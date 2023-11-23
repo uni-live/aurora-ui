@@ -7,11 +7,12 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '指南', link: '/markdown-examples' },
+      { text: '指南', link: '/guide/introduction', activeMatch: '^/guide/' },
       { text: '组件', link: '/components/', activeMatch: '^/components/' },
       { text: 'API', link: '/markdown-examples' },
       { text: 'Functions', link: '/markdown-examples' },
-      { text: '资源', link: '/markdown-examples' },
+      { text: '物料商城', link: '/markdown-examples' },
+      { text: '赞助作者', link: '/assistance' },
       {
         text: '1.0.0',
         items: [
@@ -32,12 +33,76 @@ export default defineConfig({
     ],
 
     sidebar: {
+      '/assistance': [],
       '/components': [
         {
           text: '基础组件',
           items: [
             { text: 'Color 色彩', link: '/markdown-examples' },
             { text: 'Icon 图标', link: '/markdown-examples' },
+            { text: 'Image 图片', link: '/markdown-examples' },
+            { text: 'Button 按钮', link: '/markdown-examples' },
+            { text: 'Text 文本', link: '/markdown-examples' },
+          ],
+        },
+        {
+          text: '表单组件',
+          items: [
+            { text: 'Color 色彩', link: '/markdown-examples' },
+            { text: 'Icon 图标', link: '/markdown-examples' },
+            { text: 'Image 图片', link: '/markdown-examples' },
+            { text: 'Button 按钮', link: '/markdown-examples' },
+            { text: 'Text 文本', link: '/markdown-examples' },
+          ],
+        },
+        {
+          text: '数据组件',
+          items: [
+            { text: 'Color 色彩', link: '/markdown-examples' },
+            { text: 'Icon 图标', link: '/markdown-examples' },
+            { text: 'Image 图片', link: '/markdown-examples' },
+            { text: 'Button 按钮', link: '/markdown-examples' },
+            { text: 'Text 文本', link: '/markdown-examples' },
+          ],
+        },
+        {
+          text: '反馈组件',
+          items: [
+            { text: 'Color 色彩', link: '/markdown-examples' },
+            { text: 'Icon 图标', link: '/markdown-examples' },
+            { text: 'Image 图片', link: '/markdown-examples' },
+            { text: 'Button 按钮', link: '/markdown-examples' },
+            { text: 'Text 文本', link: '/markdown-examples' },
+          ],
+        },
+        {
+          text: '布局组件',
+          items: [
+            { text: 'Color 色彩', link: '/markdown-examples' },
+            { text: 'Icon 图标', link: '/markdown-examples' },
+            { text: 'Image 图片', link: '/markdown-examples' },
+            { text: 'Button 按钮', link: '/markdown-examples' },
+            { text: 'Text 文本', link: '/markdown-examples' },
+          ],
+        },
+        {
+          text: '导航组件',
+          items: [
+            { text: 'Color 色彩', link: '/markdown-examples' },
+            { text: 'Icon 图标', link: '/markdown-examples' },
+            { text: 'Image 图片', link: '/markdown-examples' },
+            { text: 'Button 按钮', link: '/markdown-examples' },
+            { text: 'Text 文本', link: '/markdown-examples' },
+          ],
+        },
+        {
+          text: '其他组件',
+          items: [
+            { text: 'Color 色彩', link: '/markdown-examples' },
+            { text: 'Icon 图标', link: '/markdown-examples' },
+            { text: 'Image 图片', link: '/markdown-examples' },
+            { text: 'Button 按钮', link: '/markdown-examples' },
+            { text: 'Text 文本', link: '/markdown-examples' },
           ],
         },
       ],
@@ -45,11 +110,11 @@ export default defineConfig({
         {
           text: '基础',
           items: [
-            { text: '交流反馈', link: '/markdown-examples' },
-            { text: '介绍', link: '/markdown-examples' },
+            { text: '介绍', link: '/guide/introduction' },
             { text: '安装', link: '/markdown-examples' },
             { text: '快速开始', link: '/api-examples' },
             { text: '注意事项', link: '/api-examples' },
+            { text: '交流反馈', link: '/markdown-examples' },
           ],
         },
         {
