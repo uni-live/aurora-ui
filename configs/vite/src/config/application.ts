@@ -34,13 +34,6 @@ export function defineApplicationConfig(defineOptions: DefineOptions = {}) {
 
     const pathResolve = (pathname: string) => resolve(root, '.', pathname);
     const applicationConfig: UserConfig = {
-      css: {
-        preprocessorOptions: {
-          scss: {
-            additionalData: `@use '@app/design/shared' as *;`,
-          },
-        },
-      },
       resolve: {
         alias: [
           {

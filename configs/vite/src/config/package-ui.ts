@@ -1,7 +1,6 @@
 import { readPackageJSON } from 'pkg-types';
 import { defineConfig, mergeConfig, type UserConfig } from 'vite';
 import dts from 'vite-plugin-dts';
-import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 import { commonConfig } from './common';
 
@@ -11,8 +10,7 @@ interface DefineOptions {
 }
 
 function definePackageUIConfig(defineOptions: DefineOptions = {}) {
-  const { overrides = {}, options = {} } = defineOptions;
-  const { extraCss } = options as any;
+  const { overrides = {} } = defineOptions;
   const root = process.cwd();
   return defineConfig(async () => {
     const { dependencies = {}, peerDependencies = {} } = await readPackageJSON(root);
@@ -40,7 +38,6 @@ function definePackageUIConfig(defineOptions: DefineOptions = {}) {
           entryRoot: 'src',
           logLevel: 'error',
         }),
-        !extraCss && cssInjectedByJsPlugin(),
       ],
     };
     const mergedConfig = mergeConfig(commonConfig, packageConfig);
