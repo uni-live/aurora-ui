@@ -3,7 +3,6 @@ import { Theme } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import AsideSponsors from './components/AsideSponsors.vue';
 import './styles/index.css';
-// import AsideSponsors from './components/AsideSponsors.vue'
 
 const theme: Theme = {
   ...DefaultTheme,

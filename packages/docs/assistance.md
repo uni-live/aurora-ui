@@ -1,10 +1,4 @@
-<img 
-	src="https://img-blog.csdnimg.cn/test.png" 
-	align="right" 
-	width="42%"
-/>
-
-# 简介 11 % {#introduction}%
+# 简介 % {#introduction}%
 
 <VueSchoolLink
 href="https://vueschool.io/lessons/introduction-to-pinia"

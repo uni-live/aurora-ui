@@ -1,6 +1,4 @@
-<div>12121</div>
-
-# 简介 %{#introduction}%
+# 简介
 
 <VueSchoolLink
   href="https://vueschool.io/lessons/introduction-to-pinia"
@@ -9,7 +7,7 @@
 
 Pinia [起始](https://github.com/vuejs/pinia/commit/06aeef54e2cad66696063c62829dac74e15fd19e)于 2019 年 11 月左右的一次实验，其目的是设计一个拥有[组合式 API](https://github.com/vuejs/composition-api) 的 Vue 状态管理库。从那时起，我们就倾向于同时支持 Vue 2 和 Vue 3，并且不强制要求开发者使用组合式 API，我们的初心至今没有改变。除了**安装**和 **SSR** 两章之外，其余章节中提到的 API 均支持 Vue 2 和 Vue 3。虽然本文档主要是面向 Vue 3 的用户，但在必要时会标注出 Vue 2 的内容，因此 Vue 2 和 Vue 3 的用户都可以阅读本文档。
 
-## 为什么你应该使用 Pinia？%{#why-should-i-use-pinia}%
+## 为什么你应该使用 Pinia？
 
 Pinia 是 Vue 的专属状态管理库，它允许你跨组件或页面共享状态。如果你熟悉组合式 API 的话，你可能会认为可以通过一行简单的 `export const state = reactive({})` 来共享一个全局状态。对于单页应用来说确实可以，但如果应用在服务器端渲染，这可能会使你的应用暴露出一些安全漏洞。 而如果使用 Pinia，即使在小型单页应用中，你也可以获得如下功能：
 
@@ -24,7 +22,7 @@ Pinia 是 Vue 的专属状态管理库，它允许你跨组件或页面共享状
 - 为 JS 开发者提供适当的 TypeScript 支持以及**自动补全**功能。
 - 支持服务端渲染
 
-## 基础示例 %{#basic-example}%
+## 基础示例
 
 下面就是 pinia API 的基本用法 (为继续阅读本简介请确保你已阅读过了[开始](./getting-started.md)章节)。你可以先创建一个 Store：
 
@@ -165,19 +163,19 @@ export const useTodos = defineStore('todos', {
 });
 ```
 
-## 对比 Vuex %{#comparison-with-vuex}%
+## 对比 Vuex
 
 Pinia 起源于一次探索 Vuex 下一个迭代的实验，因此结合了 Vuex 5 核心团队讨论中的许多想法。最后，我们意识到 Pinia 已经实现了我们在 Vuex 5 中想要的大部分功能，所以决定将其作为新的推荐方案来代替 Vuex。
 
 与 Vuex 相比，Pinia 不仅提供了一个更简单的 API，也提供了符合组合式 API 风格的 API，最重要的是，搭配 TypeScript 一起使用时有非常可靠的类型推断支持。
 
-### RFC %{#rfcs}%
+### RFC
 
 最初，Pinia 没有经过任何 RFC 的流程。我基于自己开发应用的经验，同时通过阅读其他人的代码，为使用 Pinia 的用户工作，以及在 Discord 上回答问题等方式验证了一些想法。这些经历使我产出了这样一个可用的解决方案，并适应了各种场景和应用规模。我会一直在保持其核心 API 不变的情况下发布新版本，同时不断优化本库。
 
 现在 Pinia 已经成为推荐的状态管理解决方案，它和 Vue 生态系统中的其他核心库一样，都要经过 RFC 流程，它的 API 也已经进入稳定状态。
 
-### 对比 Vuex 3.x/4.x %{#comparison-with-vuex-3-x-4-x}%
+### 对比 Vuex 3.x/4.x
 
 > Vuex 3.x 只适配 Vue 2，而 Vuex 4.x 是适配 Vue 3 的。
 

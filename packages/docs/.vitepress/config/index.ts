@@ -30,6 +30,10 @@ export default defineConfig({
             text: '1.0.3',
             link: 'https://certification.vuejs.org/?friend=VUEROUTER',
           },
+          {
+            text: '其他版本',
+            link: 'https://certification.vuejs.org/?friend=VUEROUTER',
+          },
         ],
       },
     ],
