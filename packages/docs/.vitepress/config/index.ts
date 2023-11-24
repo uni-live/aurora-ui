@@ -4,7 +4,9 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   title: 'Aurora UI',
   description: 'A VitePress Site',
+
   themeConfig: {
+    outline: false,
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '指南', link: '/guide/introduction', activeMatch: '^/guide/' },
@@ -140,6 +142,6 @@ export default defineConfig({
       ],
     },
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/uni-live/aurora-ui' }],
   },
 });

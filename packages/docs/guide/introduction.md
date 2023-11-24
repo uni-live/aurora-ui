@@ -1,3 +1,5 @@
+<div>12121</div>
+
 # 简介 %{#introduction}%
 
 <VueSchoolLink
@@ -28,33 +30,33 @@ Pinia 是 Vue 的专属状态管理库，它允许你跨组件或页面共享状
 
 ```js
 // stores/counter.js
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export const useCounterStore = defineStore('counter', {
   state: () => {
-    return { count: 0 }
+    return { count: 0 };
   },
   // 也可以这样定义
   // state: () => ({ count: 0 })
   actions: {
     increment() {
-      this.count++
+      this.count++;
     },
   },
-})
+});
 ```
 
 然后你就可以在一个组件中使用该 store 了：
 
 ```vue
 <script setup>
-import { useCounterStore } from '@/stores/counter'
-const counter = useCounterStore()
-counter.count++
-// 自动补全！ ✨
-counter.$patch({ count: counter.count + 1 })
-// 或使用 action 代替
-counter.increment()
+  import { useCounterStore } from '@/stores/counter';
+  const counter = useCounterStore();
+  counter.count++;
+  // 自动补全！ ✨
+  counter.$patch({ count: counter.count + 1 });
+  // 或使用 action 代替
+  counter.increment();
 </script>
 <template>
   <!-- 直接从 store 中访问 state -->
@@ -66,13 +68,13 @@ counter.increment()
 
 ```js
 export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
+  const count = ref(0);
   function increment() {
-    count.value++
+    count.value++;
   }
 
-  return { count, increment }
-})
+  return { count, increment };
+});
 ```
 
 如果你还不熟悉 setup() 函数和组合式 API，别担心，Pinia 也提供了一组类似 Vuex 的 [映射 state 的辅助函数](https://vuex.vuejs.org/zh/guide/state.html#mapstate-辅助函数)。你可以用和之前一样的方式来定义 Store，然后通过 `mapStores()`、`mapState()` 或 `mapActions()` 访问：
@@ -112,16 +114,16 @@ export default defineComponent({
 
 你将会在核心概念部分了解到更多关于每个**映射辅助函数**的信息。
 
-## 为什么取名 *Pinia*？%{#why-pinia}%
+## 为什么取名 _Pinia_？%{#why-pinia}%
 
-Pinia (发音为 `/piːnjʌ/`，类似英文中的 “peenya”) 是最接近有效包名 piña (西班牙语中的 *pineapple*，即“菠萝”) 的词。 菠萝花实际上是一组各自独立的花朵，它们结合在一起，由此形成一个多重的水果。 与 Store 类似，每一个都是独立诞生的，但最终它们都是相互联系的。 它(菠萝)也是一种原产于南美洲的美味热带水果。
+Pinia (发音为 `/piːnjʌ/`，类似英文中的 “peenya”) 是最接近有效包名 piña (西班牙语中的 _pineapple_，即“菠萝”) 的词。 菠萝花实际上是一组各自独立的花朵，它们结合在一起，由此形成一个多重的水果。 与 Store 类似，每一个都是独立诞生的，但最终它们都是相互联系的。 它(菠萝)也是一种原产于南美洲的美味热带水果。
 
 ## 更真实的示例 %{#a-more-realistic-example}%
 
 这是一个更完整的 Pinia API 示例，在 JavaScript 中也使用了类型提示。对于某些开发者来说，可能足以在不进一步阅读的情况下直接开始阅读本节内容，但我们仍然建议你先继续阅读文档的其余部分，甚至跳过此示例，在阅读完所有**核心概念**之后再回来。
 
 ```js
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export const useTodos = defineStore('todos', {
   state: () => ({
@@ -135,10 +137,10 @@ export const useTodos = defineStore('todos', {
   getters: {
     finishedTodos(state) {
       // 自动补全！ ✨
-      return state.todos.filter((todo) => todo.isFinished)
+      return state.todos.filter((todo) => todo.isFinished);
     },
     unfinishedTodos(state) {
-      return state.todos.filter((todo) => !todo.isFinished)
+      return state.todos.filter((todo) => !todo.isFinished);
     },
     /**
      * @returns {{ text: string, id: number, isFinished: boolean }[]}
@@ -146,21 +148,21 @@ export const useTodos = defineStore('todos', {
     filteredTodos(state) {
       if (this.filter === 'finished') {
         // 调用其他带有自动补全的 getters ✨
-        return this.finishedTodos
+        return this.finishedTodos;
       } else if (this.filter === 'unfinished') {
-        return this.unfinishedTodos
+        return this.unfinishedTodos;
       }
-      return this.todos
+      return this.todos;
     },
   },
   actions: {
     // 接受任何数量的参数，返回一个 Promise 或不返回
     addTodo(text) {
       // 你可以直接变更该状态
-      this.todos.push({ text, id: this.nextId++, isFinished: false })
+      this.todos.push({ text, id: this.nextId++, isFinished: false });
     },
   },
-})
+});
 ```
 
 ## 对比 Vuex %{#comparison-with-vuex}%
@@ -171,8 +173,7 @@ Pinia 起源于一次探索 Vuex 下一个迭代的实验，因此结合了 Vuex
 
 ### RFC %{#rfcs}%
 
-最初，Pinia 没有经过任何 RFC 的流程。我基于自己开发应用的经验，同时通过阅读其他人的代码，为使用 Pinia 的用户工作，以及在 Discord 上回答问题等方式验证了一些想法。
-这些经历使我产出了这样一个可用的解决方案，并适应了各种场景和应用规模。我会一直在保持其核心 API 不变的情况下发布新版本，同时不断优化本库。
+最初，Pinia 没有经过任何 RFC 的流程。我基于自己开发应用的经验，同时通过阅读其他人的代码，为使用 Pinia 的用户工作，以及在 Discord 上回答问题等方式验证了一些想法。这些经历使我产出了这样一个可用的解决方案，并适应了各种场景和应用规模。我会一直在保持其核心 API 不变的情况下发布新版本，同时不断优化本库。
 
 现在 Pinia 已经成为推荐的状态管理解决方案，它和 Vue 生态系统中的其他核心库一样，都要经过 RFC 流程，它的 API 也已经进入稳定状态。
 
@@ -182,7 +183,7 @@ Pinia 起源于一次探索 Vuex 下一个迭代的实验，因此结合了 Vuex
 
 Pinia API 与 Vuex(<=4) 也有很多不同，即：
 
-- *mutation* 已被弃用。它们经常被认为是**极其冗余的**。它们初衷是带来 devtools 的集成方案，但这已不再是一个问题了。
+- _mutation_ 已被弃用。它们经常被认为是**极其冗余的**。它们初衷是带来 devtools 的集成方案，但这已不再是一个问题了。
 - 无需要创建自定义的复杂包装器来支持 TypeScript，一切都可标注类型，API 的设计方式是尽可能地利用 TS 类型推理。
 - 无过多的魔法字符串注入，只需要导入函数并调用它们，然后享受自动补全的乐趣就好。
 - 无需要动态添加 Store，它们默认都是动态的，甚至你可能都不会注意到这点。注意，你仍然可以在任何时候手动使用一个 Store 来注册它，但因为它是自动的，所以你不需要担心它。
