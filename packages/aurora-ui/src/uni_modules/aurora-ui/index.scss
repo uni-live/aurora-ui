@@ -1,0 +1,74 @@
+page {
+  /* 行为相关颜色 */
+  --a-color-primary: #465cff;
+  --a-color-success: #09be4f;
+  --a-color-warning: #ffb703;
+  --a-color-danger: #ff2b2b;
+  --a-color-purple: #6831ff;
+
+  /* 文字基本颜色、其他辅助色 */
+  /* 用于重量级文字信息、标题 */
+  --a-color-title: #181818;
+  /* 用于普通级段落信息、引导词 */
+  --a-color-section: #333333;
+  /* 用于次要标题内容 */
+  --a-color-subtitle: #7f7f7f;
+  /* 用于底部标签、描述、次要文字信息 */
+  --a-color-label: #b2b2b2;
+  /* 用于辅助、次要信息、禁用文字等。如：待输入状态描述文字，已点击按钮文字 */
+  --a-color-minor: #cccccc;
+  --a-color-white: #ffffff;
+  /* 链接颜色 */
+  --a-color-link: #465cff;
+
+  /* 背景颜色 */
+  --a-bg-color: #ffffff;
+  /* 页面背景底色 */
+  --a-bg-color-grey: #f1f4fa;
+  /* 内容模块底色 */
+  --a-bg-color-content: #f8f8f8;
+  --a-bg-color-red: rgba(255, 43, 43, 0.05);
+  --a-bg-color-yellow: rgba(255, 183, 3, 0.1);
+  --a-bg-color-purple: rgba(104, 49, 255, 0.05);
+  --a-bg-color-green: rgba(9, 190, 79, 0.05);
+  /* 点击背景色 */
+  --a-bg-color-hover: rgba(0, 0, 0, 0.2);
+  /* 遮罩颜色 */
+  --a-bg-color-mask: rgba(0, 0, 0, 0.6);
+
+  /* 边框颜色 */
+  --a-color-border: #eeeeee;
+
+  /* 阴影颜色 */
+  --a-color-shadow: rgba(2, 4, 38, 0.05);
+
+  /*禁用态的透明度 */
+  --a-opacity-disabled: 0.5;
+
+  /* 图标尺寸 */
+  --a-img-size-sm: 48rpx;
+  --a-img-size-base: 56rpx;
+  --a-img-size-middle: 64rpx;
+  --a-img-size-lg: 96rpx;
+
+  /* 图片尺寸 */
+  --a-img-sm: 60rpx;
+  --a-img-base: 120rpx;
+  --a-img-lg: 240rpx;
+
+  /* Border Radius */
+  --a-border-radius-sm: 16rpx;
+  --a-border-radius-base: 24rpx;
+  --a-border-radius-lg: 48rpx;
+  --a-border-radius-circle: 50%;
+
+  /* 水平间距 */
+  --a-spacing-row-sm: 16rpx;
+  --a-spacing-row-base: 24rpx;
+  --a-spacing-row-lg: 32rpx;
+
+  /* 垂直间距 */
+  --a-spacing-col-sm: 8rpx;
+  --a-spacing-col-base: 16rpx;
+  --a-spacing-col-lg: 24rpx;
+}

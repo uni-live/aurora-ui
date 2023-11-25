@@ -19,11 +19,11 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@app/eslint": "workspace:*",
-    "@app/prettier": "workspace:*",
-    "@app/stylelint": "workspace:*",
-    "@app/ts": "workspace:*",
-    "@app/vite": "workspace:*",
+    "@aurora/eslint": "workspace:*",
+    "@aurora/prettier": "workspace:*",
+    "@aurora/stylelint": "workspace:*",
+    "@aurora/ts": "workspace:*",
+    "@aurora/vite": "workspace:*",
     "@commitlint/cli": "^17.5.1",
     "@types/jsdom": "^21.1.0",
     "@types/lodash-es": "^4.17.8",

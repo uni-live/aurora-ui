@@ -6,9 +6,7 @@
   const href = ref('https://h5.uviewui.com/#/');
   const aaa = ref('400px  !important');
 
-  watchEffect(() => {
-    console.log(theme.value, '=================', page.value, site.value);
-  });
+  watchEffect(() => {});
 </script>
 
 <template>

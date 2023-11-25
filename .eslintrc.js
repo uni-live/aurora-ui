@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: ['@app/eslint'],
+  extends: ['@aurora/eslint'],
 };
