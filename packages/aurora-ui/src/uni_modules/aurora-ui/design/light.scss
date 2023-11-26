@@ -1,0 +1,62 @@
+@use 'shared' as *;
+
+// common
+page {
+  @include set-component-css-var('font-size', $font-size);
+  @include set-component-css-var('font-family', $font-family);
+
+  // z-index --etfma-index-#{$type}
+  @include set-component-css-var('index', $z-index);
+
+  // --etfma-border-radius-#{$type}
+  @include set-component-css-var('border-radius', $border-radius);
+
+  // component size
+  @include set-component-css-var('component-size', $common-component-size);
+}
+
+// 颜色相关
+page {
+  color-scheme: light;
+
+  // --a-color-#{$type}
+  // --a-color-#{$type}-light-{$i}
+  @each $type in $types {
+    @include set-css-color-type($colors, $type);
+  }
+
+  @include set-css-var-value('color-white', $color-white);
+  @include set-css-var-value('color-black', $color-black);
+
+  // color-scheme
+  // Background --a-bg-color-#{$type}
+  @include set-component-css-var('bg-color', $bg-color);
+
+  // --a-text-color-#{$type}
+  @include set-component-css-var('text-color', $text-color);
+
+  // --a-border-color-#{$type}
+  @include set-component-css-var('border-color', $border-color);
+
+  // Fill --a-fill-color-#{$type}
+  @include set-component-css-var('fill-color', $fill-color);
+
+  // --a-box-shadow-#{$type}
+  @include set-component-css-var('box-shadow', $box-shadow);
+
+  // Disable base
+  @include set-component-css-var('disabled', $disabled);
+
+  // overlay & mask
+  @include set-component-css-var('overlay-color', $overlay-color);
+  @include set-component-css-var('mask-color', $mask-color);
+
+  // Border
+  @include set-css-var-value('border-width', $border-width);
+  @include set-css-var-value('border-style', $border-style);
+  @include set-css-var-value('border-color-hover', $border-color-hover);
+  @include set-css-var-value(
+    'border',
+    getCssVar('border-width') getCssVar('border-style') getCssVar('border-color')
+  );
+}

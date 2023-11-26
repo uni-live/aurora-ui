@@ -19,6 +19,7 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@dcloudio/types": "^3.3.2",
     "@aurora/eslint": "workspace:*",
     "@aurora/prettier": "workspace:*",
     "@aurora/stylelint": "workspace:*",

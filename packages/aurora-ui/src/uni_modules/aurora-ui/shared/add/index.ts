@@ -49,8 +49,6 @@ export function addStyle(customStyle: Record<string, any> | string, target: stri
  * @param {string|number} value 需要添加单位的值
  * @param {string} unit 添加的单位名 比如px
  */
-export function addUnit(value = 'auto', unit = 'rpx') {
-  value = String(value);
-  // 用uView内置验证规则中的number判断是否为数值
+export function addUnit(value: string | number = 'auto', unit: string = 'rpx') {
   return isNumber(value) ? `${value}${unit}` : value;
 }

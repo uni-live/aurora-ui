@@ -1,3 +1,3 @@
 module.exports = {
-  ...require('@app/prettier'),
+  ...require('@aurora/prettier'),
 };

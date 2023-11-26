@@ -4,5 +4,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "types": ["vite/client", "@dcloudio/types"],
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
+  "include": ["**/*.ts", "**/*.vue"]
 }
