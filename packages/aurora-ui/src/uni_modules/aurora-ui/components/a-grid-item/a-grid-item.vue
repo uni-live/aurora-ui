@@ -4,13 +4,21 @@
     hover-class="a-grid-item--hover-class"
     :hover-stay-time="200"
     @tap="handleClick"
-    :class="classesRef"
+    :class="classnames"
     :style="[itemStyle]"
   >
-    <slot />
+    <slot></slot>
   </view>
 </template>
-
+<script lang="ts">
+  export default {
+    // #ifdef MP-WEIXIN
+    options: {
+      virtualHost: true,
+    },
+    // #endif
+  };
+</script>
 <script setup lang="ts">
   /**
    * gridItem 提示
@@ -23,7 +31,7 @@
    * @example <u-grid-item></u-grid-item>
    */
 
-  import { ref, computed, watch, unref } from 'vue';
+  import { ref, computed, unref, getCurrentInstance, onMounted, watch } from 'vue';
 
   import { gridItemProps } from './props';
   import { addStyle, deepMerge } from '../../shared';
@@ -34,20 +42,23 @@
     click: [string];
   }>();
 
-  const { col, border, click, items } = useGridProviderContext();
+  const { col, border, click, instances, add } = useGridProviderContext();
 
-  const classesRef = ref<string[] | string>([]);
+  const instance = getCurrentInstance();
+
+  const classnames = ref<string[] | string>([]);
 
   const width = computed(() => {
     return 100 / Number(col) + '%';
   });
 
-  watch(
-    () => items.value,
-    () => {
-      gridItemClasses();
-    },
-  );
+  onMounted(() => {
+    add(instance!);
+  });
+
+  watch([() => instances.length, () => border, () => col], () => {
+    gridItemClasses();
+  });
 
   const itemStyle = computed(() => {
     const style = {
@@ -57,22 +68,22 @@
     return deepMerge(style, addStyle(props.customStyle));
   });
 
-  const gridItemClasses = async () => {
+  const gridItemClasses = () => {
+    let classes: string[] | string = [];
     if (border) {
-      let classes: string[] | string = [];
-      unref(items)?.map((child, index) => {
-        if (this === child) {
-          const len = unref(items)?.length;
+      unref(instances)?.map((child, index) => {
+        if (instance?.uid === child.uid) {
+          const len = unref(instances)?.length;
           // 贴近右边屏幕边沿的child，并且最后一个（比如只有横向2个的时候），无需右边框
           if ((index + 1) % col !== 0 && index + 1 !== len) {
-            (classes as string[]).push('u-border-right');
+            (classes as string[]).push('a-border-right');
           }
           // 总的宫格数量对列数取余的值
           // 如果取余后，值为0，则意味着要将最后一排的宫格，都不需要下边框
           const lessNum = len % col === 0 ? col : len % col;
           // 最下面的一排child，无需下边框
           if (index < len - lessNum) {
-            (classes as string[]).push('u-border-bottom');
+            (classes as string[]).push('a-border-bottom');
           }
         }
       });
@@ -80,15 +91,16 @@
       // #ifdef MP-ALIPAY || MP-TOUTIAO
       classes = classes.join(' ');
       // #endif
-      classesRef.value = classes;
     }
+
+    classnames.value = classes;
   };
 
   function handleClick() {
     let name = props.name;
     // 如果没有设置name属性，历遍父组件的children数组，判断当前的元素是否和本实例this相等，找出当前组件的索引
-    if (unref(items) && this.name === null) {
-      name = unref(items)?.findIndex((child) => child === this);
+    if (unref(instances) && props.name === null) {
+      name = unref(instances)?.findIndex((child) => child.uid === instance?.uid);
     }
     // 调用父组件方法，发出事件
     click && click(name);
@@ -97,21 +109,17 @@
 </script>
 
 <style lang="scss" scoped>
-  $u-grid-item-hover-class-opcatiy: 0.5 !default;
-  $u-grid-item-margin-top: 1rpx !default;
-  $u-grid-item-border-right-width: 0.5px !default;
-  $u-grid-item-border-bottom-width: 0.5px !default;
-  $u-grid-item-border-right-color: $u-border-color !default;
-  $u-grid-item-border-bottom-color: $u-border-color !default;
+  @import '../../design/shared.scss';
+
+  $a-grid-item-hover-class-opcatiy: 0.5 !default;
+  $a-grid-item-margin-top: 1rpx !default;
   .a-grid-item {
     align-items: center;
     justify-content: center;
     position: relative;
     flex-direction: column;
-    /* #ifndef APP-NVUE */
     box-sizing: border-box;
     display: flex;
-    /* #endif */
 
     /* #ifdef MP */
     position: relative;
@@ -119,11 +127,23 @@
     /* #endif */
 
     /* #ifdef MP-WEIXIN */
-    margin-top: $u-grid-item-margin-top;
+    margin-top: $a-grid-item-margin-top;
     /* #endif */
 
     &--hover-class {
-      opacity: $u-grid-item-hover-class-opcatiy;
+      opacity: $a-grid-item-hover-class-opcatiy;
     }
+  }
+
+  .a-border-right {
+    border-right-width: getCssVar('border-width') !important;
+    border-color: getCssVar('border-color') !important;
+    border-right-style: solid;
+  }
+
+  .a-border-bottom {
+    border-bottom-width: getCssVar('border-width') !important;
+    border-color: getCssVar('border-color') !important;
+    border-bottom-style: solid;
   }
 </style>

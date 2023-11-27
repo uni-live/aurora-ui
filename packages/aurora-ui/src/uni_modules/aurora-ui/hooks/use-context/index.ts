@@ -3,7 +3,7 @@ import { inject, provide, reactive, readonly } from 'vue';
 
 interface CreateContextOptions {
   /**
-   * @description 注入的变量是否
+   * @description 注入的变量是否可写入
    * @default false
    */
   writeable?: boolean;
@@ -28,6 +28,7 @@ function createContext<T>(
   } else {
     provideData = !writeable ? readonly(reactiveContext) : reactiveContext;
   }
+
   provide(key, provideData);
 }
 

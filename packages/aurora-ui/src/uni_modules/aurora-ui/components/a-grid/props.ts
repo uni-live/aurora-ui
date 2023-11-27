@@ -7,7 +7,7 @@ export const gridProps = buildProps({
     default: '',
   },
   customStyle: {
-    type: Object,
+    type: [Object, String],
     default() {
       return {};
     },

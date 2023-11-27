@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@aurora/ts/web.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "types": ["vite/client", "@dcloudio/types"],
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.vue"]
+}

@@ -1,6 +1,6 @@
 <template>
   <view class="a-grid" :style="[gridStyle]">
-    <slot ref="a-grid-item" />
+    <slot></slot>
   </view>
 </template>
 
@@ -16,23 +16,26 @@
    * @event {Function} click 点击宫格触发
    * @example <u-grid :col="3" @click="click"></u-grid>
    */
-  import { computed, ref, type CSSProperties } from 'vue';
+  import { computed, type CSSProperties } from 'vue';
 
   import { gridProps } from './props';
   import { deepMerge, addStyle } from '../../shared';
   import { createGridProviderContext } from './provider';
+  import { useInstance } from '../../hooks';
 
   const props = defineProps(gridProps);
+  const emit = defineEmits<{
+    click: [string];
+  }>();
 
-  const index = ref(0);
-  const width = ref(0);
-  const items = ref(null);
+  const instance = useInstance();
 
   createGridProviderContext({
     col: props.col,
     border: props.border,
-    items: items,
     click: handleClick,
+    ...instance,
+    instances: instance.instances.value,
   });
 
   // 宫格对齐方式
@@ -55,71 +58,14 @@
   });
 
   function handleClick(name: string) {
-    this.$emit('click', name);
+    emit('click', name);
   }
-
-  // export default {
-  //   name: 'u-grid',
-  //   mixins: [uni.$u.mpMixin, uni.$u.mixin, props],
-  //   data() {
-  //     return {
-  //       index: 0,
-  //       width: 0,
-  //     };
-  //   },
-  //   watch: {
-  //     // 当父组件需要子组件需要共享的参数发生了变化，手动通知子组件
-  //     parentData() {
-  //       if (this.children.length) {
-  //         this.children.map((child) => {
-  //           // 判断子组件(u-radio)如果有updateParentData方法的话，就就执行(执行的结果是子组件重新从父组件拉取了最新的值)
-  //           typeof child.updateParentData == 'function' && child.updateParentData();
-  //         });
-  //       }
-  //     },
-  //   },
-  //   created() {
-  //     // 如果将children定义在data中，在微信小程序会造成循环引用而报错
-  //     this.children = [];
-  //   },
-  //   computed: {
-  //     // 计算父组件的值是否发生变化
-  //     parentData() {
-  //       return [this.hoverClass, this.col, this.size, this.border];
-  //     },
-  //     // 宫格对齐方式
-  //     gridStyle() {
-  //       let style = {};
-  //       switch (this.align) {
-  //         case 'left':
-  //           style.justifyContent = 'flex-start';
-  //           break;
-  //         case 'center':
-  //           style.justifyContent = 'center';
-  //           break;
-  //         case 'right':
-  //           style.justifyContent = 'flex-end';
-  //           break;
-  //         default:
-  //           style.justifyContent = 'flex-start';
-  //       }
-  //       return uni.$u.deepMerge(style, uni.$u.addStyle(this.customStyle));
-  //     },
-  //   },
-  //   methods: {
-  //     // 此方法由u-grid-item触发，用于在u-grid发出事件
-  //     childClick(name) {
-  //       this.$emit('click', name);
-  //     },
-  //   },
-  // };
 </script>
 
 <style lang="scss" scoped>
-  $u-grid-width: 100% !default;
-  .u-grid {
+  .a-grid {
     /* #ifdef MP */
-    width: $u-grid-width;
+    width: 100%;
     position: relative;
     box-sizing: border-box;
     overflow: hidden;

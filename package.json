@@ -16,16 +16,16 @@
   "dependencies": {
     "lodash-es": "^4.17.21",
     "path-to-regexp": "^6.2.1",
-    "vue": "^3.3.4"
+    "vue": "^3.3.8"
   },
   "devDependencies": {
-    "@dcloudio/types": "^3.3.2",
     "@aurora/eslint": "workspace:*",
     "@aurora/prettier": "workspace:*",
     "@aurora/stylelint": "workspace:*",
     "@aurora/ts": "workspace:*",
     "@aurora/vite": "workspace:*",
     "@commitlint/cli": "^17.5.1",
+    "@dcloudio/types": "^3.3.2",
     "@types/jsdom": "^21.1.0",
     "@types/lodash-es": "^4.17.8",
     "@types/node": "^18.14.2",

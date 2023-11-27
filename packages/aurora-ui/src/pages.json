@@ -11,6 +11,12 @@
       "style": {
         "navigationBarTitleText": "图标"
       }
+    },
+    {
+      "path": "pages/grid/grid",
+      "style": {
+        "navigationBarTitleText": "网格"
+      }
     }
   ],
   "globalStyle": {

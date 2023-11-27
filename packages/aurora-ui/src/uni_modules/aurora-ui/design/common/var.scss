@@ -156,7 +156,7 @@ $bg-color: map.merge(
 );
 
 // Border
-$border-width: 1px !default;
+$border-width: 0.5px !default;
 $border-style: solid !default;
 $border-color-hover: getCssVar('text-color', 'disabled') !default;
 $border-radius: () !default;

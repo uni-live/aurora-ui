@@ -1,10 +1,10 @@
-import { createContext, useContext } from '../../hooks';
-import type { InjectionKey, Ref } from 'vue';
+import { createContext, useContext, type InstanceReturns } from '../../hooks';
+import type { ComponentInternalInstance, InjectionKey } from 'vue';
 
-export interface GridProviderContextProps {
+export interface GridProviderContextProps extends Omit<InstanceReturns, 'instances'> {
   col: number;
   border: boolean;
-  items: Ref<any>;
+  instances: ComponentInternalInstance[];
   click?: (name: string) => void;
 }
 

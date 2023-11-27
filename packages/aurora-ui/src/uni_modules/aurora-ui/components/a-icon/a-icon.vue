@@ -1,5 +1,5 @@
 <template>
-  <view :class="['a-icon', customClass]">
+  <view ref="qqq" :class="['a-icon', customClass]">
     <image class="a-icon__img" v-if="isImg" :src="name" :mode="imgMode" :style="imgStyle"></image>
     <text
       v-else
