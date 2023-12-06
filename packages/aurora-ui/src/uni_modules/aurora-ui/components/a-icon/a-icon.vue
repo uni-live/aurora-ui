@@ -45,7 +45,7 @@
    * @property {String | Number}	width			显示图片小图标时的宽度
    * @property {String | Number}	height			显示图片小图标时的高度
    * @property {Object}			customStyle		icon的样式，对象形式
-   * @example <u-icon name="photo" color="#2979ff" size="28"></u-icon>
+   * @example <a-icon name="photo" color="#2979ff" size="28"></a-icon>
    */
 
   const props = defineProps(iconProps);

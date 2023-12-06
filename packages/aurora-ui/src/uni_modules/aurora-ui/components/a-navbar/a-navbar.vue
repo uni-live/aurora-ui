@@ -56,7 +56,7 @@
           @tap="rightClick"
         >
           <slot name="right">
-            <u-icon v-if="rightIcon" :name="rightIcon" size="20"></u-icon>
+            <a-icon v-if="rightIcon" :name="rightIcon" size="20"></a-icon>
             <text v-if="rightText" class="a-navbar__content__right__text">{{ rightText }}</text>
           </slot>
         </view>

@@ -14,5 +14,5 @@
 
 <style lang="scss">
   /*每个页面公共css */
-  @import '@/uni_modules/aurora-ui/design/light.scss';
+  @import '@/uni_modules/aurora-ui/design/index.scss';
 </style>

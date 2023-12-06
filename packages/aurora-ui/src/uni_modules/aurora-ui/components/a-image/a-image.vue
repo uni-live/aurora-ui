@@ -14,12 +14,12 @@
       ></image>
       <view v-if="showLoading && loading" class="a-image__loading" :style="loadingStyle">
         <slot name="loading">
-          <u-icon name="photo" :width="width" :height="height"></u-icon>
+          <a-icon name="photo" :width="width" :height="height"></a-icon>
         </slot>
       </view>
       <view v-if="showError && isError && !loading" class="a-image__error" :style="errorStyle">
         <slot name="error">
-          <u-icon name="error-circle" :width="width" :height="height"></u-icon>
+          <a-icon name="error-circle" :width="width" :height="height"></a-icon>
         </slot>
       </view>
     </view>
@@ -77,8 +77,6 @@
   const isError = ref(false);
   // 初始化组件时，默认为加载中状态
   const loading = ref(true);
-  // 不透明度，为了实现淡入淡出的效果
-  const opacity = ref(1);
   // 图片加载完成时，去掉背景颜色，因为如果是png图片，就会显示灰色的背景
   const backgroundStyle = ref({});
   // 用于fade模式的控制组件显示与否
@@ -154,26 +152,10 @@
   }
   // 图片加载完成，标记loading结束
   function handleLoad(event) {
-    this.loading = false;
-    this.isError = false;
+    loading.value = false;
+    isError.value = false;
     emit('load', event);
     removeBgColor();
-    // 如果不需要动画效果，就不执行下方代码，同时移除加载时的背景颜色
-    // 否则无需fade效果时，png图片依然能看到下方的背景色
-    // if (!this.fade) return this.removeBgColor();
-    // // 原来opacity为1(不透明，是为了显示占位图)，改成0(透明，意味着该元素显示的是背景颜色，默认的灰色)，再改成1，是为了获得过渡效果
-    // this.opacity = 0;
-    // // 这里设置为0，是为了图片展示到背景全透明这个过程时间为0，延时之后延时之后重新设置为duration，是为了获得背景透明(灰色)
-    // // 到图片展示的过程中的淡入效果
-    // this.durationTime = 0;
-    // // 延时50ms，否则在浏览器H5，过渡效果无效
-    // setTimeout(() => {
-    // 	this.durationTime = this.duration;
-    // 	this.opacity = 1;
-    // 	setTimeout(() => {
-    // 		this.removeBgColor();
-    // 	}, this.durationTime);
-    // }, 50);
   }
   // 移除图片的背景色
   function removeBgColor() {
@@ -191,8 +173,8 @@
   $u-image-error-left: 0px !default;
   $u-image-error-width: 100% !default;
   $u-image-error-hight: 100% !default;
-  $u-image-error-background-color: $u-bg-color !default;
-  $u-image-error-color: $u-tips-color !default;
+  $u-image-error-background-color: gray !default;
+  $u-image-error-color: gray !default;
   $u-image-error-font-size: 46rpx !default;
 
   .a-image {
@@ -211,7 +193,7 @@
       left: $u-image-error-left;
       width: $u-image-error-width;
       height: $u-image-error-hight;
-      @include flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       background-color: $u-image-error-background-color;

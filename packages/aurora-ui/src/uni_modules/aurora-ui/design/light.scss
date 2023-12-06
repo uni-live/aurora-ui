@@ -1,7 +1,10 @@
+@use 'common/var' as *;
 @use 'shared' as *;
 
 // common
 page {
+  color-scheme: light;
+
   @include set-component-css-var('font-size', $font-size);
   @include set-component-css-var('font-family', $font-family);
 

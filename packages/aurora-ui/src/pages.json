@@ -17,6 +17,12 @@
       "style": {
         "navigationBarTitleText": "网格"
       }
+    },
+    {
+      "path": "pages/image/image",
+      "style": {
+        "navigationBarTitleText": "网格"
+      }
     }
   ],
   "globalStyle": {

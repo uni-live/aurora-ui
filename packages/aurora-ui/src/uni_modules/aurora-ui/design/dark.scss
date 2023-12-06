@@ -1,9 +1,9 @@
 // CSS3 var
-@use './var' as *;
-@use '../mixins/_var.scss' as *;
-@use '../mixins/mixins.scss' as *;
+@use 'dark/var.scss' as *;
+@use 'mixins/_var.scss' as *;
+@use 'shared' as *;
 
-page.dark {
+page {
   color-scheme: dark;
 
   // hex colors
