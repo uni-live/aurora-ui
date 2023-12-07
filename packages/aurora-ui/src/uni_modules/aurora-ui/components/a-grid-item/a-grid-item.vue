@@ -1,10 +1,9 @@
 <template>
   <view
-    class="a-grid-item"
     hover-class="a-grid-item--hover-class"
     :hover-stay-time="200"
     @tap="handleClick"
-    :class="classnames"
+    :class="['a-grid-item', customClass, classnames]"
     :style="[itemStyle]"
   >
     <slot></slot>
@@ -20,17 +19,6 @@
   };
 </script>
 <script setup lang="ts">
-  /**
-   * gridItem 提示
-   * @description 宫格组件一般用于同时展示多个同类项目的场景，可以给宫格的项目设置徽标组件(badge)，或者图标等，也可以扩展为左右滑动的轮播形式。搭配u-grid使用
-   * @tutorial https://www.uviewui.com/components/grid.html
-   * @property {String | Number}	name		宫格的name ( 默认 null )
-   * @property {String}			bgColor		宫格的背景颜色 （默认 'transparent' ）
-   * @property {Object}			customStyle	自定义样式，对象形式
-   * @event {Function} click 点击宫格触发
-   * @example <u-grid-item></u-grid-item>
-   */
-
   import { ref, computed, unref, getCurrentInstance, onMounted, watch } from 'vue';
 
   import { gridItemProps } from './props';
@@ -39,7 +27,7 @@
 
   const props = defineProps(gridItemProps);
   const emit = defineEmits<{
-    click: [string];
+    click: [string | number];
   }>();
 
   const { col, border, click, instances, add } = useGridProviderContext();
@@ -52,20 +40,16 @@
     return 100 / Number(col) + '%';
   });
 
-  onMounted(() => {
-    add(instance!);
-  });
-
-  watch([() => instances.length, () => border, () => col], () => {
-    gridItemClasses();
-  });
-
   const itemStyle = computed(() => {
     const style = {
       background: props.bgColor,
       width: width.value,
     };
     return deepMerge(style, addStyle(props.customStyle));
+  });
+
+  onMounted(() => {
+    add(instance!);
   });
 
   const gridItemClasses = () => {
@@ -96,15 +80,24 @@
     classnames.value = classes;
   };
 
+  watch(
+    [() => instances.length, () => border, () => col],
+    () => {
+      gridItemClasses();
+    },
+    { immediate: true },
+  );
+
   function handleClick() {
-    let name = props.name;
-    // 如果没有设置name属性，历遍父组件的children数组，判断当前的元素是否和本实例this相等，找出当前组件的索引
-    if (unref(instances) && props.name === null) {
-      name = unref(instances)?.findIndex((child) => child.uid === instance?.uid);
+    let key = props.name;
+
+    // 如果没有设置name属性，历遍父组件的children数组，判断当前的元素是否和本实例相等，找出当前组件的索引
+    if (unref(instances)) {
+      key = unref(instances)?.findIndex((child) => child.uid === instance?.uid);
     }
     // 调用父组件方法，发出事件
-    click && click(name);
-    emit('click', name);
+    click && click(key);
+    emit('click', key);
   }
 </script>
 

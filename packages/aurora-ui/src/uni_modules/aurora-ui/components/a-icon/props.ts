@@ -2,57 +2,103 @@ import type { ExtractPropTypes } from 'vue';
 import { buildProps } from '../../shared';
 
 export const iconProps = buildProps({
+  /**
+   * @description 自定义class
+   * @property {String}
+   * @default ''
+   */
   customClass: {
     type: String,
     default: '',
   },
+  /**
+   * @description 自定义style
+   * @property {Object,String}
+   * @default {}
+   */
   customStyle: {
-    type: Object,
+    type: [Object, String],
     default() {
       return {};
     },
   },
-  // 图标类名
+  /**
+   * @description 图标类名
+   * @property {String}
+   * @default ''
+   */
   name: {
     type: String,
     default: '',
   },
-  // 图标颜色，可接受主题色
+  /**
+   * @description 图标颜色
+   * @property {String}
+   * @default ''
+   */
   color: {
     type: String,
     default: '',
   },
-  // 字体大小，单位px
+  /**
+   * @description 字体大小，单位rpx
+   * @property {String,Number}
+   * @default '32rpx'
+   */
   size: {
     type: [String, Number],
-    default: '16px',
+    default: '32rpx',
   },
-  // 触摸图标时的类名
+  /**
+   * @description 触摸图标时的类名
+   * @property {String}
+   * @default ''
+   */
   hoverClass: {
     type: String,
     default: '',
   },
-  // 是否显示粗体
+  /**
+   * @description 是否显示粗体
+   * @property {Boolean}
+   * @default false
+   */
   bold: {
     type: Boolean,
     default: false,
   },
-  // 自定义扩展前缀，方便用户扩展自己的图标库
+  /**
+   * @description 自定义扩展前缀，方便用户扩展自己的图标库
+   * @property {String}
+   * @default 'aicon'
+   */
   customPrefix: {
     type: String,
     default: 'aicon',
   },
-  // 图片的mode
-  imgMode: {
+  /**
+   * @description 图片的mode
+   * @property {String}
+   * @default 'scaleToFill'
+   */
+  mode: {
     type: String,
-    default: '',
+    default: 'scaleToFill',
   },
-  // 用于显示图片小图标时，图片的宽度
+  /**
+   * @description 用于显示图片时，图片的宽度
+   * @property {String,Number}
+   * @default ''
+   */
   width: {
     type: [String, Number],
     default: '',
   },
-  // 用于显示图片小图标时，图片的高度
+  /**
+   * @description 用于显示图片时，图片的高度
+   * @property {String,Number}
+   * @default ''
+   */
   height: {
     type: [String, Number],
     default: '',

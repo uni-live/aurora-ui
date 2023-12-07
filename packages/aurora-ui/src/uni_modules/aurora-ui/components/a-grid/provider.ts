@@ -5,7 +5,7 @@ export interface GridProviderContextProps extends Omit<InstanceReturns, 'instanc
   col: number;
   border: boolean;
   instances: ComponentInternalInstance[];
-  click?: (name: string) => void;
+  click?: (name: string | number) => void;
 }
 
 const key: InjectionKey<GridProviderContextProps> = Symbol();
