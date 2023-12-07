@@ -169,14 +169,6 @@
 <style lang="scss" scoped>
   @import '../../design/shared.scss';
 
-  $u-image-error-top: 0px !default;
-  $u-image-error-left: 0px !default;
-  $u-image-error-width: 100% !default;
-  $u-image-error-hight: 100% !default;
-  $u-image-error-background-color: gray !default;
-  $u-image-error-color: gray !default;
-  $u-image-error-font-size: 46rpx !default;
-
   .a-image {
     position: relative;
     transition: opacity 0.5s ease-in-out;
@@ -189,16 +181,16 @@
     &__loading,
     &__error {
       position: absolute;
-      top: $u-image-error-top;
-      left: $u-image-error-left;
-      width: $u-image-error-width;
-      height: $u-image-error-hight;
+      top: 0rpx;
+      left: 0rpx;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: $u-image-error-background-color;
-      color: $u-image-error-color;
-      font-size: $u-image-error-font-size;
+      background-color: getCssVar('bg-color');
+      color: getCssVar('text-color', 'primary');
+      font-size: 46rpx;
     }
   }
 </style>
