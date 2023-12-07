@@ -7,3 +7,4 @@ export * from 'lodash-es';
 export * from './sys';
 export * from './getPx';
 export * from './sleep';
+export * from './install';

@@ -2,82 +2,148 @@ import type { ExtractPropTypes } from 'vue';
 import { buildProps } from '../../shared';
 
 export const imageProps = buildProps({
+  /**
+   * @description 自定义class
+   * @property {String}
+   * @default ''
+   */
   customClass: {
     type: String,
     default: '',
   },
+  /**
+   * @description 自定义style
+   * @property {Object,String}
+   * @default {}
+   */
   customStyle: {
-    type: Object,
+    type: [Object, String],
     default() {
       return {};
     },
   },
-  // 图片地址
+  /**
+   * @description 图片地址
+   * @property {String}
+   * @default ''
+   */
   src: {
     type: String,
     default: '',
   },
-  // 裁剪模式
+  /**
+   * @description 裁剪模式
+   * @property {String}
+   * @default 'aspectFill'
+   */
   mode: {
     type: String,
     default: 'aspectFill',
   },
-  // 宽度，单位任意
+  /**
+   * @description 宽度，单位任意
+   * @property {String,Number}
+   * @default '300'
+   */
   width: {
     type: [String, Number],
     default: '300',
   },
-  // 高度，单位任意
+  /**
+   * @description 高度，单位任意
+   * @property {String,Number}
+   * @default '225'
+   */
   height: {
     type: [String, Number],
     default: '225',
   },
-  // 图片形状，circle-圆形，square-方形
+  /**
+   * @description 图片形状，circle-圆形，square-方形
+   * @property {String,Number}
+   * @default 'square'
+   */
   shape: {
     type: String,
     default: 'square',
   },
-  // 圆角，单位任意
+  /**
+   * @description 圆角，单位任意
+   * @property {String,Number}
+   * @default 0
+   */
   radius: {
     type: [String, Number],
     default: 0,
   },
-  // 是否懒加载，微信小程序、App、百度小程序、字节跳动小程序
+  /**
+   * @description 是否懒加载，微信小程序、App、百度小程序、字节跳动小程序
+   * @property {Boolean}
+   * @default true
+   */
   lazyLoad: {
     type: Boolean,
     default: true,
   },
-  // 开启长按图片显示识别微信小程序码菜单
+  /**
+   * @description 开启长按图片显示识别微信小程序码菜单
+   * @property {Boolean}
+   * @default true
+   */
   showMenuByLongpress: {
     type: Boolean,
     default: true,
   },
-  // 是否显示加载中的图标或者自定义的slot
+  /**
+   * @description 是否显示加载中的图标或者自定义的slot
+   * @property {Boolean}
+   * @default true
+   */
   showLoading: {
     type: Boolean,
     default: true,
   },
-  // 是否显示加载错误的图标或者自定义的slot
+  /**
+   * @description 是否显示加载错误的图标或者自定义的slot
+   * @property {Boolean}
+   * @default true
+   */
   showError: {
     type: Boolean,
     default: true,
   },
-  // 是否需要淡入效果
+  /**
+   * @description 是否需要淡入效果
+   * @property {Boolean}
+   * @default true
+   */
   fade: {
     type: Boolean,
     default: true,
   },
-  // 只支持网络资源，只对微信小程序有效
+  /**
+   * @description 只支持网络资源，只对微信小程序有效
+   * @property {Boolean}
+   * @default false
+   */
   webp: {
     type: Boolean,
     default: false,
   },
-  // 过渡时间，单位ms
+  /**
+   * @description 过渡时间，单位ms
+   * @property {Number}
+   * @default 500
+   */
   duration: {
-    type: [String, Number],
+    type: Number,
     default: 500,
   },
-  // 背景颜色，用于深色页面加载图片时，为了和背景色融合
+  /**
+   * @description 背景颜色，用于深色页面加载图片时，为了和背景色融合
+   * @property {String}
+   * @default 'f3f4f6'
+   */
   bgColor: {
     type: String,
     default: '#f3f4f6',

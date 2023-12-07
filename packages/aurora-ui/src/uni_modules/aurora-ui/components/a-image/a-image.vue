@@ -1,5 +1,5 @@
 <template>
-  <a-transition mode="fade" :show="show" :duration="fade ? 1000 : 0">
+  <a-transition mode="fade" :show="show" :duration="fade ? duration : 0">
     <view class="a-image" @tap="handleClick" :style="[wrapStyle, backgroundStyle]">
       <image
         v-if="!isError"
@@ -28,7 +28,6 @@
 <script lang="ts">
   export default {
     // #ifdef MP-WEIXIN
-    // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，能更好的使用flex属性
     options: {
       virtualHost: true,
     },
@@ -39,34 +38,10 @@
   import { ref, onMounted, watch, computed, type CSSProperties } from 'vue';
   import { imageProps } from './props';
   import { addStyle, addUnit, deepMerge } from '../../shared';
-  /**
-   * Image 图片
-   * @description 此组件为uni-app的image组件的加强版，在继承了原有功能外，还支持淡入动画、加载中、加载失败提示、圆角值和形状等。
-   * @tutorial https://uviewui.com/components/image.html
-   * @property {String}			src 				图片地址
-   * @property {String}			mode 				裁剪模式，见官网说明 （默认 'aspectFill' ）
-   * @property {String | Number}	width 				宽度，单位任意，如果为数值，则为px单位 （默认 '300' ）
-   * @property {String | Number}	height 				高度，单位任意，如果为数值，则为px单位 （默认 '225' ）
-   * @property {String}			shape 				图片形状，circle-圆形，square-方形 （默认 'square' ）
-   * @property {String | Number}	radius		 		圆角值，单位任意，如果为数值，则为px单位 （默认 0 ）
-   * @property {Boolean}			lazyLoad			是否懒加载，仅微信小程序、App、百度小程序、字节跳动小程序有效 （默认 true ）
-   * @property {Boolean}			showMenuByLongpress	是否开启长按图片显示识别小程序码菜单，仅微信小程序有效 （默认 true ）
-   * @property {String}			loadingIcon 		加载中的图标，或者小图片 （默认 'photo' ）
-   * @property {String}			errorIcon 			加载失败的图标，或者小图片 （默认 'error-circle' ）
-   * @property {Boolean}			showLoading 		是否显示加载中的图标或者自定义的slot （默认 true ）
-   * @property {Boolean}			showError 			是否显示加载错误的图标或者自定义的slot （默认 true ）
-   * @property {Boolean}			fade 				是否需要淡入效果 （默认 true ）
-   * @property {Boolean}			webp 				只支持网络资源，只对微信小程序有效 （默认 false ）
-   * @property {String | Number}	duration 			搭配fade参数的过渡时间，单位ms （默认 500 ）
-   * @property {String}			bgColor 			背景颜色，用于深色页面加载图片时，为了和背景色融合  (默认 '#f3f4f6' )
-   * @property {Object}			customStyle  		定义需要用到的外部样式
-   * @event {Function}	click	点击图片时触发
-   * @event {Function}	error	图片加载失败时触发
-   * @event {Function} load 图片加载成功时触发
-   * @example <a-image width="100%" height="300px" :src="src"></u-image>
-   */
+  import { ATransition } from '../a-transition';
 
   const props = defineProps(imageProps);
+
   const emit = defineEmits<{
     click: [];
     error: [any];

@@ -1,10 +1,9 @@
 <template>
   <view
     v-if="inited"
-    class="a-transition"
+    :class="['a-transition', classes, customClass]"
     ref="a-transition"
     @tap="handleClick"
-    :class="classes"
     :style="[mergeStyle]"
     @touchmove="noop"
   >
@@ -14,7 +13,6 @@
 <script lang="ts">
   export default {
     // #ifdef MP-WEIXIN
-    // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，能更好的使用flex属性
     options: {
       virtualHost: true,
     },
@@ -26,23 +24,6 @@
   import { transitionProps } from './props';
   import { useTransition } from './useTransition';
   import { addStyle } from '../../shared';
-  /**
-   * transition  动画组件
-   * @description
-   * @tutorial
-   * @property {String}			show			是否展示组件 （默认 false ）
-   * @property {String}			mode			使用的动画模式 （默认 'fade' ）
-   * @property {String | Number}	duration		动画的执行时间，单位ms （默认 '300' ）
-   * @property {String}			timingFunction	使用的动画过渡函数 （默认 'ease-out' ）
-   * @property {Object}			customStyle		自定义样式
-   * @event {Function} before-enter	进入前触发
-   * @event {Function} enter			进入中触发
-   * @event {Function} after-enter	进入后触发
-   * @event {Function} before-leave	离开前触发
-   * @event {Function} leave			离开中触发
-   * @event {Function} after-leave	离开后触发
-   * @example
-   */
 
   const emit = defineEmits<{
     beforeEnter: [];

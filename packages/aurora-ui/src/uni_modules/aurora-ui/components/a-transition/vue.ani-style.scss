@@ -12,8 +12,6 @@
  * slide-right：右滑进入
  */
 
-$u-zoom-scale: scale(0.95);
-
 .u-fade-enter-active,
 .u-fade-leave-active {
   transition-property: opacity;
@@ -26,7 +24,7 @@ $u-zoom-scale: scale(0.95);
 
 .u-fade-zoom-enter,
 .u-fade-zoom-leave-to {
-  transform: $u-zoom-scale;
+  transform: scale(0.95);
   opacity: 0;
 }
 
@@ -108,5 +106,5 @@ $u-zoom-scale: scale(0.95);
 
 .u-zoom-enter,
 .u-zoom-leave-to {
-  transform: $u-zoom-scale;
+  transform: scale(0.95);
 }

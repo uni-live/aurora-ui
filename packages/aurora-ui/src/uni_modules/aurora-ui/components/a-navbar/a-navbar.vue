@@ -67,7 +67,6 @@
 <script lang="ts">
   export default {
     // #ifdef MP-WEIXIN
-    // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，能更好的使用flex属性
     options: {
       virtualHost: true,
     },
@@ -78,8 +77,10 @@
   import { navbarProps } from './props';
   import { addUnit, getPx, sys, addStyle } from '../../shared';
   import { computed, type CSSProperties } from 'vue';
+  import { AStatusBar } from '../a-status-bar';
 
   const props = defineProps(navbarProps);
+
   const emit = defineEmits<{
     leftClick: [];
     rightClick: [];
