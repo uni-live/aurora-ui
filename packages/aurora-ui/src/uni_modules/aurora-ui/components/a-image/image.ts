@@ -1,5 +1,6 @@
 import type { ExtractPropTypes } from 'vue';
-import { buildProps } from '../../shared';
+import { buildProps, isString } from '../../shared';
+import Image from './a-image.vue';
 
 export const imageProps = buildProps({
   /**
@@ -151,3 +152,12 @@ export const imageProps = buildProps({
 });
 
 export type ImageProps = ExtractPropTypes<typeof imageProps>;
+
+export const imageEmits = {
+  click: () => true,
+  error: (_: any) => true,
+  load: (arg: string) => isString(arg),
+};
+export type ImageEmits = typeof imageEmits;
+
+export type ImageInstance = InstanceType<typeof Image>;

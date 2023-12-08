@@ -11,6 +11,8 @@
 </template>
 <script lang="ts">
   export default {
+    name: 'a-grid-item',
+    inheritAttrs: false,
     // #ifdef MP-WEIXIN
     options: {
       virtualHost: true,
@@ -21,14 +23,13 @@
 <script setup lang="ts">
   import { ref, computed, unref, getCurrentInstance, onMounted, watch } from 'vue';
 
-  import { gridItemProps } from './props';
+  import { gridItemProps, gridItemEmits } from './grid-item';
   import { addStyle, deepMerge } from '../../shared';
   import { useGridProviderContext } from '../a-grid/provider';
 
   const props = defineProps(gridItemProps);
-  const emit = defineEmits<{
-    click: [string | number];
-  }>();
+
+  const emit = defineEmits(gridItemEmits);
 
   const { col, border, click, instances, add } = useGridProviderContext();
 
@@ -104,8 +105,6 @@
 <style lang="scss" scoped>
   @import '../../design/shared.scss';
 
-  $a-grid-item-hover-class-opcatiy: 0.5 !default;
-  $a-grid-item-margin-top: 1rpx !default;
   .a-grid-item {
     align-items: center;
     justify-content: center;
@@ -120,11 +119,11 @@
     /* #endif */
 
     /* #ifdef MP-WEIXIN */
-    margin-top: $a-grid-item-margin-top;
+    margin-top: 1rpx;
     /* #endif */
 
     &--hover-class {
-      opacity: $a-grid-item-hover-class-opcatiy;
+      opacity: 0.5;
     }
   }
 
@@ -140,3 +139,4 @@
     border-bottom-style: solid;
   }
 </style>
+../grid/provider ./grid-item

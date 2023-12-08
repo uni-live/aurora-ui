@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
   import { computed, type CSSProperties } from 'vue';
-  import { statusBarProps } from './props';
+  import { statusBarProps } from './status-bar';
   import { addStyle, addUnit, deepMerge, sys } from '../../shared';
 
   const props = defineProps(statusBarProps);
@@ -37,3 +37,4 @@
     /* #endif */
   }
 </style>
+./status-bar

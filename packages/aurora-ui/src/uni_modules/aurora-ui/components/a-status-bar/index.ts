@@ -2,7 +2,7 @@ import { withInstall } from '../../shared';
 
 import aStatusBar from './a-status-bar.vue';
 
-export * from './props';
+export * from './status-bar';
 
 const AStatusBar = withInstall(aStatusBar);
 

@@ -9,4 +9,4 @@ export { AIcon };
 export default AIcon;
 
 export * from './icons';
-export * from './props';
+export * from './icon';

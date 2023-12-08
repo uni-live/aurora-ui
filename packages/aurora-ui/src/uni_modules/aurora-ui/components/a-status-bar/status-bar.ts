@@ -1,5 +1,6 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps } from '../../shared';
+import StatusBar from './a-status-bar.vue';
 
 export const statusBarProps = buildProps({
   /**
@@ -34,3 +35,5 @@ export const statusBarProps = buildProps({
 });
 
 export type StatusBarProps = ExtractPropTypes<typeof statusBarProps>;
+
+export type StatusBarInstance = InstanceType<typeof StatusBar>;

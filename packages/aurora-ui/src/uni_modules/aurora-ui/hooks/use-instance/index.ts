@@ -8,7 +8,7 @@ export interface InstanceReturns {
   clear: () => void;
 }
 
-export function useInstance() {
+export function useInstance(): InstanceReturns {
   const instances = ref<ComponentInternalInstance[]>([]);
 
   const has = (uid: string | number) => {

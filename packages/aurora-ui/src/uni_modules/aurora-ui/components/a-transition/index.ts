@@ -8,5 +8,5 @@ export { ATransition };
 
 export default ATransition;
 
-export * from './props';
+export * from './transition';
 export * from './useTransition';

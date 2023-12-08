@@ -1,5 +1,5 @@
 import { ref, nextTick } from 'vue';
-import type { TransitionProps } from './props';
+import type { TransitionProps } from './transition';
 import { sleep } from '../../shared/sleep';
 
 export function useTransition(props: TransitionProps, emit) {

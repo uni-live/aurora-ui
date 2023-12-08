@@ -14,6 +14,8 @@
 
 <script lang="ts">
   export default {
+    name: 'a-icon',
+    inheritAttrs: false,
     // #ifdef MP-WEIXIN
     options: {
       virtualHost: true,
@@ -25,7 +27,7 @@
 <script lang="ts" setup>
   import { computed, type CSSProperties } from 'vue';
 
-  import { iconProps } from './props';
+  import { iconProps } from './icon';
   import { addUnit, addStyle } from '../../shared';
   import icons from './icons';
 
@@ -121,3 +123,4 @@
     }
   }
 </style>
+./icon

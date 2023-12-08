@@ -1,5 +1,6 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps } from '../../shared';
+import Navbar from './a-navbar.vue';
 
 export const navbarProps = buildProps({
   /**
@@ -169,3 +170,11 @@ export const navbarProps = buildProps({
 });
 
 export type NavbarProps = ExtractPropTypes<typeof navbarProps>;
+
+export const navbarEmits = {
+  leftClick: () => true,
+  rightClick: () => true,
+};
+export type NavbarEmits = typeof navbarEmits;
+
+export type NavbarInstance = InstanceType<typeof Navbar>;

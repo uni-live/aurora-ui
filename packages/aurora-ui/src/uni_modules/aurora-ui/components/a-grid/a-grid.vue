@@ -5,8 +5,9 @@
 </template>
 <script lang="ts">
   export default {
+    name: 'a-grid',
+    inheritAttrs: false,
     // #ifdef MP-WEIXIN
-    // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，能更好的使用flex属性
     options: {
       virtualHost: true,
     },
@@ -16,15 +17,14 @@
 <script setup lang="ts">
   import { computed, type CSSProperties } from 'vue';
 
-  import { gridProps } from './props';
+  import { gridProps, gridEmits } from './grid';
   import { deepMerge, addStyle } from '../../shared';
   import { createGridProviderContext } from './provider';
-  import { useInstance } from '../../hooks';
+  import { useInstance } from '../../hooks/use-instance';
 
   const props = defineProps(gridProps);
-  const emit = defineEmits<{
-    click: [string | number];
-  }>();
+
+  const emit = defineEmits(gridEmits);
 
   const instance = useInstance();
 

@@ -5,6 +5,6 @@ export * from './deep-merge';
 export * from './tree';
 export * from 'lodash-es';
 export * from './sys';
-export * from './getPx';
+export * from './get-px';
 export * from './sleep';
 export * from './install';

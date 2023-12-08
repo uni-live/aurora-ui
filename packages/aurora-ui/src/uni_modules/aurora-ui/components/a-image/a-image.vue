@@ -27,6 +27,8 @@
 </template>
 <script lang="ts">
   export default {
+    name: 'a-image',
+    inheritAttrs: false,
     // #ifdef MP-WEIXIN
     options: {
       virtualHost: true,
@@ -36,17 +38,13 @@
 </script>
 <script lang="ts" setup>
   import { ref, onMounted, watch, computed, type CSSProperties } from 'vue';
-  import { imageProps } from './props';
+  import { imageProps, imageEmits } from './image';
   import { addStyle, addUnit, deepMerge } from '../../shared';
   import { ATransition } from '../a-transition';
 
   const props = defineProps(imageProps);
 
-  const emit = defineEmits<{
-    click: [];
-    error: [any];
-    load: [string];
-  }>();
+  const emit = defineEmits(imageEmits);
 
   // 图片是否加载错误，如果是，则显示错误占位图
   const isError = ref(false);
@@ -169,3 +167,4 @@
     }
   }
 </style>
+./image

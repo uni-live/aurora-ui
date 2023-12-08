@@ -1,5 +1,6 @@
 import type { ExtractPropTypes } from 'vue';
-import { buildProps } from '../../shared';
+import { buildProps, isNumber, isString } from '../../shared';
+import Grid from './a-grid.vue';
 
 export const gridProps = buildProps({
   /**
@@ -52,3 +53,10 @@ export const gridProps = buildProps({
 });
 
 export type GridProps = ExtractPropTypes<typeof gridProps>;
+
+export const gridEmits = {
+  click: (name: string | number) => isString(name) || isNumber(name),
+};
+export type GridEmits = typeof gridEmits;
+
+export type GridInstance = InstanceType<typeof Grid>;

@@ -8,4 +8,4 @@ export { AImage };
 
 export default AImage;
 
-export * from './props';
+export * from './image';

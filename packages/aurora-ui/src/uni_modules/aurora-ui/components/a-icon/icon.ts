@@ -1,5 +1,6 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps } from '../../shared';
+import Icon from './a-icon.vue';
 
 export const iconProps = buildProps({
   /**
@@ -106,3 +107,5 @@ export const iconProps = buildProps({
 });
 
 export type IconProps = ExtractPropTypes<typeof iconProps>;
+
+export type IconInstance = InstanceType<typeof Icon>;

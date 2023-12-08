@@ -16,13 +16,6 @@ function definePackageUIConfig(defineOptions: DefineOptions = {}) {
     const { dependencies = {}, peerDependencies = {} } = await readPackageJSON(root);
 
     const packageConfig: UserConfig = {
-      css: {
-        preprocessorOptions: {
-          scss: {
-            additionalData: `@use '@app/design/shared' as *;`,
-          },
-        },
-      },
       build: {
         lib: {
           entry: 'src/index.ts',

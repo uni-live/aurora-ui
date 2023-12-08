@@ -1,5 +1,6 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps } from '../../shared';
+import Transition from './a-transition.vue';
 
 export const transitionProps = buildProps({
   /**
@@ -61,3 +62,16 @@ export const transitionProps = buildProps({
 });
 
 export type TransitionProps = ExtractPropTypes<typeof transitionProps>;
+
+export const transitionEmits = {
+  beforeEnter: () => true,
+  enter: () => true,
+  afterEnter: () => true,
+  beforeLeave: () => true,
+  leave: () => true,
+  afterLeave: () => true,
+  click: () => true,
+};
+export type TransitionEmits = typeof transitionEmits;
+
+export type TransitionInstance = InstanceType<typeof Transition>;

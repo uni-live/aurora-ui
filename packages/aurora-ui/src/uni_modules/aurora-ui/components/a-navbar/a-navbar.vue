@@ -66,6 +66,8 @@
 </template>
 <script lang="ts">
   export default {
+    name: 'a-navbar',
+    inheritAttrs: false,
     // #ifdef MP-WEIXIN
     options: {
       virtualHost: true,
@@ -74,17 +76,14 @@
   };
 </script>
 <script setup lang="ts">
-  import { navbarProps } from './props';
+  import { navbarProps, navbarEmits } from './navbar';
   import { addUnit, getPx, sys, addStyle } from '../../shared';
   import { computed, type CSSProperties } from 'vue';
   import { AStatusBar } from '../a-status-bar';
 
   const props = defineProps(navbarProps);
 
-  const emit = defineEmits<{
-    leftClick: [];
-    rightClick: [];
-  }>();
+  const emit = defineEmits(navbarEmits);
 
   const placeholderStyle = computed<CSSProperties>(() => {
     return {
@@ -164,3 +163,4 @@
     }
   }
 </style>
+./navbar

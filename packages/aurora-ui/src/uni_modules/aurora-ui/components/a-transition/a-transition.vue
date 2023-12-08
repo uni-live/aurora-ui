@@ -12,6 +12,8 @@
 </template>
 <script lang="ts">
   export default {
+    name: 'a-transition',
+    inheritAttrs: false,
     // #ifdef MP-WEIXIN
     options: {
       virtualHost: true,
@@ -21,21 +23,13 @@
 </script>
 <script lang="ts" setup>
   import { computed, watch } from 'vue';
-  import { transitionProps } from './props';
+  import { transitionProps, transitionEmits } from './transition';
   import { useTransition } from './useTransition';
   import { addStyle } from '../../shared';
 
-  const emit = defineEmits<{
-    beforeEnter: [];
-    enter: [];
-    afterEnter: [];
-    beforeLeave: [];
-    leave: [];
-    afterLeave: [];
-    click: [];
-  }>();
-
   const props = defineProps(transitionProps);
+
+  const emit = defineEmits(transitionEmits);
 
   const { inited, classes, handleEnter, handleLeave } = useTransition(props, emit);
 
@@ -71,3 +65,4 @@
   .a-transition {
   }
 </style>
+./transition

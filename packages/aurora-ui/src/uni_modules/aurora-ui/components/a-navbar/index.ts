@@ -8,4 +8,4 @@ export { ANavbar };
 
 export default ANavbar;
 
-export * from './props';
+export * from './navbar';

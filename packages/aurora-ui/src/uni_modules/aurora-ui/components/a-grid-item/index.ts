@@ -8,4 +8,4 @@ export { AGridItem };
 
 export default AGridItem;
 
-export * from './props';
+export * from './grid-item';
