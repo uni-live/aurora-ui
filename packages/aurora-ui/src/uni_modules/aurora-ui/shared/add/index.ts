@@ -45,9 +45,9 @@ export function addStyle(customStyle: Record<string, any> | string, target: stri
 }
 
 /**
- * @description 添加单位，如果有rpx，upx，%，px等单位结尾或者值为auto，直接返回，否则加上px单位结尾
+ * @description 添加单位，如果有rpx，upx，%，px等单位结尾或者值为auto，直接返回，否则加上rpx单位结尾
  * @param {string|number} value 需要添加单位的值
- * @param {string} unit 添加的单位名 比如px
+ * @param {string} unit 添加的单位名 比如rpx
  */
 export function addUnit(value: string | number = 'auto', unit: string = 'rpx') {
   return isNumber(value) ? `${value}${unit}` : value;

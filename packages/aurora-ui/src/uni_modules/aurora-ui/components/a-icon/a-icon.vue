@@ -1,17 +1,3 @@
-<template>
-  <view :class="['a-icon', customClass]">
-    <image class="a-icon__img" v-if="isImg" :src="name" :mode="mode" :style="imgStyle"></image>
-    <text
-      v-else
-      class="a-icon__icon"
-      :class="aClasses"
-      :style="iconStyle"
-      :hover-class="hoverClass"
-      >{{ icon }}</text
-    >
-  </view>
-</template>
-
 <script lang="ts">
   export default {
     name: 'a-icon',
@@ -84,6 +70,23 @@
   });
 </script>
 
+<template>
+  <image
+    :class="['a-icon a-icon__img', customClass]"
+    v-if="isImg"
+    :src="name"
+    :mode="mode"
+    :style="imgStyle"
+  ></image>
+  <text
+    v-else
+    :class="['a-icon', 'a-icon__icon', aClasses, customClass]"
+    :style="iconStyle"
+    :hover-class="hoverClass"
+    >{{ icon }}</text
+  >
+</template>
+
 <style lang="scss" scoped>
   @import '../../design/shared.scss';
   @import './iconfont.css';
@@ -104,8 +107,8 @@
         color: getCssVar('color-success');
       }
 
-      &--error {
-        color: getCssVar('color-error');
+      &--danger {
+        color: getCssVar('color-danger');
       }
 
       &--warning {

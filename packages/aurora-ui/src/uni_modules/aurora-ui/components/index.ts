@@ -5,3 +5,5 @@ export * from './a-image';
 export * from './a-navbar';
 export * from './a-status-bar';
 export * from './a-transition';
+export * from './a-button';
+export * from './a-loading';

@@ -1,0 +1,91 @@
+@use 'sass:map';
+
+@use '../../design/common/var.scss' as *;
+@use '../../design/shared.scss' as *;
+
+@include b(loading) {
+  @include set-component-css-var('loading', $loading);
+}
+
+@include b(loading) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: getCssVar('loading', 'icon-color');
+  width: getCssVar('loading', 'size');
+  height: getCssVar('loading', 'size');
+  position: relative;
+  /* #ifndef APP-NVUE */
+  box-sizing: border-box;
+  max-width: getCssVar('loading', 'max-size');
+  max-height: getCssVar('loading', 'max-size');
+  animation: a-rotate 1s linear infinite;
+  /* #endif */
+
+  &--semicircle {
+    border-width: getCssVar('loading', 'semicircle', 'border-width');
+    border-color: getCssVar('loading', 'semicircle', 'border-color');
+    border-top-right-radius: getCssVar('loading', 'semicircle', 'border-radius');
+    border-top-left-radius: getCssVar('loading', 'semicircle', 'border-radius');
+    border-bottom-left-radius: getCssVar('loading', 'semicircle', 'border-radius');
+    border-bottom-right-radius: getCssVar('loading', 'semicircle', 'border-radius');
+    border-style: getCssVar('loading', 'semicircle', 'border-style');
+  }
+
+  &--circle {
+    border-top-right-radius: getCssVar('loading', 'circle', 'border-radius');
+    border-top-left-radius: getCssVar('loading', 'circle', 'border-radius');
+    border-bottom-left-radius: getCssVar('loading', 'circle', 'border-radius');
+    border-bottom-right-radius: getCssVar('loading', 'circle', 'border-radius');
+    border-width: getCssVar('loading', 'circle', 'border-width');
+    border-top-color: getCssVar('loading', 'circle', 'border-color');
+    border-right-color: getCssVar('loading', 'circle', 'border-color');
+    border-bottom-color: getCssVar('loading', 'circle', 'border-color');
+    border-left-color: getCssVar('loading', 'circle', 'border-color');
+    border-style: getCssVar('loading', 'circle', 'border-style');
+  }
+
+  &--spinner {
+    animation-timing-function: steps(12);
+  }
+
+  &__dot {
+    position: absolute;
+    top: getCssVar('loading', 'dot', 'top');
+    left: getCssVar('loading', 'dot', 'left');
+    width: getCssVar('loading', 'dot', 'width');
+    height: getCssVar('loading', 'dot', 'height');
+
+    &:before {
+      display: block;
+      width: getCssVar('loading', 'dot', 'before-width');
+      height: getCssVar('loading', 'dot', 'before-height');
+      margin: getCssVar('loading', 'dot', 'before-margin');
+      background-color: getCssVar('loading', 'dot', 'before-background-color');
+      border-radius: getCssVar('loading', 'dot', 'before-border-radius');
+      content: ' ';
+    }
+  }
+
+  :host {
+    font-size: getCssVar('loading', 'host', 'font-size');
+    line-height: getCssVar('loading', 'host', 'line-height');
+  }
+
+  @for $i from 1 through 12 {
+    .a-loading__dot:nth-of-type(#{$i}) {
+      transform: rotate($i * 30deg);
+      opacity: 1 - 0.0625 * ($i - 1);
+    }
+  }
+
+  @keyframes a-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}

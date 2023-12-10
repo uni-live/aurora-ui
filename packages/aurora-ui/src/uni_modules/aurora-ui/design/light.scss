@@ -3,8 +3,6 @@
 
 // common
 page {
-  color-scheme: light;
-
   @include set-component-css-var('font-size', $font-size);
   @include set-component-css-var('font-family', $font-family);
 
@@ -13,15 +11,10 @@ page {
 
   // --etfma-border-radius-#{$type}
   @include set-component-css-var('border-radius', $border-radius);
-
-  // component size
-  @include set-component-css-var('component-size', $common-component-size);
 }
 
 // 颜色相关
 page {
-  color-scheme: light;
-
   // --a-color-#{$type}
   // --a-color-#{$type}-light-{$i}
   @each $type in $types {

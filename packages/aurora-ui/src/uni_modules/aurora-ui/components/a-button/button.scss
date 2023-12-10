@@ -1,0 +1,106 @@
+@use 'sass:map';
+
+@use '../../design/common/var.scss' as *;
+@use '../../design/shared.scss' as *;
+
+@use './mixins.scss' as *;
+
+@include b(button) {
+  @include set-component-css-var('button', $button);
+}
+
+@include b(button) {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  white-space: nowrap;
+  color: getCssVar('button', 'text-color');
+  text-align: center;
+  box-sizing: border-box;
+  transition: 0.1s;
+  font-weight: getCssVar('button', 'font-weight');
+  vertical-align: middle;
+  background-color: getCssVar('button', 'bg-color');
+  border: getCssVar('border');
+  border-color: getCssVar('button', 'border-color');
+
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border: inherit;
+    border-radius: inherit;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    content: '';
+    background-color: #000;
+    border-color: #000;
+    z-index: 1;
+  }
+
+  > text {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  @include when(disabled) {
+    & {
+      background-image: none;
+    }
+  }
+
+  @include when(active) {
+    color: getCssVar('button', 'active', 'text-color');
+
+    &:before {
+      opacity: 0.15;
+    }
+  }
+
+  @include when(loading) {
+    position: relative;
+    pointer-events: none;
+
+    &:before {
+      z-index: 1;
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      border-radius: inherit;
+      background-color: getCssVar('mask-color', 'extra-light');
+    }
+  }
+
+  @each $type in (primary, success, warning, danger, info) {
+    @include m($type) {
+      @include button-variant($type);
+    }
+  }
+
+  @each $size in (large, default, small, mini) {
+    @include m($size) {
+      @include set-css-var-value(('button', 'width'), map.get($button-width, $size));
+      @include set-css-var-value(('button', 'height'), map.get($button-height, $size));
+
+      @include button-size(
+        map.get($button-padding-vertical, $size),
+        map.get($button-padding-horizontal, $size),
+        map.get($button-font-size, $size),
+        map.get($button-height, $size),
+        map.get($button-width, $size)
+      );
+
+      @include when(circle) {
+        width: getCssVar('button', 'width');
+        height: getCssVar('button', 'height');
+        padding: map.get($button-padding-vertical, $size);
+      }
+    }
+  }
+}

@@ -22,6 +22,8 @@
     "mikestead.dotenv",
     "dbaeumer.vscode-eslint",
     "mhutchie.git-graph",
-    "eamodio.gitlens"
+    "eamodio.gitlens",
+    "wayou.vscode-todo-highlight",
+    "gruntfuggly.todo-tree"
   ]
 }

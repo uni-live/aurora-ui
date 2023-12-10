@@ -23,12 +23,24 @@
       "style": {
         "navigationBarTitleText": "网格"
       }
+    },
+    {
+      "path": "pages/button/button",
+      "style": {
+        "navigationBarTitleText": "按钮"
+      }
+    },
+    {
+      "path": "pages/loading/loading",
+      "style": {
+        "navigationBarTitleText": "加载动画"
+      }
     }
   ],
   "globalStyle": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "@navigationBarTextStyle",
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarBackgroundColor": "@navigationBarBackgroundColor",
+    "backgroundColor": "@backgroundColor"
   }
 }
