@@ -1,12 +1,4 @@
 <script setup lang="ts">
-  import { onLoad } from '@dcloudio/uni-app';
-
-  onLoad(() => {
-    const aaa = uni.getSystemInfoSync();
-
-    console.log('====================', aaa);
-  });
-
   function handleClickGrid() {
     uni.navigateTo({ url: '/pages/grid/grid' });
   }

@@ -70,13 +70,7 @@
       <view class="u-demo-block__title">加载中</view>
       <view class="u-demo-block__content">
         <view class="u-page__button-item">
-          <a-button
-            loadingText="加载中"
-            size="large"
-            loading
-            loadingMode="circle"
-            type="success"
-            plain
+          <a-button loadingText="加载中" size="large" loadingMode="circle" type="success" plain
             >加载中</a-button
           >
         </view>
@@ -169,7 +163,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { AButton } from '@/uni_modules/aurora-ui/components/a-button';
+  import AButton from '@/uni_modules/aurora-ui/components/a-button/a-button.vue';
 
   function handleClick() {
     console.log('click');

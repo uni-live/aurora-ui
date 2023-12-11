@@ -86,8 +86,8 @@
   &.is-plain.is-active {
     background: getCssVar('button', 'active', 'bg-color') !important;
 
-    > [class*='#{$namespace}-icon__icon'] {
-      color: getCssVar('button', 'active', 'text-color') !important;
+    > .#{$namespace}-icon__icon {
+      color: red !important;
     }
   }
 }

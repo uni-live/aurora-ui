@@ -37,9 +37,9 @@
       <view class="u-demo-block__content">
         <view class="u-page__image-item">
           <a-image :src="src1" width="80px" height="80px" mode="widthFit">
-            <!-- <template v-slot:loading>
+            <template v-slot:loading>
               <u-loading-icon color="red"></u-loading-icon>
-            </template> -->
+            </template>
           </a-image>
         </view>
       </view>
@@ -50,6 +50,7 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import { onLoad } from '@dcloudio/uni-app';
+  import AImage from '@/uni_modules/aurora-ui/components/a-image/a-image.vue';
 
   const src = ref('https://cdn.uviewui.com/uview/album/1.jpg');
   const src1 = ref('');

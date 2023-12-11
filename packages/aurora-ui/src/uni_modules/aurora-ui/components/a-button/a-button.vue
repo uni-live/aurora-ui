@@ -15,8 +15,8 @@
   import { computed, type CSSProperties } from 'vue';
   import { addStyle, addUnit } from '../../shared';
   import { useNamespace } from '../../hooks';
-  import { AIcon } from '../a-icon';
-  import { ALoading } from '../a-loading';
+  import AIcon from '../a-icon/a-icon.vue';
+  import ALoading from '../a-loading/a-loading.vue';
   import { useButtonCustomStyle } from './button-custom';
 
   const props = defineProps(buttonProps);

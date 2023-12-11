@@ -1,7 +1,8 @@
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { TinyColor } from '@ctrl/tinycolor';
 import { useNamespace } from '../../hooks/use-namespace';
 import type { ButtonProps } from './button';
+import { onLoad } from '@dcloudio/uni-app';
 
 export function darken(color: TinyColor, amount = 20) {
   return color.mix('#141414', amount).toString();
@@ -9,6 +10,13 @@ export function darken(color: TinyColor, amount = 20) {
 
 export function useButtonCustomStyle(props: ButtonProps) {
   const ns = useNamespace('button');
+
+  const hasDark = ref(false);
+
+  onLoad(() => {
+    const theme = uni.getSystemInfoSync().theme;
+    hasDark.value = theme === 'dark';
+  });
 
   return computed(() => {
     let styles: Record<string, string> = {};
