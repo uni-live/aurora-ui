@@ -16,8 +16,11 @@
   import { iconProps } from './icon';
   import { addUnit, addStyle } from '../../shared';
   import icons from './icons';
+  import { useNamespace } from '../../hooks';
 
   const props = defineProps(iconProps);
+
+  const ns = useNamespace('icon');
 
   const aClasses = computed(() => {
     let classes: any = [];
@@ -27,7 +30,7 @@
       classes.push(props.customPrefix);
     }
     // 主题色，通过类配置
-    if (props.color) classes.push('a-icon__icon--' + props.color);
+    if (props.color) classes.push(ns.em('icon', props.color));
     // 阿里，头条，百度小程序通过数组绑定类名时，无法直接使用[a, b, c]的形式，否则无法识别
     // 故需将其拆成一个字符串的形式，通过空格隔开各个类名
     //#ifdef MP-ALIPAY || MP-TOUTIAO || MP-BAIDU
@@ -72,7 +75,7 @@
 
 <template>
   <image
-    :class="['a-icon a-icon__img', customClass]"
+    :class="[ns.b(), ns.e('img'), customClass]"
     v-if="isImg"
     :src="name"
     :mode="mode"
@@ -80,7 +83,7 @@
   ></image>
   <text
     v-else
-    :class="['a-icon', 'a-icon__icon', aClasses, customClass]"
+    :class="[ns.b(), ns.e('icon'), aClasses, customClass]"
     :style="iconStyle"
     :hover-class="hoverClass"
     >{{ icon }}</text
@@ -88,42 +91,6 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '../../design/shared.scss';
-  @import './iconfont.css';
-
-  .a-icon {
-    display: flex;
-    align-items: center;
-
-    &__icon {
-      font-family: aicon-iconfont;
-      position: relative;
-
-      &--primary {
-        color: getCssVar('color-primary');
-      }
-
-      &--success {
-        color: getCssVar('color-success');
-      }
-
-      &--danger {
-        color: getCssVar('color-danger');
-      }
-
-      &--warning {
-        color: getCssVar('color-warning');
-      }
-
-      &--info {
-        color: getCssVar('color-info');
-      }
-    }
-
-    &__img {
-      height: auto;
-      will-change: transform;
-    }
-  }
+  @use './iconfont.css' as *;
+  @use './icon.scss';
 </style>
-./icon

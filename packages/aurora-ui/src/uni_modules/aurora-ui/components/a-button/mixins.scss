@@ -85,10 +85,10 @@
 
   &.is-plain.is-active {
     background: getCssVar('button', 'active', 'bg-color') !important;
-
-    > .#{$namespace}-icon__icon {
-      color: red !important;
-    }
+    @include set-css-var-value(
+      ('button', 'text-color'),
+      getCssVar('button', 'active', 'text-color')
+    );
   }
 }
 

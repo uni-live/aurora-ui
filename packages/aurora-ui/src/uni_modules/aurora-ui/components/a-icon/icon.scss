@@ -1,0 +1,25 @@
+@use 'sass:map';
+
+@use '../../design/common/var.scss' as *;
+@use '../../design/shared.scss' as *;
+
+@include b(icon) {
+  display: flex;
+  align-items: center;
+
+  @include e(icon) {
+    font-family: aicon-iconfont;
+    position: relative;
+
+    @each $type in $types {
+      @include m($type) {
+        color: map.get($colors, $type, 'base');
+      }
+    }
+  }
+
+  @include e(img) {
+    height: auto;
+    will-change: transform;
+  }
+}

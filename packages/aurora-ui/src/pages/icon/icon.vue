@@ -17,7 +17,7 @@
       customStyle="height: 200rpx; padding: 20rpx"
       @click="handleClipboard(item.name)"
     >
-      <a-icon :name="item.name" color="#909399" :size="50" />
+      <a-icon :name="item.name" color="primary" :size="50" />
       <view class="grid-text">{{ item.name }}</view>
     </a-grid-item>
   </a-grid>

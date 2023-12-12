@@ -230,6 +230,16 @@ $disabled: map.merge(
   $disabled
 );
 
+$active: () !default;
+$active: map.merge(
+  (
+    'bg-color': #000,
+    'text-color': #000,
+    'border-color': #000,
+  ),
+  $active
+);
+
 // Button
 $button: () !default;
 $button: map.merge(

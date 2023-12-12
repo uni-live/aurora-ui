@@ -19,11 +19,23 @@
   text-align: center;
   box-sizing: border-box;
   transition: 0.1s;
-  font-weight: getCssVar('button', 'font-weight');
   vertical-align: middle;
   background-color: getCssVar('button', 'bg-color');
   border: getCssVar('border');
   border-color: getCssVar('button', 'border-color');
+  position: relative;
+
+  > text {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  @include when(disabled) {
+    & {
+      background-image: none;
+      opacity: 0.5;
+    }
+  }
 
   &:before {
     position: absolute;
@@ -36,20 +48,9 @@
     transform: translate(-50%, -50%);
     opacity: 0;
     content: '';
-    background-color: #000;
-    border-color: #000;
+    background-color: getCssVar('active', 'bg-color');
+    border-color: getCssVar('active', 'border-color');
     z-index: 1;
-  }
-
-  > text {
-    display: inline-flex;
-    align-items: center;
-  }
-
-  @include when(disabled) {
-    & {
-      background-image: none;
-    }
   }
 
   @include when(active) {
@@ -62,7 +63,6 @@
 
   @include when(loading) {
     position: relative;
-    pointer-events: none;
 
     &:before {
       z-index: 1;
@@ -95,12 +95,6 @@
         map.get($button-height, $size),
         map.get($button-width, $size)
       );
-
-      @include when(circle) {
-        width: getCssVar('button', 'width');
-        height: getCssVar('button', 'height');
-        padding: map.get($button-padding-vertical, $size);
-      }
     }
   }
 }
