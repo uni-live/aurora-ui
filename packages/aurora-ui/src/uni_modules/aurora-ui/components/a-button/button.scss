@@ -20,9 +20,10 @@
   box-sizing: border-box;
   transition: 0.1s;
   vertical-align: middle;
-  background-color: getCssVar('button', 'bg-color');
-  border: getCssVar('border');
+  background: getCssVar('button', 'bg-color');
+  border-width: getCssVar('button', 'border-width');
   border-color: getCssVar('button', 'border-color');
+  border-style: getCssVar('button', 'border-style');
   position: relative;
 
   > text {
@@ -32,7 +33,6 @@
 
   @include when(disabled) {
     & {
-      background-image: none;
       opacity: 0.5;
     }
   }

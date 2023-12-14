@@ -251,16 +251,16 @@ $button: map.merge(
     'active-border-color': getCssVar('button', 'border-color'),
     'active-bg-color': getCssVar('button', 'active-bg-color'),
     'active-color': getCssVar('text-color', 'primary'),
+    'border-style': getCssVar('border-style'),
+    'border-width': getCssVar('border-width'),
   ),
   $button
 );
 
-$button-border-width: $border-width !default;
-
-$button-border-color: () !default;
 $button-bg-color: () !default;
 $button-text-color: () !default;
 
+$button-border-color: () !default;
 @each $type in $types {
   $button-border-color: map.merge(
     (
@@ -276,6 +276,17 @@ $button-text-color: () !default;
     $button-bg-color
   ) !global;
 }
+
+$button-border-radius: () !default;
+$button-border-radius: map.merge(
+  (
+    'base': getCssVar('border-radius', 'base'),
+    'small': getCssVar('border-radius', 'small'),
+    'round': getCssVar('border-radius', 'round'),
+    'circle': getCssVar('border-radius', 'circle'),
+  ),
+  $button-border-radius
+);
 
 $button-font-size: () !default;
 $button-font-size: map.merge(

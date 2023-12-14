@@ -3,6 +3,7 @@ import { TinyColor } from '@ctrl/tinycolor';
 import { useNamespace } from '../../hooks/use-namespace';
 import type { ButtonProps } from './button';
 import { onLoad } from '@dcloudio/uni-app';
+import { addUnit } from '../../shared';
 
 export function darken(color: TinyColor, amount = 20) {
   return color.mix('#141414', amount).toString();
@@ -38,7 +39,10 @@ export function useButtonCustomStyle(props: ButtonProps) {
         });
       } else {
         let textColor;
-        if (props.color.indexOf('gradient') !== -1 || props.color.indexOf('rgb') !== -1) {
+        const gradient =
+          buttonColor.indexOf('gradient') !== -1 || buttonColor.indexOf('rgb') !== -1;
+
+        if (gradient) {
           textColor = `var(${ns.cssVarName('color-white')})`;
         } else {
           textColor = color.isDark()
@@ -55,6 +59,17 @@ export function useButtonCustomStyle(props: ButtonProps) {
         });
       }
     }
+
+    const gradient =
+      props.color && (buttonColor.indexOf('gradient') !== -1 || buttonColor.indexOf('rgb') !== -1);
+
+    styles = {
+      ...styles,
+      ...ns.cssVarBlock({
+        'border-radius': addUnit(props.round),
+        'border-width': props.plain && !gradient ? `var(${ns.cssVarName('border-width')})` : '0px',
+      }),
+    };
 
     return styles;
   });

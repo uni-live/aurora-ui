@@ -12,8 +12,8 @@
 
 <script setup lang="ts">
   import { buttonEmits, buttonProps } from './button';
-  import { computed, type CSSProperties } from 'vue';
-  import { addStyle, addUnit } from '../../shared';
+  import { computed } from 'vue';
+  import { addStyle } from '../../shared';
   import { useNamespace } from '../../hooks';
   import AIcon from '../a-icon/a-icon.vue';
   import ALoading from '../a-loading/a-loading.vue';
@@ -26,35 +26,6 @@
   const ns = useNamespace('button');
 
   const buttonStyle = useButtonCustomStyle(props);
-
-  const baseColor = computed(() => {
-    let style: CSSProperties = {
-      borderRadius: addUnit(props.round),
-    };
-
-    if (props.disabled) {
-      style.opacity = 0.5;
-    } else {
-      delete style.opacity;
-    }
-
-    if (props.color) {
-      if (props.color.indexOf('gradient') !== -1) {
-        // 如果自定义的颜色为渐变色，不显示边框，以及通过backgroundImage设置渐变色
-        style.border = 0;
-        if (!props.plain) {
-          style.backgroundImage = props.color;
-        }
-      } else {
-        // 非渐变色，则设置边框相关的属性
-        style.borderColor = props.color;
-        style.borderWidth = '1px';
-        style.borderStyle = 'solid';
-      }
-    }
-
-    return style;
-  });
 
   const loadingColor = computed(() => {
     if (props.plain) {
@@ -135,7 +106,7 @@
     @opensetting="opensetting"
     @launchapp="launchapp"
     :hover-class="!disabled && !loading ? ns.is('active') : ''"
-    :style="[baseColor, buttonStyle, addStyle(customStyle)]"
+    :style="[buttonStyle, addStyle(customStyle)]"
     @tap="handleClick"
     :class="[ns.b(), ...buttonClass, customClass]"
   >

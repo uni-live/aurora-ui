@@ -121,10 +121,10 @@
           <a-button text="青绿色按钮" size="large" color="rgba(10, 185, 156, 1)"></a-button>
         </view>
         <view class="u-page__button-item">
-          <a-button text="青绿色按钮" size="large" color="#626aef"></a-button>
+          <a-button text="自定义颜色按钮" size="large" color="#626aef"></a-button>
         </view>
         <view class="u-page__button-item">
-          <a-button text="青绿色按钮" size="large" color="#626aef" plain></a-button>
+          <a-button text="自定义颜色镂空按钮" size="large" color="#626aef" plain></a-button>
         </view>
       </view>
     </view>
