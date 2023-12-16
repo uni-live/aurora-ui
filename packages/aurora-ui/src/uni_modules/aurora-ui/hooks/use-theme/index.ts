@@ -1,0 +1,57 @@
+import { GlobalTheme } from 'components/a-config-provider';
+import type { ExtractThemeOverrides, MergedTheme, Theme, UseThemeProps } from './interface';
+import { ComputedRef, computed } from 'vue';
+import { useConfigProviderContext } from '../../components/a-config-provider';
+import { merge } from 'shared';
+
+export * from './interface';
+
+export function useTheme<N, T, R>(
+  resolveId: Exclude<keyof GlobalTheme, 'common' | 'name'>,
+  defaultTheme: Theme<N, T, R>,
+  props: UseThemeProps<Theme<N, T, R>>,
+): ComputedRef<MergedTheme<Theme<N, T, R>>> {
+  const AConfigProvider = useConfigProviderContext();
+
+  const mergedThemeRef = computed(() => {
+    const {
+      theme: { common: selfCommon, self, peers = {} } = {},
+      themeOverrides: selfOverrides = {} as ExtractThemeOverrides<Theme<N, T, R>>,
+      builtinThemeOverrides: builtinOverrides = {} as ExtractThemeOverrides<Theme<N, T, R>>,
+    } = props;
+    const { common: selfCommonOverrides, peers: peersOverrides } = selfOverrides;
+    const {
+      common: globalCommon = undefined,
+      [resolveId]: {
+        common: globalSelfCommon = undefined,
+        self: globalSelf = undefined,
+        peers: globalPeers = {},
+      } = {},
+    } = AConfigProvider?.mergedThemeRef || {};
+    const { common: globalCommonOverrides = undefined, [resolveId]: globalSelfOverrides = {} } =
+      AConfigProvider?.mergedThemeOverridesRef || {};
+    const { common: globalSelfCommonOverrides, peers: globalPeersOverrides = {} } =
+      globalSelfOverrides;
+    const mergedCommon = merge(
+      {},
+      selfCommon || globalSelfCommon || globalCommon || defaultTheme.common,
+      globalCommonOverrides,
+      globalSelfCommonOverrides,
+      selfCommonOverrides,
+    );
+    const mergedSelf = merge(
+      (self || globalSelf || defaultTheme.self)?.(mergedCommon) as T,
+      builtinOverrides,
+      globalSelfOverrides,
+      selfOverrides,
+    );
+    return {
+      common: mergedCommon,
+      self: mergedSelf,
+      peers: merge({}, defaultTheme.peers, globalPeers, peers), // 关联组件主题
+      peerOverrides: merge({}, builtinOverrides.peers, globalPeersOverrides, peersOverrides), // 关联组件主题覆盖
+    };
+  });
+
+  return mergedThemeRef;
+}

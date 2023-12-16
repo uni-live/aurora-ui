@@ -1,11 +1,12 @@
 import { createContext, useContext } from '../../hooks';
 import type { InjectionKey } from 'vue';
-import { GlobalTheme, DateLocale } from './type';
+import { GlobalTheme, DateLocale, GlobalThemeOverrides } from './interface';
 
 export interface ConfigProviderContextProps {
   mergedThemeRef?: GlobalTheme;
   mergedNamespaceRef?: string;
   mergedLocaleRef?: DateLocale;
+  mergedThemeOverridesRef?: GlobalThemeOverrides;
 }
 
 const key: InjectionKey<ConfigProviderContextProps> = Symbol();

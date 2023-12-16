@@ -8,3 +8,5 @@ export * from './sys';
 export * from './get-px';
 export * from './sleep';
 export * from './install';
+export * from './create-key';
+export * from './color';

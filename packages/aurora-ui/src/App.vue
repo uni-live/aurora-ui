@@ -14,12 +14,10 @@
 
 <style lang="scss">
   /*每个页面公共css */
-  @use '@/uni_modules/aurora-ui/design/index.scss' as *;
-
-  @use '@/uni_modules/aurora-ui/design/shared.scss' as *;
+  // @use '@/uni_modules/aurora-ui/design/index.scss' as *;
 
   page {
-    background-color: getCssVar('bg-color');
+    // background-color: getCssVar('bg-color');
     height: 100%;
   }
 </style>

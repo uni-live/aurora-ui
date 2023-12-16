@@ -1,7 +1,7 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps, definePropType } from '../../shared';
 import ConfigProvider from './a-config-provider.vue';
-import type { DateLocale, GlobalTheme } from './type';
+import type { DateLocale, GlobalTheme } from './interface';
 
 export const configProviderProps = buildProps({
   /**

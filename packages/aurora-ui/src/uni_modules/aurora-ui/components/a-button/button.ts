@@ -1,6 +1,8 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps, definePropType } from '../../shared';
 import Button from './a-button.vue';
+import type { ExtractThemeOverrides, Theme } from '../../hooks/use-theme';
+import { ButtonThemeVars } from './styles';
 
 export const buttonProps = buildProps({
   /**
@@ -24,6 +26,30 @@ export const buttonProps = buildProps({
     },
   },
   /**
+   * @description 自定义主题
+   * @property {Object}
+   * @default
+   */
+  theme: {
+    type: definePropType<Theme<'Button', ButtonThemeVars, any>>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  themeOverrides: {
+    type: definePropType<ExtractThemeOverrides<Theme<'Button', ButtonThemeVars, any>>>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  builtinThemeOverrides: {
+    type: definePropType<ExtractThemeOverrides<Theme<'Button', ButtonThemeVars, any>>>(Object),
+  },
+  /**
    * @description 按钮的预置样式，info，primary，danger，warning，success
    * @property {String}
    * @default 'primary'
@@ -40,6 +66,15 @@ export const buttonProps = buildProps({
   size: {
     type: definePropType<'large' | 'default' | 'small' | 'mini'>(String),
     default: 'default',
+  },
+  /**
+   * @description 按钮是否文本类型
+   * @property {Boolean}
+   * @default false
+   */
+  text: {
+    type: Boolean,
+    default: false,
   },
   /**
    * @description 按钮是否镂空
@@ -218,15 +253,6 @@ export const buttonProps = buildProps({
   hoverStayTime: {
     type: Number,
     default: 200,
-  },
-  /**
-   * @description 按钮文字
-   * @property {String}
-   * @default ''
-   */
-  text: {
-    type: String,
-    default: '',
   },
   /**
    * @description 按钮图标

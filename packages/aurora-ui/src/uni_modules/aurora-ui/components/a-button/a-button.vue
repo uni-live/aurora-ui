@@ -13,11 +13,13 @@
 <script setup lang="ts">
   import { buttonEmits, buttonProps } from './button';
   import { computed } from 'vue';
-  import { addStyle } from '../../shared';
-  import { useNamespace } from '../../hooks';
+  import { addStyle, createKey, createPressedColor } from '../../shared';
+  import { useNamespace, useTheme } from '../../hooks';
   import AIcon from '../a-icon/a-icon.vue';
   import ALoading from '../a-loading/a-loading.vue';
   import { useButtonCustomStyle } from './button-custom';
+  import { buttonLight } from './styles';
+  import { changeColor } from 'seemly';
 
   const props = defineProps(buttonProps);
 
@@ -26,6 +28,113 @@
   const ns = useNamespace('button');
 
   const buttonStyle = useButtonCustomStyle(props);
+
+  const themeRef = useTheme('Button', buttonLight, props);
+
+  const cssVarsRef = computed(() => {
+    const theme = themeRef.value;
+    const { self } = theme;
+
+    const { text, type, color, plain, size, round } = props;
+
+    let colorProps = ns.cssVarBlock({
+      color: 'initial',
+      'color-pressed': 'initial',
+      'color-disabled': 'initial',
+      'text-color': 'initial',
+      'text-color-pressed': 'initial',
+      'text-color-disabled': 'initial',
+    });
+
+    if (text) {
+      const typeTextColor = self[createKey('color', type)];
+      const mergedTextColor = color || typeTextColor;
+      colorProps = ns.cssVarBlock({
+        color: changeColor(mergedTextColor, {
+          alpha: Number(self.colorOpacitySecondary),
+        }),
+        'color-pressed': changeColor(mergedTextColor, {
+          alpha: Number(self.colorOpacitySecondaryPressed),
+        }),
+        'color-disabled': self.colorSecondary,
+        'text-color': mergedTextColor,
+        'text-color-pressed': mergedTextColor,
+        'text-color-disabled': mergedTextColor,
+      });
+    } else if (plain) {
+      colorProps = ns.cssVarBlock({
+        color: '#0000',
+        'color-pressed': '#0000',
+        'color-disabled': '#0000',
+        'text-color': color || self[createKey('textColorGhost', type)],
+        'text-color-pressed': color
+          ? createPressedColor(color)
+          : self[createKey('textColorGhostPressed', type)],
+        'text-color-disabled': color || self[createKey('textColorGhostDisabled', type)],
+      });
+    } else {
+      colorProps = ns.cssVarBlock({
+        color: color || self[createKey('color', type)],
+        'color-pressed': color ? createPressedColor(color) : self[createKey('colorPressed', type)],
+        'color-disabled': color || self[createKey('colorDisabled', type)],
+        'text-color': color ? self.textColorPrimary : self[createKey('textColor', type)],
+        'text-color-pressed': color
+          ? self.textColorPressedPrimary
+          : self[createKey('textColorPressed', type)],
+        'text-color-disabled': color
+          ? self.textColorDisabledPrimary
+          : self[createKey('textColorDisabled', type)],
+      });
+    }
+
+    // border
+    let borderCssVar = ns.cssVarBlock({
+      border: 'initial',
+      'border-pressed': 'initial',
+      'border-disabled': 'initial',
+    });
+
+    if (text) {
+      borderCssVar = ns.cssVarBlock({
+        border: 'none',
+        'border-pressed': 'none',
+        'border-disabled': 'none',
+      });
+    } else {
+      borderCssVar = ns.cssVarBlock({
+        border: self[createKey('border', type)],
+        'border-pressed': self[createKey('borderPressed', type)],
+        'border-disabled': self[createKey('borderDisabled', type)],
+      });
+    }
+
+    // size
+    const {
+      [createKey('height', size)]: height,
+      [createKey('fontSize', size)]: fontSize,
+      [createKey('padding', size)]: padding,
+      [createKey('paddingRound', size)]: paddingRound,
+      [createKey('iconSize', size)]: iconSize,
+      [createKey('borderRadius', size)]: borderRadius,
+      [createKey('iconMargin', size)]: iconMargin,
+    } = self as any;
+
+    const sizeCssVar = ns.cssVarBlock({
+      width: 'initial',
+      height: height,
+      'font-size': fontSize,
+      padding: round ? paddingRound : padding,
+      'icon-size': iconSize,
+      'icon-margin': iconMargin,
+      'border-radius': borderRadius,
+    });
+    return {
+      [ns.cssVarBlockName('opacity-disabled')]: self.opacityDisabled,
+      ...colorProps,
+      ...borderCssVar,
+      ...sizeCssVar,
+    };
+  });
 
   const loadingColor = computed(() => {
     if (props.plain) {
@@ -106,7 +215,7 @@
     @opensetting="opensetting"
     @launchapp="launchapp"
     :hover-class="!disabled && !loading ? ns.is('active') : ''"
-    :style="[buttonStyle, addStyle(customStyle)]"
+    :style="[buttonStyle, cssVarsRef, addStyle(customStyle)]"
     @tap="handleClick"
     :class="[ns.b(), ...buttonClass, customClass]"
   >
