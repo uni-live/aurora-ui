@@ -23,6 +23,7 @@ const base = {
   alphaPending: '0.05',
   alphaTablePending: '0.02',
   alphaPressed: '0.07',
+  alphaLoading: '0.5',
 
   alphaAvatar: '0.2',
   alphaRail: '0.14',
@@ -38,29 +39,24 @@ const base = {
   alphaTag: '0.02',
 
   // primary
-  primaryDefault: '#18a058',
-  primaryActive: '#0c7a43',
-  primarySuppl: '#36ad6a',
-
-  // info
-  infoDefault: '#2080f0',
-  infoActive: '#1060c9',
-  infoSuppl: '#4098fc',
-
-  // error
-  errorDefault: '#d03050',
-  errorActive: '#ab1f3f',
-  errorSuppl: '#de576d',
-
-  // warning
-  warningDefault: '#f0a020',
-  warningActive: '#c97c10',
-  warningSuppl: '#fcb040',
+  primaryDefault: '#2080f0',
+  primaryActive: '#1060c9',
 
   // success
   successDefault: '#18a058',
   successActive: '#0c7a43',
-  successSuppl: '#36ad6a',
+
+  // info
+  infoDefault: '#909399',
+  infoActive: '#6b6d71',
+
+  // error
+  errorDefault: '#d03050',
+  errorActive: '#ab1f3f',
+
+  // warning
+  warningDefault: '#f0a020',
+  warningActive: '#c97c10',
 };
 
 const baseBackgroundRgb = rgba(base.neutralBase);
@@ -84,23 +80,18 @@ const derived = {
   // primary color
   primaryColor: base.primaryDefault,
   primaryColorPressed: base.primaryActive,
-  primaryColorSuppl: base.primarySuppl,
   // info color
   infoColor: base.infoDefault,
   infoColorPressed: base.infoActive,
-  infoColorSuppl: base.infoSuppl,
   // success color
   successColor: base.successDefault,
   successColorPressed: base.successActive,
-  successColorSuppl: base.successSuppl,
   // warning color
   warningColor: base.warningDefault,
   warningColorPressed: base.warningActive,
-  warningColorSuppl: base.warningSuppl,
   // error color
   errorColor: base.errorDefault,
   errorColorPressed: base.errorActive,
-  errorColorSuppl: base.errorSuppl,
   // text color
   textColorBase: base.neutralTextBase,
   textColor1: 'rgb(31, 34, 37)',
@@ -125,6 +116,8 @@ const derived = {
 
   dividerColor: 'rgb(239, 239, 245)',
   borderColor: 'rgb(224, 224, 230)',
+  borderStyle: 'solid',
+  borderWidth: '1px',
 
   // close
   closeIconColor: neutral(Number(base.alphaClose)),
@@ -168,6 +161,7 @@ const derived = {
   tableColorStriped: 'rgba(0, 0, 100, 0.02)',
   pressedColor: 'rgb(237, 237, 239)',
 
+  // disabled
   opacityDisabled: base.alphaDisabled,
   inputColorDisabled: 'rgb(250, 250, 252)',
 

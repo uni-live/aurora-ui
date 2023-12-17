@@ -2,7 +2,7 @@ import { GlobalTheme } from 'components/a-config-provider';
 import type { ExtractThemeOverrides, MergedTheme, Theme, UseThemeProps } from './interface';
 import { ComputedRef, computed } from 'vue';
 import { useConfigProviderContext } from '../../components/a-config-provider';
-import { merge } from 'shared';
+import { merge } from '../../shared';
 
 export * from './interface';
 
@@ -40,6 +40,7 @@ export function useTheme<N, T, R>(
       selfCommonOverrides,
     );
     const mergedSelf = merge(
+      // {}, executed every time, no need for empty obj
       (self || globalSelf || defaultTheme.self)?.(mergedCommon) as T,
       builtinOverrides,
       globalSelfOverrides,

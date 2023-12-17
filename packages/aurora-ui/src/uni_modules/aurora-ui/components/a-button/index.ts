@@ -9,3 +9,5 @@ export { AButton };
 export default AButton;
 
 export * from './button';
+
+export * from './styles';

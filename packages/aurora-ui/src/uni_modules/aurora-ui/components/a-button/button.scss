@@ -1,13 +1,6 @@
 @use 'sass:map';
 
-@use '../../design/common/var.scss' as *;
 @use '../../design/shared.scss' as *;
-
-@use './mixins.scss' as *;
-
-@include b(button) {
-  @include set-component-css-var('button', $button);
-}
 
 @include b(button) {
   display: inline-flex;
@@ -20,81 +13,42 @@
   box-sizing: border-box;
   transition: 0.1s;
   vertical-align: middle;
-  background: getCssVar('button', 'bg-color');
-  border-width: getCssVar('button', 'border-width');
-  border-color: getCssVar('button', 'border-color');
-  border-style: getCssVar('button', 'border-style');
+  background: getCssVar('button', 'color');
+  border: getCssVar('button', 'border');
+  border-radius: getCssVar('button', 'border-radius');
   position: relative;
+
+  @include utils-clear-after-border;
 
   > text {
     display: inline-flex;
     align-items: center;
+    color: inherit;
   }
 
   @include when(disabled) {
-    & {
-      opacity: 0.5;
-    }
-  }
-
-  &:before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    border: inherit;
-    border-radius: inherit;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    content: '';
-    background-color: getCssVar('active', 'bg-color');
-    border-color: getCssVar('active', 'border-color');
-    z-index: 1;
+    background-color: getCssVar('button', 'color-disabled');
+    color: getCssVar('button', 'text-color-disabled');
+    border: getCssVar('button', 'border-disabled');
+    opacity: getCssVar('button', 'opacity-disabled');
   }
 
   @include when(active) {
-    color: getCssVar('button', 'active', 'text-color');
-
-    &:before {
-      opacity: 0.15;
-    }
+    color: getCssVar('button', 'text-color-pressed');
+    background-color: getCssVar('button', 'color-pressed');
+    border: getCssVar('button', 'border-pressed');
   }
 
-  @include when(loading) {
-    position: relative;
-
-    &:before {
-      z-index: 1;
-      content: '';
-      position: absolute;
-      left: -1px;
-      top: -1px;
-      right: -1px;
-      bottom: -1px;
-      border-radius: inherit;
-      background-color: getCssVar('mask-color', 'extra-light');
-    }
+  &.is-linear.is-active {
+    opacity: getCssVar('button', 'opacity-disabled');
   }
 
-  @each $type in (primary, success, warning, danger, info) {
-    @include m($type) {
-      @include button-variant($type);
-    }
-  }
-
-  @each $size in (large, default, small, mini) {
+  @each $size in (large, medium, small, mini) {
     @include m($size) {
-      @include set-css-var-value(('button', 'width'), map.get($button-width, $size));
-      @include set-css-var-value(('button', 'height'), map.get($button-height, $size));
-
-      @include button-size(
-        map.get($button-padding-vertical, $size),
-        map.get($button-padding-horizontal, $size),
-        map.get($button-font-size, $size),
-        map.get($button-height, $size),
-        map.get($button-width, $size)
-      );
+      padding: getCssVar('button', 'padding');
+      font-size: getCssVar('button', 'font-size');
+      height: getCssVar('button', 'height');
+      width: getCssVar('button', 'width');
     }
   }
 }

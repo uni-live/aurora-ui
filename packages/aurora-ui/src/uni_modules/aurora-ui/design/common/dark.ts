@@ -42,27 +42,22 @@ const base = {
   // primary
   primaryDefault: '#63e2b7',
   primaryActive: '#5acea7',
-  primarySuppl: 'rgb(42, 148, 125)',
 
   // info
   infoDefault: '#70c0e8',
   infoActive: '#66afd3',
-  infoSuppl: 'rgb(56, 137, 197)',
 
   // error
   errorDefault: '#e88080',
   errorActive: '#e57272',
-  errorSuppl: 'rgb(208, 58, 82)',
 
   // warning
   warningDefault: '#f2c97d',
   warningActive: '#e6c260',
-  warningSuppl: 'rgb(240, 138, 0)',
 
   // success
   successDefault: '#63e2b7',
   successActive: '#5acea7',
-  successSuppl: 'rgb(42, 148, 125)',
 };
 
 const baseBackgroundRgb = rgba(base.neutralBase);
@@ -86,23 +81,18 @@ const derived: ThemeCommonVars = {
   // primary color
   primaryColor: base.primaryDefault,
   primaryColorPressed: base.primaryActive,
-  primaryColorSuppl: base.primarySuppl,
   // info color
   infoColor: base.infoDefault,
   infoColorPressed: base.infoActive,
-  infoColorSuppl: base.infoSuppl,
   // success color
   successColor: base.successDefault,
   successColorPressed: base.successActive,
-  successColorSuppl: base.successSuppl,
   // warning color
   warningColor: base.warningDefault,
   warningColorPressed: base.warningActive,
-  warningColorSuppl: base.warningSuppl,
   // error color
   errorColor: base.errorDefault,
   errorColorPressed: base.errorActive,
-  errorColorSuppl: base.errorSuppl,
   // text color
   textColorBase: base.neutralTextBase,
   textColor1: overlay(base.alpha1),
@@ -110,7 +100,6 @@ const derived: ThemeCommonVars = {
   textColor3: overlay(base.alpha3),
   // textColor4: overlay(base.alpha4), // disabled, placeholder, icon
   // textColor5: overlay(base.alpha5),
-
   textColorDisabled: overlay(base.alpha4),
   placeholderColor: overlay(base.alpha4),
   placeholderColorDisabled: overlay(base.alpha5),
@@ -127,6 +116,8 @@ const derived: ThemeCommonVars = {
 
   dividerColor: overlay(base.alphaDivider),
   borderColor: overlay(base.alphaBorder),
+  borderStyle: 'solid',
+  borderWidth: '1px',
 
   // close
   closeIconColorHover: overlay(Number(base.alphaClose)),

@@ -12,22 +12,20 @@
 
 <script setup lang="ts">
   import { buttonEmits, buttonProps } from './button';
-  import { computed } from 'vue';
-  import { addStyle, createKey, createPressedColor } from '../../shared';
+  import { computed, type CSSProperties } from 'vue';
+  import { addStyle, addUnit, createKey, createPressedColor, merge } from '../../shared';
   import { useNamespace, useTheme } from '../../hooks';
   import AIcon from '../a-icon/a-icon.vue';
   import ALoading from '../a-loading/a-loading.vue';
-  import { useButtonCustomStyle } from './button-custom';
   import { buttonLight } from './styles';
   import { changeColor } from 'seemly';
+  import { isLinearGradient, isRound } from './utils';
 
   const props = defineProps(buttonProps);
 
   const emit = defineEmits(buttonEmits);
 
   const ns = useNamespace('button');
-
-  const buttonStyle = useButtonCustomStyle(props);
 
   const themeRef = useTheme('Button', buttonLight, props);
 
@@ -36,6 +34,8 @@
     const { self } = theme;
 
     const { text, type, color, plain, size, round } = props;
+
+    const isLinear = isLinearGradient(color);
 
     let colorProps = ns.cssVarBlock({
       color: 'initial',
@@ -46,7 +46,7 @@
       'text-color-disabled': 'initial',
     });
 
-    if (text) {
+    if (text && !isLinear) {
       const typeTextColor = self[createKey('color', type)];
       const mergedTextColor = color || typeTextColor;
       colorProps = ns.cssVarBlock({
@@ -61,7 +61,7 @@
         'text-color-pressed': mergedTextColor,
         'text-color-disabled': mergedTextColor,
       });
-    } else if (plain) {
+    } else if (plain && !isLinear) {
       colorProps = ns.cssVarBlock({
         color: '#0000',
         'color-pressed': '#0000',
@@ -75,8 +75,16 @@
     } else {
       colorProps = ns.cssVarBlock({
         color: color || self[createKey('color', type)],
-        'color-pressed': color ? createPressedColor(color) : self[createKey('colorPressed', type)],
-        'color-disabled': color || self[createKey('colorDisabled', type)],
+        'color-pressed': color
+          ? isLinear
+            ? 'initial'
+            : createPressedColor(color)
+          : self[createKey('colorPressed', type)],
+        'color-disabled': color
+          ? isLinear
+            ? 'initial'
+            : color
+          : self[createKey('colorDisabled', type)],
         'text-color': color ? self.textColorPrimary : self[createKey('textColor', type)],
         'text-color-pressed': color
           ? self.textColorPressedPrimary
@@ -94,17 +102,30 @@
       'border-disabled': 'initial',
     });
 
-    if (text) {
+    if (text || isLinear) {
       borderCssVar = ns.cssVarBlock({
         border: 'none',
         'border-pressed': 'none',
         'border-disabled': 'none',
       });
     } else {
+      const borderColor = color || self[createKey('borderColor', type)];
+      const borderPressed = color
+        ? createPressedColor(color)
+        : self[createKey('borderColorPressed', type)];
+      const borderDisabled = color || self[createKey('borderColorDisabled', type)];
+
       borderCssVar = ns.cssVarBlock({
-        border: self[createKey('border', type)],
-        'border-pressed': self[createKey('borderPressed', type)],
-        'border-disabled': self[createKey('borderDisabled', type)],
+        border: `${self[createKey('borderWidth', type)]} ${
+          self[createKey('borderStyle', type)]
+        } ${borderColor}`,
+        'border-pressed': `${self[createKey('borderWidthPressed', type)]} ${
+          self[createKey('borderStylePressed', type)]
+        } ${borderPressed}`,
+
+        'border-disabled': `${self[createKey('borderWidthDisabled', type)]} ${
+          self[createKey('borderStyleDisabled', type)]
+        } ${borderDisabled}`,
       });
     }
 
@@ -114,19 +135,15 @@
       [createKey('fontSize', size)]: fontSize,
       [createKey('padding', size)]: padding,
       [createKey('paddingRound', size)]: paddingRound,
-      [createKey('iconSize', size)]: iconSize,
       [createKey('borderRadius', size)]: borderRadius,
-      [createKey('iconMargin', size)]: iconMargin,
     } = self as any;
 
     const sizeCssVar = ns.cssVarBlock({
       width: 'initial',
       height: height,
+      padding: isRound(round) ? paddingRound : padding,
       'font-size': fontSize,
-      padding: round ? paddingRound : padding,
-      'icon-size': iconSize,
-      'icon-margin': iconMargin,
-      'border-radius': borderRadius,
+      'border-radius': isRound(round) ? addUnit(round) : borderRadius,
     });
     return {
       [ns.cssVarBlockName('opacity-disabled')]: self.opacityDisabled,
@@ -136,16 +153,8 @@
     };
   });
 
-  const loadingColor = computed(() => {
-    if (props.plain) {
-      // 如果有设置color值，则用color值，否则使用type主题颜色
-      return props.color ? props.color : `var(${ns.cssVarName('button-text-color')})`;
-    }
-
-    return '';
-  });
-
   const buttonClass = computed(() => {
+    const isLinear = isLinearGradient(props.color);
     const classes = [
       ns.b(),
       ns.m(props.type),
@@ -153,20 +162,66 @@
       ns.is('disabled', props.disabled),
       ns.is('loading', props.loading),
       ns.is('plain', props.plain),
+      ns.is('linear', isLinear),
     ];
 
     return classes;
   });
 
-  const mergeIconColor = computed(() => {
-    // 如果是镂空状态，设置了color就用color值，否则使用主题颜色，
-    if (props.iconColor) return props.iconColor;
+  const mergeLoadingClass = computed(() => {
+    return props.loadingCustomClass;
+  });
 
+  const mergeLoadingStyle = computed(() => {
+    const { size } = props;
+    const { self } = themeRef.value;
+
+    const { [createKey('iconMargin', size)]: iconMargin } = self as any;
+
+    const style: CSSProperties = {
+      marginRight: iconMargin,
+    };
+
+    return merge(style, addStyle(props.loadingCustomStyle));
+  });
+
+  const loadingColor = computed(() => {
+    const { color, type } = props;
+    const { self } = themeRef.value;
     return props.plain
-      ? props.color
-        ? props.color
-        : `var(${ns.cssVarName('button-text-color')})`
-      : `var(${ns.cssVarName('button-text-color')})`;
+      ? color || self[createKey('textColorGhost', type)]
+      : color
+      ? self.textColorPrimary
+      : self[createKey('textColor', type)];
+  });
+
+  const mergeIconClass = computed(() => {
+    return props.iconCustomClass;
+  });
+
+  const mergeIconStyle = computed(() => {
+    const { size } = props;
+    const { self } = themeRef.value;
+
+    const { [createKey('iconMargin', size)]: iconMargin } = self as any;
+
+    const style: CSSProperties = {
+      marginRight: iconMargin,
+    };
+    return merge(style, addStyle(props.iconCustomStyle));
+  });
+
+  const mergeIconColor = computed(() => {
+    return props.iconColor || 'inherit';
+  });
+
+  const mergeIconSize = computed(() => {
+    const { self } = themeRef.value;
+    const { iconSize, size } = props;
+
+    const { [createKey('iconSize', size)]: themeIconSize } = self as any;
+
+    return iconSize || themeIconSize;
   });
 
   const getphonenumber = (res) => {
@@ -215,14 +270,14 @@
     @opensetting="opensetting"
     @launchapp="launchapp"
     :hover-class="!disabled && !loading ? ns.is('active') : ''"
-    :style="[buttonStyle, cssVarsRef, addStyle(customStyle)]"
+    :style="[cssVarsRef, addStyle(customStyle)]"
     @tap="handleClick"
     :class="[ns.b(), ...buttonClass, customClass]"
   >
     <template v-if="loading">
       <a-loading
-        :custom-style="{ marginRight: '2px' }"
-        :mode="loadingMode"
+        :custom-class="mergeLoadingClass"
+        :custom-style="mergeLoadingStyle"
         :size="loadingSize"
         :color="loadingColor"
       ></a-loading>
@@ -230,9 +285,11 @@
     <template v-else>
       <a-icon
         v-if="icon"
+        :custom-class="mergeIconClass"
+        :custom-style="mergeIconStyle"
         :name="icon"
         :color="mergeIconColor"
-        :customStyle="{ marginRight: '2px' }"
+        :size="mergeIconSize"
       ></a-icon>
     </template>
     <slot>

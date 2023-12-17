@@ -50,22 +50,62 @@ export const buttonProps = buildProps({
     type: definePropType<ExtractThemeOverrides<Theme<'Button', ButtonThemeVars, any>>>(Object),
   },
   /**
+   * @description 内置loading组件自定义class
+   * @property {String}
+   * @default ''
+   */
+  loadingCustomClass: {
+    type: String,
+    default: '',
+  },
+  /**
+   * @description 内置loading组件自定义样式
+   * @property {Object,String}
+   * @default {}
+   */
+  loadingCustomStyle: {
+    type: [Object, String],
+    default() {
+      return {};
+    },
+  },
+  /**
+   * @description 内置icon组件自定义class
+   * @property {String}
+   * @default ''
+   */
+  iconCustomClass: {
+    type: String,
+    default: '',
+  },
+  /**
+   * @description 内置loading组件自定义样式
+   * @property {Object,String}
+   * @default {}
+   */
+  iconCustomStyle: {
+    type: [Object, String],
+    default() {
+      return {};
+    },
+  },
+  /**
    * @description 按钮的预置样式，info，primary，danger，warning，success
    * @property {String}
    * @default 'primary'
    */
   type: {
-    type: definePropType<'primary' | 'success' | 'warning' | 'danger' | 'info'>(String),
+    type: definePropType<'primary' | 'success' | 'warning' | 'error' | 'info'>(String),
     default: 'primary',
   },
   /**
-   * @description 按钮尺寸，large，default，small，mini
+   * @description 按钮尺寸，large，medium，small，mini
    * @property {String}
-   * @default 'default'
+   * @default 'medium'
    */
   size: {
-    type: definePropType<'large' | 'default' | 'small' | 'mini'>(String),
-    default: 'default',
+    type: definePropType<'large' | 'medium' | 'small' | 'mini'>(String),
+    default: 'medium',
   },
   /**
    * @description 按钮是否文本类型
@@ -104,22 +144,13 @@ export const buttonProps = buildProps({
     default: false,
   },
   /**
-   * @description 加载状态图标类型
-   * @property {String}
-   * @default 'spinner'
-   */
-  loadingMode: {
-    type: definePropType<'spinner' | 'circle' | 'semicircle'>(String),
-    default: 'spinner',
-  },
-  /**
    * @description 加载图标大小
    * @property {Number}
    * @default 15
    */
   loadingSize: {
     type: [Number, String],
-    default: '30rpx',
+    default: '28rpx',
   },
   /**
    * @description 开放能力，具体请看uniapp稳定关于button组件部分说明
@@ -254,6 +285,7 @@ export const buttonProps = buildProps({
     type: Number,
     default: 200,
   },
+
   /**
    * @description 按钮图标
    * @property {String}
@@ -271,6 +303,15 @@ export const buttonProps = buildProps({
   iconColor: {
     type: String,
     default: '',
+  },
+  /**
+   * @description 图标大小
+   * @property {Number, String}
+   * @default 15
+   */
+  iconSize: {
+    type: [Number, String],
+    default: '32rpx',
   },
   /**
    * @description 按钮颜色，支持传入linear-gradient渐变色
@@ -293,11 +334,10 @@ export const buttonProps = buildProps({
   /**
    * @description 圆角大小
    * @property {String, Number}
-   * @default '16rpx'
+   * @default
    */
   round: {
     type: [String, Number],
-    default: '16rpx',
   },
 });
 

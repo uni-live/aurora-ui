@@ -10,23 +10,20 @@ export default {
   cubicBezierEaseOut: 'cubic-bezier(0, 0, .2, 1)',
   cubicBezierEaseIn: 'cubic-bezier(.4, 0, 1, 1)',
 
-  borderRadius: '3px',
-  borderRadiusSmall: '2px',
+  borderRadiusMini: '2rpx',
+  borderRadiusSmall: '4rpx',
+  borderRadiusMedium: '6rpx',
+  borderRadiusLarge: '8rpx',
 
-  fontSize: '14px',
-  fontSizeMini: '12px',
-  fontSizeTiny: '12px',
-  fontSizeSmall: '14px',
-  fontSizeMedium: '14px',
-  fontSizeLarge: '15px',
-  fontSizeHuge: '16px',
+  fontSizeMini: '20rpx',
+  fontSizeSmall: '24rpx',
+  fontSizeMedium: '28rpx',
+  fontSizeLarge: '30rpx',
 
   lineHeight: '1.6',
 
-  heightMini: '16px', // private now, it's too small
-  heightTiny: '22px',
-  heightSmall: '28px',
-  heightMedium: '34px',
-  heightLarge: '40px',
-  heightHuge: '46px'
-}
+  heightMini: '32rpx',
+  heightSmall: '56rpx',
+  heightMedium: '68rpx',
+  heightLarge: '92rpx',
+};

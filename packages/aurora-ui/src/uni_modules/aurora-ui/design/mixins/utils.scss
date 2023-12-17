@@ -37,3 +37,9 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin utils-clear-after-border {
+  &:after {
+    border: none;
+  }
+}

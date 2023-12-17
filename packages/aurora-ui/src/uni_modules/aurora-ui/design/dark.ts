@@ -1,5 +1,5 @@
-import { commonDark } from './common';
-import { buttonDark } from '../components/a-button/styles';
+import commonDark from './common/dark';
+import buttonDark from '../components/a-button/styles/dark';
 
 import type { BuiltInGlobalTheme } from './interface';
 
