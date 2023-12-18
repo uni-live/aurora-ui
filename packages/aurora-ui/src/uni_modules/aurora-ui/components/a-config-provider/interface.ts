@@ -1,6 +1,8 @@
 import { ThemeCommonVars } from 'design/common';
 import { ButtonTheme } from '../a-button/styles';
 import { ExtractThemeOverrides } from 'hooks/use-theme';
+import { ComputedRef, Ref } from 'vue';
+import { ConfigProviderProps } from './config-provider';
 
 export interface GlobalThemeWithoutCommon {
   Button?: ButtonTheme;
@@ -23,3 +25,14 @@ export type GlobalThemeOverrides = {
 } & {
   [key in keyof GlobalThemeWithoutCommon]?: ExtractThemeOverrides<GlobalThemeWithoutCommon[key]>;
 };
+
+export interface ConfigProviderContextProps {
+  mergedThemeRef?: ComputedRef<GlobalTheme | undefined> | Ref<GlobalTheme | undefined>;
+  mergedNamespaceRef?: ComputedRef<string | undefined> | Ref<string | undefined>;
+  mergedLocaleRef?: ComputedRef<DateLocale | undefined> | Ref<DateLocale | undefined>;
+  mergedThemeOverridesRef?:
+    | ComputedRef<GlobalThemeOverrides | undefined>
+    | Ref<GlobalThemeOverrides | undefined>;
+}
+
+export type UseConfigPrivateProps = Omit<ConfigProviderProps, 'customClass' | 'customStyle'>;

@@ -1,8 +1,8 @@
-import { GlobalTheme } from 'components/a-config-provider';
+import type { GlobalTheme } from '../../components/a-config-provider';
 import type { ExtractThemeOverrides, MergedTheme, Theme, UseThemeProps } from './interface';
-import { ComputedRef, computed } from 'vue';
-import { useConfigProviderContext } from '../../components/a-config-provider';
+import { ComputedRef, computed, inject } from 'vue';
 import { merge } from '../../shared';
+import { configProviderInjectionKey } from '../../components/a-config-provider/context';
 
 export * from './interface';
 
@@ -11,7 +11,7 @@ export function useTheme<N, T, R>(
   defaultTheme: Theme<N, T, R>,
   props: UseThemeProps<Theme<N, T, R>>,
 ): ComputedRef<MergedTheme<Theme<N, T, R>>> {
-  const AConfigProvider = useConfigProviderContext();
+  const AConfigProvider = inject(configProviderInjectionKey);
 
   const mergedThemeRef = computed(() => {
     const {
@@ -27,9 +27,9 @@ export function useTheme<N, T, R>(
         self: globalSelf = undefined,
         peers: globalPeers = {},
       } = {},
-    } = AConfigProvider?.mergedThemeRef || {};
+    } = AConfigProvider?.mergedThemeRef?.value || {};
     const { common: globalCommonOverrides = undefined, [resolveId]: globalSelfOverrides = {} } =
-      AConfigProvider?.mergedThemeOverridesRef || {};
+      AConfigProvider?.mergedThemeOverridesRef?.value || {};
     const { common: globalSelfCommonOverrides, peers: globalPeersOverrides = {} } =
       globalSelfOverrides;
     const mergedCommon = merge(

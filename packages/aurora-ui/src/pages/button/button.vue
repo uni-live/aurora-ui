@@ -4,12 +4,10 @@
       <view class="u-demo-block__title">按钮类型</view>
       <view class="u-demo-block__content">
         <view class="u-page__button-item">
-          <a-button size="large" type="primary" :theme="theme" @click="handleClick"
-            >主要按钮</a-button
-          >
+          <a-button size="large" type="primary">主要按钮</a-button>
         </view>
         <view class="u-page__button-item">
-          <a-button size="large" type="info" @click="handleClick">信息按钮</a-button>
+          <a-button size="large" type="info">信息按钮</a-button>
         </view>
         <view class="u-page__button-item">
           <a-button size="large" type="success">成功按钮</a-button>
@@ -172,23 +170,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
   import AButton from '@/uni_modules/aurora-ui/components/a-button/a-button.vue';
-  import { buttonLight, type ButtonTheme } from '@/uni_modules/aurora-ui/components/a-button';
-
-  const theme = ref<ButtonTheme>({});
-
-  function handleClick() {
-    console.log('click');
-
-    theme.value = {
-      ...buttonLight,
-      common: {
-        ...buttonLight.common,
-        primaryColor: 'red',
-      },
-    };
-  }
 </script>
 
 <style lang="scss">

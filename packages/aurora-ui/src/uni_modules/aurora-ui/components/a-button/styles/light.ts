@@ -1,6 +1,6 @@
 import { Theme } from 'hooks/use-theme';
-import { commonLight } from '../../../design';
-import type { ThemeCommonVars } from '../../../design';
+import { commonLight } from '../../../design/common';
+import type { ThemeCommonVars } from '../../../design/common';
 
 export const self = (vars: ThemeCommonVars) => {
   const {

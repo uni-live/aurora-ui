@@ -1,4 +1,4 @@
-import { commonDark } from '../../../design';
+import { commonDark } from '../../../design/common';
 import type { ButtonTheme } from './light';
 import { self } from './light';
 

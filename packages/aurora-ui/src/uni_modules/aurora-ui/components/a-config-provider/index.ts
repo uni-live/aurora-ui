@@ -12,4 +12,6 @@ export * from './config-provider';
 
 export * from './interface';
 
-export * from './provider';
+export * from './use-config-provider';
+
+export * from './context';

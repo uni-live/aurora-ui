@@ -47,9 +47,6 @@ export const configProviderProps = buildProps({
    */
   themeOverrides: {
     type: Object,
-    default() {
-      return {};
-    },
   },
   /**
    * @description 全局组件类名称前缀 (需要配合 $namespace 使用)
