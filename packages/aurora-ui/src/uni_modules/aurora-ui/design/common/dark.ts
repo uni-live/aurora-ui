@@ -40,12 +40,12 @@ const base = {
   alphaTag: '0.2',
 
   // primary
-  primaryDefault: '#63e2b7',
-  primaryActive: '#5acea7',
+  primaryDefault: '#70c0e8',
+  primaryActive: '#66afd3',
 
   // info
-  infoDefault: '#70c0e8',
-  infoActive: '#66afd3',
+  infoDefault: '#909399',
+  infoActive: '#6b6d71',
 
   // error
   errorDefault: '#e88080',
@@ -105,7 +105,6 @@ const derived: ThemeCommonVars = {
   placeholderColorDisabled: overlay(base.alpha5),
   iconColor: overlay(base.alpha4),
   iconColorDisabled: overlay(base.alpha5),
-  iconColorHover: overlay(Number(base.alpha4) * 1.25),
   iconColorPressed: overlay(Number(base.alpha4) * 0.8),
 
   opacity1: base.alpha1,
@@ -120,15 +119,12 @@ const derived: ThemeCommonVars = {
   borderWidth: '1px',
 
   // close
-  closeIconColorHover: overlay(Number(base.alphaClose)),
   closeIconColor: overlay(Number(base.alphaClose)),
   closeIconColorPressed: overlay(Number(base.alphaClose)),
-  closeColorHover: 'rgba(255, 255, 255, .12)',
   closeColorPressed: 'rgba(255, 255, 255, .08)',
 
   // clear
   clearColor: overlay(base.alpha4),
-  clearColorHover: scaleColor(overlay(base.alpha4), { alpha: 1.25 }),
   clearColorPressed: scaleColor(overlay(base.alpha4), { alpha: 0.8 }),
 
   scrollbarColor: overlay(base.alphaScrollbar),
@@ -155,8 +151,6 @@ const derived: ThemeCommonVars = {
   actionColor: overlay(base.alphaAction),
   tableHeaderColor: overlay(base.alphaAction),
 
-  hoverColor: overlay(base.alphaPending),
-  tableColorHover: overlay(base.alphaTablePending),
   tableColorStriped: overlay(base.alphaTableStriped),
   pressedColor: overlay(base.alphaPressed),
 
@@ -164,7 +158,6 @@ const derived: ThemeCommonVars = {
   inputColorDisabled: overlay(base.alphaDisabledInput),
 
   buttonColor2: 'rgba(255, 255, 255, .08)',
-  buttonColor2Hover: 'rgba(255, 255, 255, .12)',
   buttonColor2Pressed: 'rgba(255, 255, 255, .08)',
 
   boxShadow1:

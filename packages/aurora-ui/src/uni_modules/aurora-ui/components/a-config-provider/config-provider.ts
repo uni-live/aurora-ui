@@ -51,13 +51,10 @@ export const configProviderProps = buildProps({
   /**
    * @description 全局组件类名称前缀 (需要配合 $namespace 使用)
    * @property {String}
-   * @default 'a'
+   * @default
    */
   namespace: {
     type: String,
-    default() {
-      return 'a';
-    },
   },
 });
 

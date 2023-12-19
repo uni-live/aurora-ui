@@ -1,13 +1,19 @@
 import { defineStore } from 'pinia';
 import { store } from '.';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
-import { type UseConfigPrivateProps, useConfigPrivate, buttonLight } from '@/uni_modules/aurora-ui';
+import {
+  type UseConfigPrivateProps,
+  useConfigPrivate,
+  lightTheme,
+  darkTheme,
+} from '@/uni_modules/aurora-ui';
 
 export const useConfig = defineStore('confog', () => {
+  const isDark = ref(false);
+
   const props = reactive<UseConfigPrivateProps>({
-    namespace: '',
-    theme: void 0,
+    theme: lightTheme,
   });
 
   useConfigPrivate(props);
@@ -16,14 +22,12 @@ export const useConfig = defineStore('confog', () => {
     props.namespace = ns;
   }
 
+  /**
+   * @description 切换主题
+   */
   function changeTheme() {
-    props.theme = {
-      ...buttonLight,
-      common: {
-        ...buttonLight.common,
-        primaryColor: 'red',
-      },
-    };
+    isDark.value = !isDark.value;
+    props.theme = isDark.value ? darkTheme : lightTheme;
   }
 
   return { changeNS, changeTheme };

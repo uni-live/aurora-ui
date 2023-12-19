@@ -1,10 +1,20 @@
+<script lang="ts" setup>
+  import { useConfigStore } from '@/stores/use-config';
+  import AButton from '@/uni_modules/aurora-ui/components/a-button/a-button.vue';
+
+  const store = useConfigStore();
+  function handleClick() {
+    store.changeTheme();
+  }
+</script>
+
 <template>
   <view class="u-page">
     <view class="u-demo-block">
       <view class="u-demo-block__title">按钮类型</view>
       <view class="u-demo-block__content">
         <view class="u-page__button-item">
-          <a-button size="large" type="primary">主要按钮</a-button>
+          <a-button size="large" type="primary" @click="handleClick">主要按钮</a-button>
         </view>
         <view class="u-page__button-item">
           <a-button size="large" type="info">信息按钮</a-button>
@@ -168,10 +178,6 @@
     </view>
   </view>
 </template>
-
-<script lang="ts" setup>
-  import AButton from '@/uni_modules/aurora-ui/components/a-button/a-button.vue';
-</script>
 
 <style lang="scss">
   @use '@/uni_modules/aurora-ui/design/shared.scss' as *;

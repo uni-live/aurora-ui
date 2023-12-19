@@ -104,7 +104,6 @@ const derived = {
   placeholderColor: neutral(base.alpha4),
   placeholderColorDisabled: neutral(base.alpha5),
   iconColor: neutral(base.alpha4),
-  iconColorHover: scaleColor(neutral(base.alpha4), { lightness: 0.75 }),
   iconColorPressed: scaleColor(neutral(base.alpha4), { lightness: 0.9 }),
   iconColorDisabled: neutral(base.alpha5),
 
@@ -121,14 +120,11 @@ const derived = {
 
   // close
   closeIconColor: neutral(Number(base.alphaClose)),
-  closeIconColorHover: neutral(Number(base.alphaClose)),
   closeIconColorPressed: neutral(Number(base.alphaClose)),
-  closeColorHover: 'rgba(0, 0, 0, .09)',
   closeColorPressed: 'rgba(0, 0, 0, .13)',
 
   // clear
   clearColor: neutral(base.alpha4),
-  clearColorHover: scaleColor(neutral(base.alpha4), { lightness: 0.75 }),
   clearColorPressed: scaleColor(neutral(base.alpha4), { lightness: 0.9 }),
 
   scrollbarColor: overlay(base.alphaScrollbar),
@@ -155,9 +151,7 @@ const derived = {
   actionColor: 'rgb(250, 250, 252)',
   tableHeaderColor: 'rgb(250, 250, 252)',
 
-  hoverColor: 'rgb(243, 243, 245)',
   // use color with alpha since it can be nested with header filter & sorter effect
-  tableColorHover: 'rgba(0, 0, 100, 0.03)',
   tableColorStriped: 'rgba(0, 0, 100, 0.02)',
   pressedColor: 'rgb(237, 237, 239)',
 
@@ -168,7 +162,6 @@ const derived = {
   // secondary button color
   // can also be used in tertiary button & quaternary button
   buttonColor2: 'rgba(46, 51, 56, .05)',
-  buttonColor2Hover: 'rgba(46, 51, 56, .09)',
   buttonColor2Pressed: 'rgba(46, 51, 56, .13)',
 
   boxShadow1:

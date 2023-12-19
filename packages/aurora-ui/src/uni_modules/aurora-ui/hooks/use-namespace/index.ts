@@ -1,6 +1,7 @@
+import { configProviderInjectionKey } from '../../components/a-config-provider/context';
 import { computed, getCurrentInstance, inject, ref, unref } from 'vue';
 
-import type { InjectionKey, Ref } from 'vue';
+import type { Ref } from 'vue';
 
 export const defaultNamespace = 'a';
 const statePrefix = 'is-';
@@ -25,15 +26,15 @@ const _bem = (
   return cls;
 };
 
-export const namespaceContextKey: InjectionKey<Ref<string | undefined>> =
-  Symbol('namespaceContextKey');
-
 export const useGetDerivedNamespace = (namespaceOverrides?: Ref<string | undefined>) => {
+  const AConfigProvider = inject(configProviderInjectionKey);
+
   const derivedNamespace =
     namespaceOverrides ||
     (getCurrentInstance()
-      ? inject(namespaceContextKey, ref(defaultNamespace))
+      ? AConfigProvider?.mergedNamespaceRef?.value || ref(defaultNamespace)
       : ref(defaultNamespace));
+
   const namespace = computed(() => {
     return unref(derivedNamespace) || defaultNamespace;
   });

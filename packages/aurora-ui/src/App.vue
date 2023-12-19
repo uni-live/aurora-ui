@@ -1,5 +1,8 @@
 <script lang="ts" setup>
   import { onLaunch, onShow, onHide } from '@dcloudio/uni-app';
+  import { useConfigStore } from './stores/use-config';
+
+  useConfigStore();
 
   onLaunch(() => {
     console.log('App Launch');
