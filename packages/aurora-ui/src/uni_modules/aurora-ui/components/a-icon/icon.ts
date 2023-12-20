@@ -1,6 +1,8 @@
 import type { ExtractPropTypes } from 'vue';
-import { buildProps } from '../../shared';
+import { buildProps, definePropType } from '../../shared';
 import Icon from './a-icon.vue';
+import type { ExtractThemeOverrides, Theme } from '../../hooks/use-theme';
+import { IconTheme, IconThemeVars } from './styles';
 
 export const iconProps = buildProps({
   /**
@@ -13,7 +15,7 @@ export const iconProps = buildProps({
     default: '',
   },
   /**
-   * @description 自定义style
+   * @description 自定义样式
    * @property {Object,String}
    * @default {}
    */
@@ -22,6 +24,30 @@ export const iconProps = buildProps({
     default() {
       return {};
     },
+  },
+  /**
+   * @description 自定义主题
+   * @property {Object}
+   * @default
+   */
+  theme: {
+    type: definePropType<IconTheme>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  themeOverrides: {
+    type: definePropType<ExtractThemeOverrides<IconTheme>>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  builtinThemeOverrides: {
+    type: definePropType<ExtractThemeOverrides<IconTheme>>(Object),
   },
   /**
    * @description 图标类名

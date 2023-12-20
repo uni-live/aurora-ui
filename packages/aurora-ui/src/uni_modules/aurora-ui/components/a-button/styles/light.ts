@@ -1,4 +1,4 @@
-import { Theme } from 'hooks/use-theme';
+import { Theme } from '../../../hooks/use-theme';
 import { commonLight } from '../../../design/common';
 import type { ThemeCommonVars } from '../../../design/common';
 

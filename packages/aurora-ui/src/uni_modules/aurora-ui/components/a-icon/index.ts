@@ -10,3 +10,5 @@ export default AIcon;
 
 export * from './icons';
 export * from './icon';
+
+export * from './styles';

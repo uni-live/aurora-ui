@@ -1,8 +1,8 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps, definePropType } from '../../shared';
 import Button from './a-button.vue';
-import type { ExtractThemeOverrides, Theme } from '../../hooks/use-theme';
-import { ButtonThemeVars } from './styles';
+import type { ExtractThemeOverrides } from '../../hooks/use-theme';
+import { ButtonTheme } from './styles';
 
 export const buttonProps = buildProps({
   /**
@@ -31,7 +31,7 @@ export const buttonProps = buildProps({
    * @default
    */
   theme: {
-    type: definePropType<Theme<'Button', ButtonThemeVars, any>>(Object),
+    type: definePropType<ButtonTheme>(Object),
   },
   /**
    * @description 主题覆盖
@@ -39,7 +39,7 @@ export const buttonProps = buildProps({
    * @default
    */
   themeOverrides: {
-    type: definePropType<ExtractThemeOverrides<Theme<'Button', ButtonThemeVars, any>>>(Object),
+    type: definePropType<ExtractThemeOverrides<ButtonTheme>>(Object),
   },
   /**
    * @description 主题覆盖
@@ -47,7 +47,7 @@ export const buttonProps = buildProps({
    * @default
    */
   builtinThemeOverrides: {
-    type: definePropType<ExtractThemeOverrides<Theme<'Button', ButtonThemeVars, any>>>(Object),
+    type: definePropType<ExtractThemeOverrides<ButtonTheme>>(Object),
   },
   /**
    * @description 内置loading组件自定义class

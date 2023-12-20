@@ -1,6 +1,5 @@
 @use 'sass:map';
 
-@use '../../design/common/var.scss' as *;
 @use '../../design/shared.scss' as *;
 
 @include b(icon) {
@@ -10,12 +9,6 @@
   @include e(icon) {
     font-family: aicon-iconfont;
     position: relative;
-
-    @each $type in $types {
-      @include m($type) {
-        color: map.get($colors, $type, 'base');
-      }
-    }
   }
 
   @include e(img) {

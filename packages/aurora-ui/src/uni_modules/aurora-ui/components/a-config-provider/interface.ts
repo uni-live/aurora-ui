@@ -3,9 +3,11 @@ import { ButtonTheme } from '../a-button/styles';
 import { ExtractThemeOverrides } from 'hooks/use-theme';
 import { ComputedRef, Ref } from 'vue';
 import { ConfigProviderProps } from './config-provider';
+import { IconTheme } from 'components/a-icon/styles';
 
 export interface GlobalThemeWithoutCommon {
   Button?: ButtonTheme;
+  Icon?: IconTheme;
 }
 
 export interface GlobalTheme extends GlobalThemeWithoutCommon {

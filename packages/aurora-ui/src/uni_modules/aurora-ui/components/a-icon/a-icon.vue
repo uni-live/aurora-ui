@@ -18,9 +18,14 @@
   import icons from './icons';
   import { useNamespace } from '../../hooks';
 
+  import { useTheme } from '../../hooks/use-theme';
+  import { iconLight } from './styles';
+
   const props = defineProps(iconProps);
 
   const ns = useNamespace('icon');
+
+  useTheme('Icon', iconLight, props);
 
   const aClasses = computed(() => {
     let classes: any = [];
