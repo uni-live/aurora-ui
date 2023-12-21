@@ -138,5 +138,11 @@
     border-color: getCssVar('border-color') !important;
     border-bottom-style: solid;
   }
+
+  .a-border {
+    border-bottom-width: getCssVar('border-width') !important;
+    border-color: getCssVar('border-color') !important;
+    border-bottom-style: solid;
+  }
 </style>
 ../grid/provider ./grid-item

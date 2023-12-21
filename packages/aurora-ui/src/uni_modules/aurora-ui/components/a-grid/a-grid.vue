@@ -1,8 +1,3 @@
-<template>
-  <view :class="['a-grid', customClass]" :style="[gridStyle]">
-    <slot></slot>
-  </view>
-</template>
 <script lang="ts">
   export default {
     name: 'a-grid',
@@ -15,18 +10,25 @@
   };
 </script>
 <script setup lang="ts">
-  import { computed, type CSSProperties } from 'vue';
+  import { computed } from 'vue';
 
   import { gridProps, gridEmits } from './grid';
   import { deepMerge, addStyle } from '../../shared';
   import { createGridProviderContext } from './provider';
   import { useInstance } from '../../hooks/use-instance';
+  import { useTheme } from '../../hooks/use-theme';
+  import { gridLight } from './styles';
+  import { useNamespace } from '../../hooks/use-namespace';
 
   const props = defineProps(gridProps);
 
   const emit = defineEmits(gridEmits);
 
   const instance = useInstance();
+
+  const ns = useNamespace('grid');
+
+  const themeRef = useTheme('Grid', gridLight, props);
 
   createGridProviderContext({
     col: props.col,
@@ -37,20 +39,12 @@
   });
 
   const gridStyle = computed(() => {
-    let style: CSSProperties = {};
-    switch (props.align) {
-      case 'left':
-        style.justifyContent = 'flex-start';
-        break;
-      case 'center':
-        style.justifyContent = 'center';
-        break;
-      case 'right':
-        style.justifyContent = 'flex-end';
-        break;
-      default:
-        style.justifyContent = 'flex-start';
-    }
+    const { self } = themeRef.value;
+
+    const style = ns.cssVarBlock({
+      'justify-content': props.align || self.justifyContentL,
+    });
+
     return deepMerge(style, addStyle(props.customStyle));
   });
 
@@ -59,18 +53,12 @@
   }
 </script>
 
+<template>
+  <view :class="[ns.b(), customClass]" :style="[gridStyle]">
+    <slot></slot>
+  </view>
+</template>
+
 <style lang="scss" scoped>
-  .a-grid {
-    /* #ifdef MP */
-    width: 100%;
-    position: relative;
-    box-sizing: border-box;
-    overflow: hidden;
-    display: block;
-    /* #endif */
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+  @use './grid.scss' as *;
 </style>

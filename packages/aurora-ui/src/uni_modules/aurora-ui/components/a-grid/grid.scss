@@ -1,0 +1,15 @@
+@use '../../design/shared.scss' as *;
+
+@include b(grid) {
+  /* #ifdef MP */
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: block;
+  /* #endif */
+  justify-content: getCssVar('grid', 'justify-content');
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}

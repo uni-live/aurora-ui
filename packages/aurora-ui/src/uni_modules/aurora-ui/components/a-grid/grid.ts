@@ -1,6 +1,8 @@
 import type { ExtractPropTypes } from 'vue';
-import { buildProps, isNumber, isString } from '../../shared';
+import { buildProps, definePropType, isNumber, isString } from '../../shared';
 import Grid from './a-grid.vue';
+import { GridTheme } from './styles';
+import { ExtractThemeOverrides } from '../../hooks/use-theme';
 
 export const gridProps = buildProps({
   /**
@@ -22,6 +24,30 @@ export const gridProps = buildProps({
     default() {
       return {};
     },
+  },
+  /**
+   * @description 自定义主题
+   * @property {Object}
+   * @default
+   */
+  theme: {
+    type: definePropType<GridTheme>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  themeOverrides: {
+    type: definePropType<ExtractThemeOverrides<GridTheme>>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  builtinThemeOverrides: {
+    type: definePropType<ExtractThemeOverrides<GridTheme>>(Object),
   },
   /**
    * @description 分成几列
@@ -47,8 +73,8 @@ export const gridProps = buildProps({
    * @default 'left'
    */
   align: {
-    type: String,
-    default: 'left',
+    type: definePropType<'center' | 'flex-start' | 'flex-end'>(String),
+    default: 'center',
   },
 });
 

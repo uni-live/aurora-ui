@@ -1,6 +1,7 @@
 import commonDark from './common/dark';
 import buttonDark from '../components/a-button/styles/dark';
 import iconDark from '../components/a-icon/styles/dark';
+import gridDark from '../components/a-grid/styles/dark';
 
 import type { BuiltInGlobalTheme } from './interface';
 
@@ -9,4 +10,5 @@ export const darkTheme: BuiltInGlobalTheme = {
   common: commonDark,
   Button: buttonDark,
   Icon: iconDark,
+  Grid: gridDark,
 };

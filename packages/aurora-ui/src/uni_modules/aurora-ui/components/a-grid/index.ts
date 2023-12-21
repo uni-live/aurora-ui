@@ -11,3 +11,5 @@ export default AGrid;
 export * from './provider';
 
 export * from './grid';
+
+export * from './styles';
