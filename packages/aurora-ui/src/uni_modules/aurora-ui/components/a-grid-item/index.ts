@@ -9,3 +9,5 @@ export { AGridItem };
 export default AGridItem;
 
 export * from './grid-item';
+
+export * from './styles';

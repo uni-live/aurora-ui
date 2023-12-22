@@ -7,6 +7,11 @@
   flex-direction: column;
   box-sizing: border-box;
   display: flex;
+  background-color: getCssVar('grid-item', 'background-color');
+  width: getCssVar('grid-item', 'width');
+  border-width: 0;
+  border-color: getCssVar('grid-item', 'border-color');
+  border-right-style: solid;
 
   /* #ifdef MP */
   position: relative;
@@ -17,25 +22,15 @@
   margin-top: 1rpx;
   /* #endif */
 
-  &--hover-class {
-    opacity: 0.5;
+  @include when(active) {
+    background-color: getCssVar('grid-item', 'color-pressed');
   }
 
-  .a-border-right {
-    border-right-width: getCssVar('border-width') !important;
-    border-color: getCssVar('border-color') !important;
-    border-right-style: solid;
+  @include when(border-right) {
+    border-right-width: getCssVar('grid-item', 'border-right-width');
   }
 
-  .a-border-bottom {
-    border-bottom-width: getCssVar('border-width') !important;
-    border-color: getCssVar('border-color') !important;
-    border-bottom-style: solid;
-  }
-
-  .a-border {
-    border-bottom-width: getCssVar('border-width') !important;
-    border-color: getCssVar('border-color') !important;
-    border-bottom-style: solid;
+  @include when(border-bottom) {
+    border-right-width: getCssVar('grid-item', 'border-bottom-width');
   }
 }

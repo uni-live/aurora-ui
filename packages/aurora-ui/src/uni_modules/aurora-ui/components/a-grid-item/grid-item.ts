@@ -1,6 +1,8 @@
 import type { ExtractPropTypes } from 'vue';
-import { buildProps, isNumber, isString } from '../../shared';
+import { buildProps, definePropType, isNumber, isString } from '../../shared';
 import GridItem from './a-grid-item.vue';
+import { GridItemTheme } from './styles/light';
+import { ExtractThemeOverrides } from '../../hooks/use-theme';
 
 export const gridItemProps = buildProps({
   /**
@@ -22,6 +24,30 @@ export const gridItemProps = buildProps({
     default() {
       return {};
     },
+  },
+  /**
+   * @description 自定义主题
+   * @property {Object}
+   * @default
+   */
+  theme: {
+    type: definePropType<GridItemTheme>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  themeOverrides: {
+    type: definePropType<ExtractThemeOverrides<GridItemTheme>>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  builtinThemeOverrides: {
+    type: definePropType<ExtractThemeOverrides<GridItemTheme>>(Object),
   },
   /**
    * @description 宫格的name

@@ -1,4 +1,4 @@
-export { default as buttonDark } from './dark';
-export { default as buttonLight } from './light';
+export { default as gridItemDark } from './dark';
+export { default as gridItemLight } from './light';
 
 export type { GridItemThemeVars, GridItemTheme } from './light';
