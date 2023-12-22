@@ -1,0 +1,41 @@
+@use '../../design/shared.scss' as *;
+
+@include b(grid-item) {
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+
+  /* #ifdef MP */
+  position: relative;
+  float: left;
+  /* #endif */
+
+  /* #ifdef MP-WEIXIN */
+  margin-top: 1rpx;
+  /* #endif */
+
+  &--hover-class {
+    opacity: 0.5;
+  }
+
+  .a-border-right {
+    border-right-width: getCssVar('border-width') !important;
+    border-color: getCssVar('border-color') !important;
+    border-right-style: solid;
+  }
+
+  .a-border-bottom {
+    border-bottom-width: getCssVar('border-width') !important;
+    border-color: getCssVar('border-color') !important;
+    border-bottom-style: solid;
+  }
+
+  .a-border {
+    border-bottom-width: getCssVar('border-width') !important;
+    border-color: getCssVar('border-color') !important;
+    border-bottom-style: solid;
+  }
+}

@@ -24,6 +24,9 @@
     "mhutchie.git-graph",
     "eamodio.gitlens",
     "wayou.vscode-todo-highlight",
-    "gruntfuggly.todo-tree"
+    "gruntfuggly.todo-tree",
+    "vue.volar",
+    "sdras.vue-vscode-snippets",
+    "shenjiaolong.vue-helper"
   ]
 }

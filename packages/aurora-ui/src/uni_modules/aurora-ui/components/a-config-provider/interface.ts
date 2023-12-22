@@ -3,13 +3,15 @@ import { ButtonTheme } from '../a-button/styles';
 import { ExtractThemeOverrides } from 'hooks/use-theme';
 import { ComputedRef, Ref } from 'vue';
 import { ConfigProviderProps } from './config-provider';
-import { IconTheme } from 'components/a-icon/styles/light';
-import { GridTheme } from 'components/a-grid/styles/light';
+import { IconTheme } from '../a-icon/styles/light';
+import { GridTheme } from '../a-grid/styles/light';
+import { GridItemTheme } from '../a-grid-item/styles/light';
 
 export interface GlobalThemeWithoutCommon {
   Button?: ButtonTheme;
   Icon?: IconTheme;
   Grid?: GridTheme;
+  GridItem?: GridItemTheme;
 }
 
 export interface GlobalTheme extends GlobalThemeWithoutCommon {

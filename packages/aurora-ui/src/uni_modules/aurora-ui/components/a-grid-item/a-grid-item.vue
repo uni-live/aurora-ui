@@ -21,7 +21,7 @@
   };
 </script>
 <script setup lang="ts">
-  import { ref, computed, unref, getCurrentInstance, onMounted, watch } from 'vue';
+  import { computed, unref, getCurrentInstance, onMounted, watch } from 'vue';
 
   import { gridItemProps, gridItemEmits } from './grid-item';
   import { addStyle, deepMerge } from '../../shared';
@@ -35,8 +35,6 @@
 
   const instance = getCurrentInstance();
 
-  const classnames = ref<string[] | string>([]);
-
   const width = computed(() => {
     return 100 / Number(col) + '%';
   });
@@ -49,11 +47,7 @@
     return deepMerge(style, addStyle(props.customStyle));
   });
 
-  onMounted(() => {
-    add(instance!);
-  });
-
-  const gridItemClasses = () => {
+  const classnames = computed(() => {
     let classes: string[] | string = [];
     if (border) {
       unref(instances)?.map((child, index) => {
@@ -78,16 +72,12 @@
       // #endif
     }
 
-    classnames.value = classes;
-  };
+    return classes;
+  });
 
-  watch(
-    [() => instances.length, () => border, () => col],
-    () => {
-      gridItemClasses();
-    },
-    { immediate: true },
-  );
+  onMounted(() => {
+    add(instance!);
+  });
 
   function handleClick() {
     let key = props.name;
@@ -103,46 +93,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../../design/shared.scss';
-
-  .a-grid-item {
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    flex-direction: column;
-    box-sizing: border-box;
-    display: flex;
-
-    /* #ifdef MP */
-    position: relative;
-    float: left;
-    /* #endif */
-
-    /* #ifdef MP-WEIXIN */
-    margin-top: 1rpx;
-    /* #endif */
-
-    &--hover-class {
-      opacity: 0.5;
-    }
-  }
-
-  .a-border-right {
-    border-right-width: getCssVar('border-width') !important;
-    border-color: getCssVar('border-color') !important;
-    border-right-style: solid;
-  }
-
-  .a-border-bottom {
-    border-bottom-width: getCssVar('border-width') !important;
-    border-color: getCssVar('border-color') !important;
-    border-bottom-style: solid;
-  }
-
-  .a-border {
-    border-bottom-width: getCssVar('border-width') !important;
-    border-color: getCssVar('border-color') !important;
-    border-bottom-style: solid;
-  }
+  @use './grid-item.scss' as *;
 </style>
-../grid/provider ./grid-item

@@ -2,6 +2,7 @@ import commonDark from './common/dark';
 import buttonDark from '../components/a-button/styles/dark';
 import iconDark from '../components/a-icon/styles/dark';
 import gridDark from '../components/a-grid/styles/dark';
+import gridItemDark from '../components/a-grid-item/styles/dark';
 
 import type { BuiltInGlobalTheme } from './interface';
 
@@ -11,4 +12,5 @@ export const darkTheme: BuiltInGlobalTheme = {
   Button: buttonDark,
   Icon: iconDark,
   Grid: gridDark,
+  GridItem: gridItemDark,
 };
