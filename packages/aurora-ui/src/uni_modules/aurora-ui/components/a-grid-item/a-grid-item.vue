@@ -72,6 +72,8 @@
           // 贴近右边屏幕边沿的child，并且最后一个（比如只有横向2个的时候），无需右边框
           if ((index + 1) % col !== 0 && index + 1 !== len) {
             style[ns.cssVarBlockName('border-right-width')] = self.borderRightWidth;
+          } else {
+            style[ns.cssVarBlockName('border-right-width')] = '0rpx';
           }
           // 总的宫格数量对列数取余的值
           // 如果取余后，值为0，则意味着要将最后一排的宫格，都不需要下边框
@@ -79,6 +81,8 @@
           // 最下面的一排child，无需下边框
           if (index < len - lessNum) {
             style[ns.cssVarBlockName('border-bottom-width')] = self.borderBottomWidth;
+          } else {
+            style[ns.cssVarBlockName('border-bottom-width')] = '0rpx';
           }
         }
       });

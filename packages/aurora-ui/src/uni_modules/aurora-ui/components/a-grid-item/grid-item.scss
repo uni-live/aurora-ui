@@ -11,7 +11,7 @@
   width: getCssVar('grid-item', 'width');
   border-width: 0;
   border-color: getCssVar('grid-item', 'border-color');
-  border-right-style: solid;
+  border-style: solid;
 
   /* #ifdef MP */
   position: relative;
@@ -31,6 +31,6 @@
   }
 
   @include when(border-bottom) {
-    border-right-width: getCssVar('grid-item', 'border-bottom-width');
+    border-bottom-width: getCssVar('grid-item', 'border-bottom-width');
   }
 }
