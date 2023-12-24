@@ -9,3 +9,5 @@ const AStatusBar = withInstall(aStatusBar);
 export { AStatusBar };
 
 export default AStatusBar;
+
+export * from './styles';

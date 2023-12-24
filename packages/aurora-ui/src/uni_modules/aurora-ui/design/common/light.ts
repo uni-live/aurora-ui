@@ -97,8 +97,8 @@ const derived = {
   textColor1: 'rgb(31, 34, 37)',
   textColor2: 'rgb(51, 54, 57)',
   textColor3: 'rgb(118, 124, 130)',
-  // textColor4: neutral(base.alpha4), // disabled, placeholder, icon
-  // textColor5: neutral(base.alpha5),
+  textColor4: neutral(base.alpha4), // disabled, placeholder, icon
+  textColor5: neutral(base.alpha5),
 
   textColorDisabled: neutral(base.alpha4),
   placeholderColor: neutral(base.alpha4),
@@ -126,12 +126,6 @@ const derived = {
   // clear
   clearColor: neutral(base.alpha4),
   clearColorPressed: scaleColor(neutral(base.alpha4), { lightness: 0.9 }),
-
-  scrollbarColor: overlay(base.alphaScrollbar),
-  scrollbarColorHover: overlay(base.alphaScrollbarHover),
-  scrollbarWidth: '5px',
-  scrollbarHeight: '5px',
-  scrollbarBorderRadius: '5px',
 
   progressRailColor: neutral(base.alphaProgressRail),
   railColor: 'rgb(219, 219, 223)',

@@ -1,10 +1,7 @@
-<template>
-  <view :style="[style]" class="a-status-bar">
-    <slot />
-  </view>
-</template>
 <script lang="ts">
   export default {
+    name: 'a-status-bar',
+    inheritAttrs: false,
     // #ifdef MP-WEIXIN
     options: {
       virtualHost: true,
@@ -17,24 +14,31 @@
   import { computed, type CSSProperties } from 'vue';
   import { statusBarProps } from './status-bar';
   import { addStyle, addUnit, deepMerge, sys } from '../../shared';
+  import { useNamespace } from '../../hooks/use-namespace';
+  import { useTheme } from '../../hooks/use-theme';
+  import { statusBarLight } from './styles';
 
   const props = defineProps(statusBarProps);
 
+  const ns = useNamespace('status-bar');
+
+  const themeRef = useTheme('StatusBar', statusBarLight, props);
+
   const style = computed(() => {
-    const style: CSSProperties = {};
-    // 状态栏高度，由于某些安卓和微信开发工具无法识别css的顶部状态栏变量，所以使用js获取的方式
-    style.height = addUnit(sys().statusBarHeight, 'px');
-    style.backgroundColor = props.bgColor;
+    const { self } = themeRef.value;
+    const style: CSSProperties = ns.cssVarBlock({
+      height: addUnit(sys().statusBarHeight, 'px'),
+      'background-color': self.backgroundColor,
+    });
     return deepMerge(style, addStyle(props.customStyle));
   });
 </script>
+<template>
+  <view :style="[style]" :class="[ns.b()]">
+    <slot />
+  </view>
+</template>
 
 <style lang="scss" scoped>
-  .a-status-bar {
-    // nvue会默认100%，如果nvue下，显式写100%的话，会导致宽度不为100%而异常
-    /* #ifndef APP-NVUE */
-    width: 100%;
-    /* #endif */
-  }
+  @use './status-bar.scss' as *;
 </style>
-./status-bar

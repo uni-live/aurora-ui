@@ -1,6 +1,7 @@
 import { ref, nextTick } from 'vue';
 import type { TransitionProps } from './transition';
 import { sleep } from '../../shared/sleep';
+import { useGetDerivedNamespace } from '../../hooks/use-namespace';
 
 export function useTransition(props: TransitionProps, emit) {
   const status = ref('');
@@ -9,12 +10,14 @@ export function useTransition(props: TransitionProps, emit) {
   const classes = ref('');
   const transitionEnded = ref(false);
 
+  const namespace = useGetDerivedNamespace();
+
   // 定义类名，通过给元素动态切换类名，赋予元素一定的css动画样式
   const getClassNames = (name) => ({
-    enter: `u-${name}-enter u-${name}-enter-active`,
-    'enter-to': `u-${name}-enter-to u-${name}-enter-active`,
-    leave: `u-${name}-leave u-${name}-leave-active`,
-    'leave-to': `u-${name}-leave-to u-${name}-leave-active`,
+    enter: `${namespace.value}-${name}-enter ${namespace.value}-${name}-enter-active`,
+    'enter-to': `${namespace.value}-${name}-enter-to ${namespace.value}-${name}-enter-active`,
+    leave: `${namespace.value}-${name}-leave ${namespace.value}-${name}-leave-active`,
+    'leave-to': `${namespace.value}-${name}-leave-to ${namespace.value}-${name}-leave-active`,
   });
 
   // vue版本的组件进场处理

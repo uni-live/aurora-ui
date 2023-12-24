@@ -1,0 +1,7 @@
+@use '../../design/shared' as *;
+
+@include b(status-bar) {
+  width: 100%;
+  height: getCssVar('status-bar', 'height');
+  background-color: getCssVar('status-bar', 'background-color');
+}

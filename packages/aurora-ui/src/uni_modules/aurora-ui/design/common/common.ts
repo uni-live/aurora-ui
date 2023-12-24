@@ -14,6 +14,7 @@ export default {
   borderRadiusSmall: '4rpx',
   borderRadiusMedium: '6rpx',
   borderRadiusLarge: '8rpx',
+  borderCircle: '100%',
 
   fontSizeMini: '20rpx',
   fontSizeSmall: '24rpx',

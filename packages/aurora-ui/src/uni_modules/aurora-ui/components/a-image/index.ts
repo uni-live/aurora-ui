@@ -9,3 +9,5 @@ export { AImage };
 export default AImage;
 
 export * from './image';
+
+export * from './styles';

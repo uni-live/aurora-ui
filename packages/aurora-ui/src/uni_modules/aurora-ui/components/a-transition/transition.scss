@@ -1,0 +1,110 @@
+@use '../../design/shared' as *;
+/**
+ * fade：淡入
+ * zoom：缩放
+ * fade-zoom：缩放淡入
+ * fade-up：上滑淡入
+ * fade-down：下滑淡入
+ * fade-left：左滑淡入
+ * fade-right：右滑淡入
+ * slide-up：上滑进入
+ * slide-down：下滑进入
+ * slide-left：左滑进入
+ * slide-right：右滑进入
+ */
+.#{$namespace}-fade-enter-active,
+.#{$namespace}-fade-leave-active {
+  transition-property: opacity;
+}
+
+.#{$namespace}-fade-enter,
+.#{$namespace}-fade-leave-to {
+  opacity: 0;
+}
+
+.#{$namespace}-fade-zoom-enter,
+.#{$namespace}-fade-zoom-leave-to {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.#{$namespace}-fade-zoom-enter-active,
+.#{$namespace}-fade-zoom-leave-active {
+  transition-property: transform, opacity;
+}
+
+.#{$namespace}-fade-down-enter-active,
+.#{$namespace}-fade-down-leave-active,
+.#{$namespace}-fade-left-enter-active,
+.#{$namespace}-fade-left-leave-active,
+.#{$namespace}-fade-right-enter-active,
+.#{$namespace}-fade-right-leave-active,
+.#{$namespace}-fade-up-enter-active,
+.#{$namespace}-fade-up-leave-active {
+  transition-property: opacity, transform;
+}
+
+.#{$namespace}-fade-up-enter,
+.#{$namespace}-fade-up-leave-to {
+  transform: translate3d(0, 100%, 0);
+  opacity: 0;
+}
+
+.#{$namespace}-fade-down-enter,
+.#{$namespace}-fade-down-leave-to {
+  transform: translate3d(0, -100%, 0);
+  opacity: 0;
+}
+
+.#{$namespace}-fade-left-enter,
+.#{$namespace}-fade-left-leave-to {
+  transform: translate3d(-100%, 0, 0);
+  opacity: 0;
+}
+
+.#{$namespace}-fade-right-enter,
+.#{$namespace}-fade-right-leave-to {
+  transform: translate3d(100%, 0, 0);
+  opacity: 0;
+}
+
+.#{$namespace}-slide-down-enter-active,
+.#{$namespace}-slide-down-leave-active,
+.#{$namespace}-slide-left-enter-active,
+.#{$namespace}-slide-left-leave-active,
+.#{$namespace}-slide-right-enter-active,
+.#{$namespace}-slide-right-leave-active,
+.#{$namespace}-slide-up-enter-active,
+.#{$namespace}-slide-up-leave-active {
+  transition-property: transform;
+}
+
+.#{$namespace}-slide-up-enter,
+.u-slide-up-leave-to {
+  transform: translate3d(0, 100%, 0);
+}
+
+.#{$namespace}-slide-down-enter,
+.#{$namespace}-slide-down-leave-to {
+  transform: translate3d(0, -100%, 0);
+}
+
+.#{$namespace}-slide-left-enter,
+.#{$namespace}-slide-left-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.#{$namespace}-slide-right-enter,
+.#{$namespace}-slide-right-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+
+.#{$namespace}-zoom-enter-active,
+.#{$namespace}-zoom-leave-active {
+  transition-property: transform;
+}
+
+.#{$namespace}-zoom-enter,
+.#{$namespace}-zoom-leave-to {
+  transform: scale(0.95);
+}

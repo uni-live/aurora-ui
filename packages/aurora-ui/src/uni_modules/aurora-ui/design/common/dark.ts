@@ -98,8 +98,8 @@ const derived: ThemeCommonVars = {
   textColor1: overlay(base.alpha1),
   textColor2: overlay(base.alpha2),
   textColor3: overlay(base.alpha3),
-  // textColor4: overlay(base.alpha4), // disabled, placeholder, icon
-  // textColor5: overlay(base.alpha5),
+  textColor4: overlay(base.alpha4), // disabled, placeholder, icon
+  textColor5: overlay(base.alpha5),
   textColorDisabled: overlay(base.alpha4),
   placeholderColor: overlay(base.alpha4),
   placeholderColorDisabled: overlay(base.alpha5),
@@ -126,12 +126,6 @@ const derived: ThemeCommonVars = {
   // clear
   clearColor: overlay(base.alpha4),
   clearColorPressed: scaleColor(overlay(base.alpha4), { alpha: 0.8 }),
-
-  scrollbarColor: overlay(base.alphaScrollbar),
-  scrollbarColorHover: overlay(base.alphaScrollbarHover),
-  scrollbarWidth: '5px',
-  scrollbarHeight: '5px',
-  scrollbarBorderRadius: '5px',
 
   progressRailColor: overlay(base.alphaProgressRail),
   railColor: overlay(base.alphaRail),

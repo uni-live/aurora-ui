@@ -1,6 +1,8 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps, definePropType } from '../../shared';
 import Loading from './a-loading.vue';
+import { LoadingTheme } from './styles/light';
+import { ExtractThemeOverrides } from '../../hooks/use-theme';
 
 export const loadingProps = buildProps({
   /**
@@ -22,6 +24,30 @@ export const loadingProps = buildProps({
     default() {
       return {};
     },
+  },
+  /**
+   * @description 自定义主题
+   * @property {Object}
+   * @default
+   */
+  theme: {
+    type: definePropType<LoadingTheme>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  themeOverrides: {
+    type: definePropType<ExtractThemeOverrides<LoadingTheme>>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  builtinThemeOverrides: {
+    type: definePropType<ExtractThemeOverrides<LoadingTheme>>(Object),
   },
   /**
    * @description 颜色

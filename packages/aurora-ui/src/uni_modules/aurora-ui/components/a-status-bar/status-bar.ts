@@ -1,6 +1,8 @@
 import type { ExtractPropTypes } from 'vue';
-import { buildProps } from '../../shared';
+import { buildProps, definePropType } from '../../shared';
 import StatusBar from './a-status-bar.vue';
+import { StatusBarTheme } from './styles';
+import { ExtractThemeOverrides } from '../../hooks/use-theme';
 
 export const statusBarProps = buildProps({
   /**
@@ -22,6 +24,30 @@ export const statusBarProps = buildProps({
     default() {
       return {};
     },
+  },
+  /**
+   * @description 自定义主题
+   * @property {Object}
+   * @default
+   */
+  theme: {
+    type: definePropType<StatusBarTheme>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  themeOverrides: {
+    type: definePropType<ExtractThemeOverrides<StatusBarTheme>>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  builtinThemeOverrides: {
+    type: definePropType<ExtractThemeOverrides<StatusBarTheme>>(Object),
   },
   /**
    * @description 背景颜色

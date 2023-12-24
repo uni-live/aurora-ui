@@ -1,0 +1,44 @@
+@use '../../design//shared' as *;
+
+@include b(image) {
+  position: relative;
+  transition: opacity 0.5s ease-in-out;
+  width: getCssVar('image', 'width');
+  height: getCssVar('image', 'height');
+
+  @include e(image) {
+    width: getCssVar('image', 'width');
+    height: getCssVar('image', 'height');
+    border-radius: getCssVar('image', 'border-radius');
+  }
+
+  @include e(loading) {
+    position: absolute;
+    top: 0rpx;
+    left: 0rpx;
+    width: getCssVar('image', 'width');
+    height: getCssVar('image', 'height');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: getCssVar('image', 'bg-color');
+    color: getCssVar('image', 'icon-color');
+    font-size: getCssVar('image', 'icon-size');
+    border-radius: getCssVar('image', 'border-radius');
+  }
+
+  @include e(error) {
+    position: absolute;
+    top: 0rpx;
+    left: 0rpx;
+    width: getCssVar('image', 'width');
+    height: getCssVar('image', 'height');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: getCssVar('image', 'bg-color');
+    color: getCssVar('image', 'icon-color');
+    font-size: getCssVar('image', 'icon-size');
+    border-radius: getCssVar('image', 'border-radius');
+  }
+}

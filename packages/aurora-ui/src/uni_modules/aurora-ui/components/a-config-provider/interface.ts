@@ -6,12 +6,18 @@ import { ConfigProviderProps } from './config-provider';
 import { IconTheme } from '../a-icon/styles/light';
 import { GridTheme } from '../a-grid/styles/light';
 import { GridItemTheme } from '../a-grid-item/styles/light';
+import { StatusBarTheme } from '../a-status-bar/styles/light';
+import { LoadingTheme } from '../a-loading/styles/light';
+import { ImageTheme } from '../a-image/styles/light';
 
 export interface GlobalThemeWithoutCommon {
   Button?: ButtonTheme;
   Icon?: IconTheme;
   Grid?: GridTheme;
   GridItem?: GridItemTheme;
+  StatusBar?: StatusBarTheme;
+  Loading?: LoadingTheme;
+  Image?: ImageTheme;
 }
 
 export interface GlobalTheme extends GlobalThemeWithoutCommon {

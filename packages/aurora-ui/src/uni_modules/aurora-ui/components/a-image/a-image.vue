@@ -1,30 +1,3 @@
-<template>
-  <a-transition mode="fade" :show="show" :duration="fade ? duration : 0">
-    <view class="a-image" @tap="handleClick" :style="[wrapStyle, backgroundStyle]">
-      <image
-        v-if="!isError"
-        :src="src"
-        :mode="mode"
-        @error="handleError"
-        @load="handleLoad"
-        :show-menu-by-longpress="showMenuByLongpress"
-        :lazy-load="lazyLoad"
-        class="a-image__image"
-        :style="imageStyle"
-      ></image>
-      <view v-if="showLoading && loading" class="a-image__loading" :style="loadingStyle">
-        <slot name="loading">
-          <a-icon name="photo" :width="width" :height="height"></a-icon>
-        </slot>
-      </view>
-      <view v-if="showError && isError && !loading" class="a-image__error" :style="errorStyle">
-        <slot name="error">
-          <a-icon name="error-circle" :width="width" :height="height"></a-icon>
-        </slot>
-      </view>
-    </view>
-  </a-transition>
-</template>
 <script lang="ts">
   export default {
     name: 'a-image',
@@ -37,14 +10,20 @@
   };
 </script>
 <script lang="ts" setup>
-  import { ref, onMounted, watch, computed, type CSSProperties } from 'vue';
+  import { ref, onMounted, watch, computed } from 'vue';
   import { imageProps, imageEmits } from './image';
   import { addStyle, addUnit, deepMerge } from '../../shared';
   import { ATransition } from '../a-transition';
+  import { useNamespace } from '../../hooks/use-namespace';
+  import { useTheme } from '../../hooks/use-theme';
+  import { imageLight } from './styles';
+  import AIcon from '../a-icon/a-icon.vue';
 
   const props = defineProps(imageProps);
 
   const emit = defineEmits(imageEmits);
+  const ns = useNamespace('image');
+  const themeRef = useTheme('Image', imageLight, props);
 
   // 图片是否加载错误，如果是，则显示错误占位图
   const isError = ref(false);
@@ -55,30 +34,7 @@
   // 用于fade模式的控制组件显示与否
   const show = ref(false);
 
-  const imageStyle = computed<CSSProperties>(() => {
-    return {
-      borderRadius: props.shape == 'circle' ? '10000px' : addUnit(props.radius),
-      width: addUnit(props.width),
-      height: addUnit(props.height),
-    };
-  });
-
-  const loadingStyle = computed<CSSProperties>(() => {
-    return {
-      borderRadius: props.shape == 'circle' ? '50%' : addUnit(props.radius),
-      backgroundColor: props.bgColor,
-      width: addUnit(props.width),
-      height: addUnit(props.height),
-    };
-  });
-
-  const errorStyle = computed<CSSProperties>(() => {
-    return {
-      borderRadius: props.shape == 'circle' ? '50%' : addUnit(props.radius),
-      width: addUnit(props.width),
-      height: addUnit(props.height),
-    };
-  });
+  const hasError = computed(() => props.showError && isError && !loading);
 
   onMounted(() => {
     show.value = true;
@@ -101,16 +57,30 @@
   );
 
   const wrapStyle = computed(() => {
-    let style: CSSProperties = {};
-    // 通过调用addUnit()方法，如果有单位，如百分比，px单位等，直接返回，如果是纯粹的数值，则加上rpx单位
-    style.width = addUnit(props.width);
-    style.height = addUnit(props.height);
-    // 如果是显示圆形，设置一个很多的半径值即可
-    style.borderRadius = props.shape == 'circle' ? '10000px' : addUnit(props.radius);
-    // 如果设置圆角，必须要有hidden，否则可能圆角无效
-    style.overflow = props.radius ? 'hidden' : 'visible';
+    const { self } = themeRef.value;
+
+    const style = ns.cssVarBlock({
+      width: addUnit(props.width) || self.width,
+      height: addUnit(props.height) || self.height,
+      // 如果是显示圆形，设置一个很多的半径值即可
+      'border-radius':
+        props.shape == 'circle' ? '100%' : addUnit(props.radius) || self.borderRadius,
+      // 如果设置圆角，必须要有hidden，否则可能圆角无效
+      overflow: props.radius ? 'hidden' : 'visible',
+      'bg-color': props.bgColor || self.bgColor,
+    });
 
     return deepMerge(style, addStyle(props.customStyle));
+  });
+
+  const mergeIconColor = computed(() => {
+    const { self } = themeRef.value;
+    return props.iconColor || self.iconColor;
+  });
+
+  const mergeIconSize = computed(() => {
+    const { self } = themeRef.value;
+    return props.iconSize || self.iconSize;
   });
 
   function handleClick() {
@@ -138,33 +108,33 @@
     };
   }
 </script>
+<template>
+  <a-transition mode="fade" :show="show" :duration="fade ? duration : 0">
+    <view :class="[ns.b()]" @tap="handleClick" :style="[wrapStyle, backgroundStyle]">
+      <image
+        v-if="!isError"
+        :src="src"
+        :mode="mode"
+        @error="handleError"
+        @load="handleLoad"
+        :show-menu-by-longpress="showMenuByLongpress"
+        :lazy-load="lazyLoad"
+        :class="ns.e('image')"
+      ></image>
+      <view v-if="showLoading && loading" :class="ns.e('loading')">
+        <slot name="loading">
+          <AIcon :name="loadingIcon" :color="mergeIconColor" :size="mergeIconSize"></AIcon>
+        </slot>
+      </view>
+      <view v-if="hasError" :class="ns.e('error')">
+        <slot name="error">
+          <a-icon :name="errorIcon" :color="mergeIconColor" :size="mergeIconSize"></a-icon>
+        </slot>
+      </view>
+    </view>
+  </a-transition>
+</template>
 
 <style lang="scss" scoped>
-  @import '../../design/shared.scss';
-
-  .a-image {
-    position: relative;
-    transition: opacity 0.5s ease-in-out;
-
-    &__image {
-      width: 100%;
-      height: 100%;
-    }
-
-    &__loading,
-    &__error {
-      position: absolute;
-      top: 0rpx;
-      left: 0rpx;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: getCssVar('bg-color');
-      color: getCssVar('text-color', 'primary');
-      font-size: 46rpx;
-    }
-  }
+  @use './image.scss' as *;
 </style>
-./image

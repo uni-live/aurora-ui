@@ -9,3 +9,5 @@ export { ALoading };
 export default ALoading;
 
 export * from './loading';
+
+export * from './styles';

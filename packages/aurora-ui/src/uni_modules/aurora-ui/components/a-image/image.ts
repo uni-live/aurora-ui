@@ -1,6 +1,8 @@
 import type { ExtractPropTypes } from 'vue';
-import { buildProps, isString } from '../../shared';
+import { buildProps, definePropType, isString } from '../../shared';
 import Image from './a-image.vue';
+import { ImageTheme } from './styles/light';
+import { ExtractThemeOverrides } from '../../hooks/use-theme';
 
 export const imageProps = buildProps({
   /**
@@ -22,6 +24,30 @@ export const imageProps = buildProps({
     default() {
       return {};
     },
+  },
+  /**
+   * @description 自定义主题
+   * @property {Object}
+   * @default
+   */
+  theme: {
+    type: definePropType<ImageTheme>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  themeOverrides: {
+    type: definePropType<ExtractThemeOverrides<ImageTheme>>(Object),
+  },
+  /**
+   * @description 主题覆盖
+   * @property {Object}
+   * @default
+   */
+  builtinThemeOverrides: {
+    type: definePropType<ExtractThemeOverrides<ImageTheme>>(Object),
   },
   /**
    * @description 图片地址
@@ -75,7 +101,7 @@ export const imageProps = buildProps({
    */
   radius: {
     type: [String, Number],
-    default: 0,
+    default: '6rpx',
   },
   /**
    * @description 是否懒加载，微信小程序、App、百度小程序、字节跳动小程序
@@ -148,6 +174,41 @@ export const imageProps = buildProps({
   bgColor: {
     type: String,
     default: '#f3f4f6',
+  },
+  /**
+   * @description 加载loading图标,只支持本ui库下图标
+   * @property {String}
+   * @default
+   */
+  loadingIcon: {
+    type: String,
+    default: 'photo',
+  },
+  /**
+   * @description 加载error图标,只支持本ui库下图标
+   * @property {String}
+   * @default
+   */
+  errorIcon: {
+    type: String,
+    default: 'error-circle',
+  },
+  /**
+   * @description 加载图标的大小
+   * @property {String}
+   * @default
+   */
+  iconSize: {
+    type: [String, Number],
+    default: '46rpx',
+  },
+  /**
+   * @description 加载图标的颜色
+   * @property {String}
+   * @default
+   */
+  iconColor: {
+    type: String,
   },
 });
 

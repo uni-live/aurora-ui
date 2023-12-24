@@ -1,8 +1,7 @@
 <template>
   <view
     v-if="inited"
-    :class="['a-transition', classes, customClass]"
-    ref="a-transition"
+    :class="[classes, customClass]"
     @tap="handleClick"
     :style="[mergeStyle]"
     @touchmove="noop"
@@ -59,10 +58,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../../design/shared.scss';
-  @import './vue.ani-style.scss';
-
-  .a-transition {
-  }
+  @use './transition.scss' as *;
 </style>
-./transition
