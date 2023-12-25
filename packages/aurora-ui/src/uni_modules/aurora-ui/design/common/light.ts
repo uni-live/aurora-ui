@@ -116,7 +116,7 @@ const derived = {
   dividerColor: 'rgb(239, 239, 245)',
   borderColor: 'rgb(224, 224, 230)',
   borderStyle: 'solid',
-  borderWidth: '1px',
+  borderWidth: '1rpx',
 
   // close
   closeIconColor: neutral(Number(base.alphaClose)),

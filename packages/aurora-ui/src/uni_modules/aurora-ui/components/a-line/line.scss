@@ -1,0 +1,5 @@
+@use '../../design/shared' as *;
+
+@include b(line) {
+  vertical-align: middle;
+}

@@ -9,6 +9,8 @@ import { GridItemTheme } from '../a-grid-item/styles/light';
 import { StatusBarTheme } from '../a-status-bar/styles/light';
 import { LoadingTheme } from '../a-loading/styles/light';
 import { ImageTheme } from '../a-image/styles/light';
+import { CellTheme } from '../a-cell/styles/light';
+import { LineTheme } from '../a-line/styles/light';
 
 export interface GlobalThemeWithoutCommon {
   Button?: ButtonTheme;
@@ -18,6 +20,8 @@ export interface GlobalThemeWithoutCommon {
   StatusBar?: StatusBarTheme;
   Loading?: LoadingTheme;
   Image?: ImageTheme;
+  Cell?: CellTheme;
+  Line?: LineTheme;
 }
 
 export interface GlobalTheme extends GlobalThemeWithoutCommon {
