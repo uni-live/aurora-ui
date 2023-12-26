@@ -30,10 +30,27 @@
 
   const mergeStyle = computed(() => {
     const { self } = themeRef.value;
-    const style = ns.cssVarBlock({});
+    const style = ns.cssVarBlock({
+      padding: self.padding,
+      'font-size': self.fontSize,
+      color: self.color,
+      'icon-size': self.iconSize,
+      'left-icon-margin-right': self.leftIconWrapMarginRight,
+      'right-icon-margin-left': self.rightIconWrapMarginLeft,
+      'title-font-size': self.titleFontSize,
+      'title-line-height': self.titleLineHeight,
+      'title-color': self.titleColor,
+      'value-font-size': self.valueFontSize,
+      'line-height': self.lineHeight,
+      'value-color': self.valueColor,
+      'clickable-color': self.clickableColor,
+      'disabled-color': self.disabledColor,
+    });
 
     return [style, props.customStyle];
   });
+
+  function handleClick() {}
 </script>
 <template>
   <view
@@ -41,7 +58,7 @@
     :style="mergeStyle"
     :hover-class="!disabled && (clickable || isLink) ? 'u-cell--clickable' : ''"
     :hover-stay-time="250"
-    @tap="clickHandler"
+    @tap="handleClick"
   >
     <view
       class="u-cell__body"

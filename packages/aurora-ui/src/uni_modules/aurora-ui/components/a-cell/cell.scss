@@ -7,5 +7,63 @@
     font-size: getCssVar('cell', 'font-size');
     color: getCssVar('cell', 'color');
     align-items: center;
+
+    &__content {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+  }
+
+  @include e(left-icon-wrap) {
+    display: flex;
+    align-items: center;
+    font-size: getCssVar('cell', 'icon-size');
+    margin-right: getCssVar('cell', 'left-icon-margin-right');
+  }
+
+  @include e(right-icon-wrap) {
+    display: flex;
+    align-items: center;
+    font-size: getCssVar('cell', 'icon-size');
+    margin-left: getCssVar('cell', 'right-icon-margin-left');
+    transition: transform 0.3s;
+
+    @include m(up) {
+      transform: rotate(-90deg);
+    }
+
+    @include m(down) {
+      transform: rotate(90deg);
+    }
+  }
+
+  @include e(title) {
+    flex: 1;
+    &-text {
+      font-size: getCssVar('cell', 'title-font-size');
+      line-height: getCssVar('cell', 'title-line-height');
+      color: getCssVar('cell', 'title-color');
+    }
+  }
+
+  @include e(value) {
+    text-align: right;
+    font-size: getCssVar('cell', 'value-font-size');
+    line-height: getCssVar('cell', 'line-height');
+    color: getCssVar('cell', 'value-color');
+  }
+
+  @include e(clickable) {
+    background-color: getCssVar('cell', 'clickable-color');
+  }
+
+  @include e(disabled) {
+    color: getCssVar('cell', 'disabled-color');
+    cursor: not-allowed;
+  }
+
+  @include e(center) {
+    align-items: center;
   }
 }
