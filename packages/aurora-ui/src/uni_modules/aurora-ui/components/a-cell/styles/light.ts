@@ -3,8 +3,26 @@ import { commonLight } from '../../../design/common';
 import type { ThemeCommonVars } from '../../../design/common';
 
 export const self = (vars: ThemeCommonVars) => {
+  const { baseColor, textColor3 } = vars;
   return {
-    justifyContentL: 'center',
+    padding: '20rpx 30rpx',
+    fontSize: '30rpx',
+    lineHeight: '48rpx',
+    color: baseColor,
+    iconSize: '32rpx',
+    titleFontSize: '30rpx',
+    titleLineHeight: '44rpx',
+    titleColor: baseColor,
+    labelFontSize: '24rpx',
+    labelColor: textColor3,
+    labelLineHeight: '36rpx',
+    labelMarginTop: '10rpx',
+    valueFontSize: '28rpx',
+    valueColor: baseColor,
+    clickableColor: baseColor,
+    disabledColor: baseColor,
+    leftIconWrapMarginRight: '8rpx',
+    rightIconWrapMarginLeft: '8rpx',
   };
 };
 

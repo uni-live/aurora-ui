@@ -1,4 +1,11 @@
 @use '../../design/shared' as *;
 
 @include b(cell) {
+  @include e(body) {
+    display: flex;
+    padding: getCssVar('cell', 'padding');
+    font-size: getCssVar('cell', 'font-size');
+    color: getCssVar('cell', 'color');
+    align-items: center;
+  }
 }
