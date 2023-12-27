@@ -10,7 +10,7 @@
   };
 </script>
 <script setup lang="ts">
-  import { computed } from 'vue';
+  import { computed, useSlots } from 'vue';
 
   import AIcon from '../a-icon/a-icon.vue';
   import ALine from '../a-line/a-line.vue';
@@ -19,17 +19,20 @@
   import { useNamespace } from '../../hooks/use-namespace';
   import { useTheme } from '../../hooks/use-theme';
   import { cellLight } from './styles';
+  import { addStyle } from '../../shared/add';
 
   const props = defineProps(cellProps);
-
   const emit = defineEmits(cellEmits);
+  const slots = useSlots();
 
   const ns = useNamespace('cell');
 
   const themeRef = useTheme('Cell', cellLight, props);
 
+  const selfRef = computed(() => themeRef.value.self);
+
   const mergeStyle = computed(() => {
-    const { self } = themeRef.value;
+    const self = selfRef.value;
     const style = ns.cssVarBlock({
       padding: self.padding,
       'font-size': self.fontSize,
@@ -50,73 +53,71 @@
     return [style, props.customStyle];
   });
 
-  function handleClick() {}
+  const hoverClass = computed(() => {
+    const { disabled, clickable } = props;
+    return !disabled && clickable ? ns.e('clickable') : '';
+  });
+
+  const hasLeftIcon = computed(() => {
+    return slots?.icon || props.icon;
+  });
+
+  const hasRightIcon = computed(() => {
+    return props.isLink && (slots?.['right-icon'] || props.rightIcon);
+  });
+
+  const titleTextStyle = computed(() => {
+    return addStyle(props.titleStyle);
+  });
+
+  function handleClick() {
+    emit('click');
+  }
 </script>
 <template>
   <view
     :class="[ns.b(), customClass]"
     :style="mergeStyle"
-    :hover-class="!disabled && (clickable || isLink) ? 'u-cell--clickable' : ''"
+    :hover-class="hoverClass"
     :hover-stay-time="250"
     @tap="handleClick"
   >
-    <view
-      class="u-cell__body"
-      :class="[center && 'u-cell--center', size === 'large' && 'u-cell__body--large']"
-    >
-      <view class="u-cell__body__content">
-        <view class="u-cell__left-icon-wrap" v-if="$slots.icon || icon">
+    <view :class="[ns.e('body'), center && ns.m('center')]">
+      <view :class="ns.e('body__content')">
+        <view :class="ns.e('left-icon-wrap')" v-if="hasLeftIcon">
           <slot name="icon" v-if="$slots.icon"> </slot>
-          <u-icon
-            v-else
-            :name="icon"
-            :custom-style="iconStyle"
-            :size="size === 'large' ? 22 : 18"
-          ></u-icon>
+          <a-icon v-else :name="icon" :custom-style="iconStyle" :size="selfRef.iconSize"></a-icon>
         </view>
-        <view class="u-cell__title">
+        <view :class="ns.e('title')">
           <slot name="title">
             <text
               v-if="title"
-              class="u-cell__title-text"
               :style="[titleTextStyle]"
-              :class="[
-                disabled && 'u-cell--disabled',
-                size === 'large' && 'u-cell__title-text--large',
-              ]"
+              :class="[ns.e('title-text'), disabled && ns.m('disabled')]"
               >{{ title }}</text
             >
           </slot>
           <slot name="label">
-            <text
-              class="u-cell__label"
-              v-if="label"
-              :class="[disabled && 'u-cell--disabled', size === 'large' && 'u-cell__label--large']"
-              >{{ label }}</text
-            >
+            <text v-if="label" :class="[ns.e('label'), disabled && ns.m('disabled')]">{{
+              label
+            }}</text>
           </slot>
         </view>
       </view>
       <slot name="value">
-        <text
-          class="u-cell__value"
-          :class="[disabled && 'u-cell--disabled', size === 'large' && 'u-cell__value--large']"
-          v-if="!$u.test.empty(value)"
-          >{{ value }}</text
-        >
+        <text v-if="value" :class="[ns.e('value'), disabled && ns.m('disabled')]">{{ value }}</text>
       </slot>
       <view
-        class="u-cell__right-icon-wrap"
-        v-if="$slots['right-icon'] || isLink"
-        :class="[`u-cell__right-icon-wrap--${arrowDirection}`]"
+        v-if="hasRightIcon"
+        :class="[ns.e('right-icon-wrap'), ns.em('right-icon-wrap', arrowDirection)]"
       >
-        <slot name="right-icon" v-if="$slots['right-icon']"> </slot>
+        <slot name="right-icon" v-if="slots?.['right-icon']"> </slot>
         <a-icon
           v-else
           :name="rightIcon"
           :custom-style="rightIconStyle"
-          :color="disabled ? '#c8c9cc' : 'info'"
-          :size="size === 'large' ? 18 : 16"
+          :color="disabled ? selfRef.disabledRightIconColor : selfRef.rightIconColor"
+          :size="selfRef.iconSize"
         ></a-icon>
       </view>
     </view>

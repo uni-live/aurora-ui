@@ -4,22 +4,26 @@ import type { ThemeCommonVars } from '../../../design/common';
 import { changeColor } from 'seemly';
 
 export const self = (vars: ThemeCommonVars) => {
-  const { baseColor, textColor3, opacity3 } = vars;
+  const { baseColor, opacity3, textColor1, textColor2, textColor3 } = vars;
   return {
     padding: '20rpx 30rpx',
     fontSize: '30rpx',
     lineHeight: '48rpx',
-    color: baseColor,
+    color: textColor1,
     iconSize: '32rpx',
     titleFontSize: '30rpx',
     titleLineHeight: '44rpx',
-    titleColor: baseColor,
+    titleColor: textColor1,
     labelFontSize: '24rpx',
-    labelColor: textColor3,
+    labelColor: textColor2,
     labelLineHeight: '36rpx',
     labelMarginTop: '10rpx',
     valueFontSize: '28rpx',
-    valueColor: baseColor,
+    valueColor: textColor1,
+    rightIconColor: textColor3,
+    disabledRightIconColor: changeColor(textColor3, {
+      alpha: Number(opacity3),
+    }),
     clickableColor: changeColor(baseColor, {
       alpha: Number(opacity3),
     }),

@@ -83,7 +83,7 @@ export const cellProps = buildProps({
     default: false,
   },
   /**
-   * @description 是否展示右侧箭头并开启点击反馈
+   * @description 是否展示右侧箭头
    * @property {Boolean}
    * @default false
    */
@@ -141,6 +141,7 @@ export const cellProps = buildProps({
    */
   titleStyle: {
     type: [Object, String],
+    default: {},
   },
 });
 
