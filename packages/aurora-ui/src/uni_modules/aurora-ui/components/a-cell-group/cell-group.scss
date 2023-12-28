@@ -1,0 +1,19 @@
+@use '../../design/shared' as *;
+
+@include b(cell-group) {
+  flex: 1;
+
+  @include e(title) {
+    padding: getCssVar('cell-group', 'padding');
+
+    &__text {
+      font-size: getCssVar('cell-group', 'font-size');
+      line-height: getCssVar('cell-group', 'line-height');
+      color: getCssVar('cell-group', 'color');
+    }
+  }
+
+  @include e(wrapper) {
+    position: relative;
+  }
+}

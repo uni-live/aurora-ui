@@ -8,3 +8,5 @@ export * from './a-transition';
 export * from './a-button';
 export * from './a-loading';
 export * from './a-config-provider';
+export * from './a-cell';
+export * from './a-cell-group';
