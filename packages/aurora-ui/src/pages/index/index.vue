@@ -23,6 +23,7 @@
     <view @click="handleClickImage">图片</view>
     <view @click="handleClickButton">按钮</view>
     <view @click="handleClick('loading')">加载动画</view>
+    <view @click="handleClick('cell')">cell</view>
   </view>
 </template>
 

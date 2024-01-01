@@ -22,7 +22,7 @@ export const cellGroupProps = buildProps({
    */
   border: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 

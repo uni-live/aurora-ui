@@ -92,15 +92,6 @@ export const cellProps = buildProps({
     default: false,
   },
   /**
-   * @description 是否显示表单状态下的必填星号
-   * @property {Boolean}
-   * @default false
-   */
-  required: {
-    type: Boolean,
-    default: false,
-  },
-  /**
    * @description 右侧的图标箭头
    * @property {String}
    * @default 'arrow-right'

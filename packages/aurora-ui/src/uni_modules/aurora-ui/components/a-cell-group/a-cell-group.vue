@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * cellGroup  单元格
    * @description cell单元格一般用于一组列表的情况，比如个人中心页，设置页等。

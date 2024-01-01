@@ -1,5 +1,26 @@
 @use '../../design/shared' as *;
 
 @include b(line) {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  align-items: stretch;
+  align-content: flex-start;
   vertical-align: middle;
+  box-sizing: border-box;
+  border-color: getCssVar('line', 'border-color');
+  border-width: getCssVar('line', 'border-width');
+  border-bottom-width: getCssVar('line', 'border-width');
+  border-style: getCssVar('line', 'border-style');
+  transform: getCssVar('line', 'transform');
+
+  @include m(row) {
+    width: getCssVar('line', 'width');
+  }
+
+  @include m(col) {
+    height: getCssVar('line', 'height');
+  }
 }

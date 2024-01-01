@@ -35,6 +35,12 @@
       "style": {
         "navigationBarTitleText": "加载动画"
       }
+    },
+    {
+      "path": "pages/cell/cell",
+      "style": {
+        "navigationBarTitleText": "cell"
+      }
     }
   ],
   "globalStyle": {

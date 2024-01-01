@@ -1,6 +1,6 @@
 <script lang="ts">
   export default {
-    name: 'a-cel',
+    name: 'a-cell',
     inheritAttrs: false,
     // #ifdef MP-WEIXIN
     options: {
@@ -26,7 +26,6 @@
   const slots = useSlots();
 
   const ns = useNamespace('cell');
-
   const themeRef = useTheme('Cell', cellLight, props);
 
   const selfRef = computed(() => themeRef.value.self);
@@ -43,6 +42,10 @@
       'title-font-size': self.titleFontSize,
       'title-line-height': self.titleLineHeight,
       'title-color': self.titleColor,
+      'label-margin-top': self.labelMarginTop,
+      'label-font-size': self.labelFontSize,
+      'label-color': self.labelColor,
+      'label-line-height': self.labelLineHeight,
       'value-font-size': self.valueFontSize,
       'line-height': self.lineHeight,
       'value-color': self.valueColor,
@@ -55,7 +58,8 @@
 
   const hoverClass = computed(() => {
     const { disabled, clickable } = props;
-    return !disabled && clickable ? ns.e('clickable') : '';
+
+    return !disabled && clickable ? ns.m('clickable') : '';
   });
 
   const hasLeftIcon = computed(() => {

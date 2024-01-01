@@ -1,35 +1,28 @@
 import { Theme } from '../../../hooks/use-theme';
 import { commonLight } from '../../../design/common';
 import type { ThemeCommonVars } from '../../../design/common';
-import { changeColor } from 'seemly';
 
 export const self = (vars: ThemeCommonVars) => {
-  const { baseColor, opacity3, textColor1, textColor2, textColor3 } = vars;
+  const { textColor1, textColor2, textColor3, textColor4 } = vars;
   return {
     padding: '20rpx 30rpx',
     fontSize: '30rpx',
-    lineHeight: '48rpx',
+    lineHeight: '44rpx',
     color: textColor1,
     iconSize: '32rpx',
     titleFontSize: '30rpx',
     titleLineHeight: '44rpx',
     titleColor: textColor1,
     labelFontSize: '24rpx',
-    labelColor: textColor2,
+    labelColor: textColor3,
     labelLineHeight: '36rpx',
     labelMarginTop: '10rpx',
     valueFontSize: '28rpx',
-    valueColor: textColor1,
+    valueColor: textColor2,
     rightIconColor: textColor3,
-    disabledRightIconColor: changeColor(textColor3, {
-      alpha: Number(opacity3),
-    }),
-    clickableColor: changeColor(baseColor, {
-      alpha: Number(opacity3),
-    }),
-    disabledColor: changeColor(baseColor, {
-      alpha: Number(opacity3),
-    }),
+    disabledRightIconColor: textColor4,
+    clickableColor: textColor4,
+    disabledColor: textColor4,
     leftIconWrapMarginRight: '8rpx',
     rightIconWrapMarginLeft: '8rpx',
   };
