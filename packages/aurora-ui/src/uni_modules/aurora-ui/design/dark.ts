@@ -11,6 +11,7 @@ import imageDark from '../components/a-image/styles/dark';
 import cellDark from '../components/a-cell/styles/dark';
 import cellGroupDark from '../components/a-cell-group/styles/dark';
 import lineDark from '../components/a-line/styles/dark';
+import tagDark from '../components/a-tag/styles/dark';
 
 export const darkTheme: BuiltInGlobalTheme = {
   name: 'dark',
@@ -25,4 +26,5 @@ export const darkTheme: BuiltInGlobalTheme = {
   Cell: cellDark,
   CellGroup: cellGroupDark,
   Line: lineDark,
+  Tag: tagDark,
 };

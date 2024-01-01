@@ -11,6 +11,7 @@ import imageLight from '../components/a-image/styles/light';
 import lineLight from '../components/a-line/styles/light';
 import cellLight from '../components/a-cell/styles/light';
 import cellGroupLight from '../components/a-cell-group/styles/light';
+import tagLight from '../components/a-tag/styles/light';
 
 export const lightTheme: BuiltInGlobalTheme = {
   name: 'light',
@@ -25,4 +26,5 @@ export const lightTheme: BuiltInGlobalTheme = {
   Line: lineLight,
   Cell: cellLight,
   CellGroup: cellGroupLight,
+  Tag: tagLight,
 };

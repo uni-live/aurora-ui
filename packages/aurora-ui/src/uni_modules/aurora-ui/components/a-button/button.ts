@@ -79,7 +79,7 @@ export const buttonProps = buildProps({
     default: '',
   },
   /**
-   * @description 内置loading组件自定义样式
+   * @description 内置icon组件自定义style
    * @property {Object,String}
    * @default {}
    */
@@ -321,15 +321,6 @@ export const buttonProps = buildProps({
   color: {
     type: String,
     default: '',
-  },
-  /**
-   * @description dark 模式, 意味着自动设置 color 为 dark 模式的颜色
-   * @property {Boolean}
-   * @default false
-   */
-  dark: {
-    type: Boolean,
-    default: false,
   },
   /**
    * @description 圆角大小

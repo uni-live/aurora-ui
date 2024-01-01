@@ -1,0 +1,38 @@
+@use 'sass:map';
+
+@use '../../design/shared.scss' as *;
+
+@include b(tag) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: getCssVar('tag', 'text-color');
+  text-align: center;
+  box-sizing: border-box;
+  vertical-align: middle;
+  background: getCssVar('tag', 'color');
+  border: getCssVar('tag', 'border');
+  border-radius: getCssVar('tag', 'border-radius');
+  position: relative;
+
+  > text {
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+  }
+
+  @include when(active) {
+    color: getCssVar('tag', 'text-color-pressed');
+    background-color: getCssVar('tag', 'color-pressed');
+    border: getCssVar('tag', 'border-pressed');
+  }
+
+  @each $size in (large, medium, small, mini) {
+    @include m($size) {
+      padding: getCssVar('tag', 'padding');
+      font-size: getCssVar('tag', 'font-size');
+      height: getCssVar('tag', 'height');
+      width: getCssVar('tag', 'width');
+    }
+  }
+}

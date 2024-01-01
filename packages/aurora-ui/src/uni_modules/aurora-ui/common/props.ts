@@ -32,7 +32,7 @@ export default function <T>() {
       type: definePropType<T>(Object),
     },
     /**
-     * @description 主题覆盖
+     * @description 主题变量
      * @property {Object}
      * @default
      */
@@ -40,7 +40,7 @@ export default function <T>() {
       type: definePropType<ExtractThemeOverrides<T>>(Object),
     },
     /**
-     * @description 主题覆盖
+     * @description 组件主题变量
      * @property {Object}
      * @default
      */

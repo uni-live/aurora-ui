@@ -7,8 +7,8 @@
    * @property {String}	            customClass	            定义需要用到的外部calss样式
    * @property {Object | String}	  customStyle	            定义需要用到的外部style样式
    * @property {Object}	            theme	                  自定义主题
-   * @property {Object}	            themeOverrides	        主题覆盖
-   * @property {Object}	            builtinThemeOverrides	  主题覆盖
+   * @property {Object}	            themeOverrides	        主题变量
+   * @property {Object}	            builtinThemeOverrides	  组件主题变量
    * @property {String}	            title		                分组标题
    * @property {Boolean}	          border		              是否显示外边框 (默认 true )
    *
