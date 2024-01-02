@@ -3,7 +3,7 @@
 @use '../../design/shared.scss' as *;
 
 @include b(tag) {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   color: getCssVar('tag', 'text-color');
@@ -14,6 +14,12 @@
   border: getCssVar('tag', 'border');
   border-radius: getCssVar('tag', 'border-radius');
   position: relative;
+  flex-shrink: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  flex-direction: row;
+  position: relative;
+  overflow: hidden;
 
   > text {
     display: inline-flex;
@@ -31,8 +37,6 @@
     @include m($size) {
       padding: getCssVar('tag', 'padding');
       font-size: getCssVar('tag', 'font-size');
-      height: getCssVar('tag', 'height');
-      width: getCssVar('tag', 'width');
     }
   }
 }

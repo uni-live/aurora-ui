@@ -4,10 +4,6 @@ import type { ThemeCommonVars } from '../../../design/common';
 
 export const self = (vars: ThemeCommonVars) => {
   const {
-    heightMini,
-    heightSmall,
-    heightMedium,
-    heightLarge,
     borderRadiusLarge,
     borderRadiusMedium,
     borderRadiusSmall,
@@ -37,23 +33,23 @@ export const self = (vars: ThemeCommonVars) => {
     fontWeightStrong,
   } = vars;
   return {
-    paddingMini: '0 12rpx',
-    paddingSmall: '0 20rpx',
-    paddingMedium: '0 28rpx',
-    paddingLarge: '0 36rpx',
-    paddingRoundMini: '0 20rpx',
-    paddingRoundSmall: '0 28rpx',
-    paddingRoundMedium: '0 36rpx',
-    paddingRoundLarge: '0 44rpx',
-    // icon
-    closeIconMarginMini: '2rpx',
-    closeIconMarginSmall: '4rpx',
-    closeIconMarginMedium: '6rpx',
-    closeIconMarginLarge: '8rpx',
-    closeIconSizeMini: '24rpx',
-    closeIconSizeSmall: '28rpx',
-    closeIconSizeMedium: '32rpx',
-    closeIconSizeLarge: '36rpx',
+    paddingMini: '4rpx 12rpx',
+    paddingSmall: '6rpx 20rpx',
+    paddingMedium: '8rpx 28rpx',
+    paddingLarge: '10rpx 36rpx',
+    paddingRoundMini: '4rpx 12rpx',
+    paddingRoundSmall: '6rpx 20rpx',
+    paddingRoundMedium: '8rpx 28rpx',
+    paddingRoundLarge: '10rpx 36rpx',
+    // closeIcon
+    closeIconMarginMini: '4rpx',
+    closeIconMarginSmall: '8rpx',
+    closeIconMarginMedium: '12rpx',
+    closeIconMarginLarge: '16rpx',
+    closeIconSizeMini: '14rpx',
+    closeIconSizeSmall: '16rpx',
+    closeIconSizeMedium: '20rpx',
+    closeIconSizeLarge: '24rpx',
     // icon
     iconMarginMini: '2rpx',
     iconMarginSmall: '4rpx',
@@ -63,11 +59,7 @@ export const self = (vars: ThemeCommonVars) => {
     iconSizeSmall: '28rpx',
     iconSizeMedium: '32rpx',
     iconSizeLarge: '36rpx',
-    // height
-    heightMini,
-    heightSmall,
-    heightMedium,
-    heightLarge,
+
     // borderRadius
     borderRadiusMini: borderRadiusMini,
     borderRadiusSmall: borderRadiusMedium,

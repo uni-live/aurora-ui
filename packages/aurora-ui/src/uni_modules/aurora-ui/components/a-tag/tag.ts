@@ -111,7 +111,6 @@ export const tagProps = buildProps({
    */
   closeIconSize: {
     type: [Number, String],
-    default: '32rpx',
   },
   /**
    * @description 按住后多久出现点击态，单位毫秒
@@ -156,7 +155,6 @@ export const tagProps = buildProps({
    */
   iconSize: {
     type: [Number, String],
-    default: '32rpx',
   },
   /**
    * @description 标签颜色，支持传入linear-gradient渐变色
@@ -174,6 +172,15 @@ export const tagProps = buildProps({
    */
   round: {
     type: [String, Number],
+  },
+  /**
+   * @description 是否开启点击反馈
+   * @property {Boolean}
+   * @default false
+   */
+  clickable: {
+    type: Boolean,
+    default: false,
   },
 });
 

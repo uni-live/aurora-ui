@@ -41,6 +41,12 @@
       "style": {
         "navigationBarTitleText": "cell"
       }
+    },
+    {
+      "path": "pages/tag/tag",
+      "style": {
+        "navigationBarTitleText": "tag"
+      }
     }
   ],
   "globalStyle": {

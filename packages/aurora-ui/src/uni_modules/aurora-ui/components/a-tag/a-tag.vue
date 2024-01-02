@@ -27,6 +27,7 @@
    * @property {String | Number}	  hoverStartTime			    按住后多久出现点击态，单位毫秒 （默认 0 )
    * @property {String | Number}	  hoverStayTime			      手指松开后点击态保留时间，单位毫秒 （默认 200 )
    * @property {String | Number}	  round					          圆角大小
+   * @property {Boolean}			      clickable					      是否开启点击反馈（默认 false）
    *
    * @event {Function}	close			非禁止并且非加载中，才能点击
    * @example <u-tag>月落</u-tag>
@@ -184,7 +185,7 @@
     const { size } = props;
     const { self } = themeRef.value;
 
-    const { [createKey('iconMargin', size)]: iconMargin } = self as any;
+    const { [createKey('closeIconMargin', size)]: iconMargin } = self as any;
 
     const style: CSSProperties = {
       marginLeft: iconMargin,
@@ -260,6 +261,7 @@
     :style="[cssVarsRef, addStyle(customStyle)]"
     :hover-start-time="hoverStartTime"
     :hover-stay-time="hoverStayTime"
+    :hover-class="clickable ? ns.is('active') : ''"
     @tap="handleClick"
   >
     <slot name="icon" v-if="hasIcon">
