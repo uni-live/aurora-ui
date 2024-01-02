@@ -3,7 +3,7 @@
     <view class="u-page__item">
       <text class="u-page__item__title">基础功能</text>
       <a-cell-group>
-        <a-cell title="uView UI" value="内容" clickable required :isLink="true"></a-cell>
+        <a-cell title="uView UI" value="内容" clickable :isLink="true"></a-cell>
         <a-cell title="利剑出鞘,一统江湖" value="内容" label="挣脱束缚,向往自由"></a-cell>
       </a-cell-group>
     </view>
@@ -28,34 +28,27 @@
         <a-cell title="单元格" value="内容" label="描述信息" center></a-cell>
       </a-cell-group>
     </view>
-    <!-- <view class="u-page__item">
+    <view class="u-page__item">
       <text class="u-page__item__title">自定义插槽</text>
       <a-cell-group>
         <a-cell value="内容">
-          <view slot="title" class="u-slot-title">
-            <text class="u-cell-text">单元格</text>
-            <a-tag text="标签" plain size="mini" type="warning"> </a-tag>
-          </view>
+          <template #title>
+            <view class="u-slot-title">
+              <text class="u-cell-text">单元格</text>
+              <a-tag text="标签" plain size="mini" type="warning"> </a-tag>
+            </view>
+          </template>
         </a-cell>
         <a-cell title="单元格" isLink>
-          <text slot="value" class="u-slot-value">99</text>
+          <template #value>
+            <text class="u-slot-value">99</text>
+          </template>
         </a-cell>
       </a-cell-group>
-    </view> -->
+    </view>
   </view>
 </template>
-<script lang="ts">
-  export default {
-    data() {
-      return {};
-    },
-    methods: {
-      click() {
-        console.log('Cell is clicked.');
-      },
-    },
-  };
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss">
   page {
