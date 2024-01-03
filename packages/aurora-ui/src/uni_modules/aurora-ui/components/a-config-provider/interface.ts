@@ -13,6 +13,7 @@ import { CellTheme } from '../a-cell/styles/light';
 import { LineTheme } from '../a-line/styles/light';
 import { CellGroupTheme } from 'components/a-cell-group/styles/light';
 import { TagTheme } from 'components/a-tag/styles/light';
+import { BadgeTheme } from 'components/badge/styles/light';
 
 export interface GlobalThemeWithoutCommon {
   Button?: ButtonTheme;
@@ -26,6 +27,7 @@ export interface GlobalThemeWithoutCommon {
   Line?: LineTheme;
   CellGroup?: CellGroupTheme;
   Tag?: TagTheme;
+  Badge?: BadgeTheme;
 }
 
 export interface GlobalTheme extends GlobalThemeWithoutCommon {
