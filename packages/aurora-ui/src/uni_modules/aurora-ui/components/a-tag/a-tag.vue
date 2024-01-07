@@ -50,7 +50,7 @@
   import { useNamespace, useTheme } from '../../hooks';
   import { tagLight } from './styles';
   import { changeColor } from 'seemly';
-  import { isLinearGradient, isRound } from './utils';
+  import { isLinearGradient, isRound } from '../../shared/utils/is';
   import AIcon from '../../components/a-icon/a-icon.vue';
 
   const props = defineProps(tagProps);

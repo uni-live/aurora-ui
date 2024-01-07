@@ -19,6 +19,15 @@ export const badgeProps = buildProps({
     default: '',
   },
   /**
+   * @description 标签尺寸，large，medium，small，mini
+   * @property {String}
+   * @default 'medium'
+   */
+  size: {
+    type: definePropType<'large' | 'medium' | 'small' | 'mini'>(String),
+    default: 'medium',
+  },
+  /**
    * @description 是否显示圆点
    * @property {Boolean}
    * @default false
@@ -65,7 +74,7 @@ export const badgeProps = buildProps({
    * @default 'circle'
    */
   shape: {
-    type: String,
+    type: definePropType<'circle' | 'horn'>(String),
     default: 'circle',
   },
   /**

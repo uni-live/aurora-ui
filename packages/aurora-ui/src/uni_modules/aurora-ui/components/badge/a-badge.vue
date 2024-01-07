@@ -10,6 +10,7 @@
    * @property {Object}	          themeOverrides	        主题变量
    * @property {Object}	          builtinThemeOverrides	  组件主题变量
    * @property {String | Number}	value		                显示的内容 (默认 '')
+   * @property {String}	          size		                标签尺寸，large，medium，small，mini (默认 'medium')
    * @property {Boolean}			    isDot		                是否显示圆点 (默认 false)
    * @property {String | Number}	max		                  最大值，超过最大值会显示 '{max}+' (默认 999)
    * @property {String}			      type	                  主题类型，error|warning|success|primary (默认 'error' )
@@ -39,7 +40,9 @@
   import { badgeLight } from './styles';
   import { badgeProps } from './badge';
   import { computed } from 'vue';
-  import { addStyle } from '../../shared';
+  import { addStyle, createKey } from '../../shared';
+  import { isLinearGradient } from '../../shared/utils/is';
+  import { changeColor } from 'seemly';
 
   const props = defineProps(badgeProps);
 
@@ -48,18 +51,64 @@
   const themeRef = useTheme('Badge', badgeLight, props);
 
   const mergeStyle = computed(() => {
-    const { self } = themeRef.value;
+    const theme = themeRef.value;
+    const { self } = theme;
 
-    const style = ns.cssVarBlock({});
+    const { type, color, size, shape } = props;
 
-    return [style, addStyle(props.customStyle)];
+    const isLinear = isLinearGradient(color);
+
+    let colorProps = ns.cssVarBlock({
+      color: 'initial',
+      'text-color': 'initial',
+    });
+
+    if (!isLinear) {
+      const typeTextColor = self[createKey('color', type)];
+      const mergedTextColor = color || typeTextColor;
+      colorProps = ns.cssVarBlock({
+        color: changeColor(mergedTextColor, {
+          alpha: Number(self.colorOpacitySecondary),
+        }),
+        'text-color': mergedTextColor,
+      });
+    } else {
+      colorProps = ns.cssVarBlock({
+        color: color || self[createKey('color', type)],
+        'text-color': color ? self.textColorPrimary : self[createKey('textColor', type)],
+      });
+    }
+
+    // size
+    const {
+      [createKey('fontSize', size)]: fontSize,
+      [createKey('padding', size)]: padding,
+      [createKey('borderRadius', size)]: borderRadius,
+    } = self as any;
+
+    const sizeCssVar = ns.cssVarBlock({
+      padding: padding,
+      'font-size': fontSize,
+      'border-radius': shape === 'circle' ? '50px' : borderRadius,
+    });
+
+    return [colorProps, sizeCssVar, addStyle(props.customStyle)];
   });
 
   const mergeClass = computed(() => {
     const dot = props.isDot ? ns.m('dot') : ns.m('not-dot');
     const shape = props.shape === 'horn' && ns.m('horn');
+    const isLinear = isLinearGradient(props.color);
 
-    return [ns.b(), dot, shape, props.customClass];
+    return [
+      ns.b(),
+      dot,
+      shape,
+      ns.m(props.type),
+      ns.m(props.size),
+      ns.is('linear', isLinear),
+      props.customClass,
+    ];
   });
 
   const showValue = computed(() => {
@@ -80,7 +129,7 @@
   });
 </script>
 <template>
-  <text :class="mergeClass" :style="mergeStyle">{{ isDot ? '' : showValue }}</text>
+  <div :class="mergeClass" :style="mergeStyle">{{ isDot ? '' : showValue }}</div>
 </template>
 <style lang="scss" scoped>
   @use './badge.scss' as *;

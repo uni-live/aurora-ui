@@ -1,4 +1,5 @@
 @use '../../design/shared' as *;
 
 @include b(badge) {
+  display: inline-block;
 }

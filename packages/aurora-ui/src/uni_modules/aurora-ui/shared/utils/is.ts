@@ -1,11 +1,11 @@
-import { addUnit } from '../../shared';
+import { addUnit } from '../add';
 
 /**
  * @description 判断是否是渐变颜色
  * @param color
  * @returns { Boolean }
  */
-export function isLinearGradient(color: string) {
+export function isLinearGradient(color?: string) {
   return !!(color && color.indexOf('gradient') > -1);
 }
 

@@ -7,6 +7,8 @@ const badgeDark: BadgeTheme = {
   common: commonDark,
   self(vars) {
     const commonSelf = self(vars);
+    commonSelf.colorOpacitySecondary = '0.16';
+    commonSelf.colorOpacitySecondaryPressed = '0.12';
     return commonSelf;
   },
 };
