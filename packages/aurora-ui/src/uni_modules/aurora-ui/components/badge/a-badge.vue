@@ -64,8 +64,7 @@
     });
 
     if (!isLinear) {
-      const typeTextColor = self[createKey('color', type)];
-      const mergedTextColor = color || typeTextColor;
+      const mergedTextColor = color || self[createKey('color', type)];
       colorProps = ns.cssVarBlock({
         color: changeColor(mergedTextColor, {
           alpha: Number(self.colorOpacitySecondary),
@@ -80,19 +79,21 @@
     }
 
     // size
-    const {
-      [createKey('fontSize', size)]: fontSize,
-      [createKey('padding', size)]: padding,
-      [createKey('borderRadius', size)]: borderRadius,
-    } = self as any;
+    const { [createKey('fontSize', size)]: fontSize, [createKey('padding', size)]: padding } =
+      self as any;
 
     const sizeCssVar = ns.cssVarBlock({
       padding: padding,
       'font-size': fontSize,
-      'border-radius': shape === 'circle' ? '50px' : borderRadius,
     });
 
-    return [colorProps, sizeCssVar, addStyle(props.customStyle)];
+    // border-radius
+    const borderCssVar = ns.cssVarBlock({
+      'border-radius': self.borderRadius,
+      'border-bottom-left-radius': shape === 'circle' ? self.borderRadius : '0px',
+    });
+
+    return [colorProps, sizeCssVar, borderCssVar, addStyle(props.customStyle)];
   });
 
   const mergeClass = computed(() => {

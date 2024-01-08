@@ -2,4 +2,19 @@
 
 @include b(badge) {
   display: inline-block;
+  justify-content: center;
+  align-items: center;
+  color: getCssVar('tag', 'text-color');
+  text-align: center;
+  box-sizing: border-box;
+  vertical-align: middle;
+  background: getCssVar('tag', 'color');
+  border: getCssVar('tag', 'border');
+  border-radius: getCssVar('tag', 'border-radius');
+  position: relative;
+  flex-shrink: 0;
+  white-space: nowrap;
+  flex-direction: row;
+  position: relative;
+  overflow: hidden;
 }

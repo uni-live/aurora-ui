@@ -47,6 +47,12 @@
       "style": {
         "navigationBarTitleText": "tag"
       }
+    },
+    {
+      "path": "pages/badge/badge",
+      "style": {
+        "navigationBarTitleText": "badge"
+      }
     }
   ],
   "globalStyle": {
