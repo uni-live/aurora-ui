@@ -8,7 +8,6 @@
   box-sizing: border-box;
   vertical-align: middle;
   background: getCssVar('badge', 'color');
-  border-radius: getCssVar('badge', 'border-radius');
   color: getCssVar('badge', 'text-color');
   padding: getCssVar('badge', 'padding');
   font-size: getCssVar('badge', 'font-size');
@@ -18,12 +17,16 @@
   flex-direction: row;
   overflow: hidden;
 
-  @include m(dot) {
-    padding: 20px;
+  @include m(circle) {
+    border-radius: getCssVar('badge', 'border-radius');
   }
 
   @include m(horn) {
     border-bottom-left-radius: 0;
+  }
+
+  @include when(dot) {
+    padding: 20px;
   }
 
   @include when(absolute) {

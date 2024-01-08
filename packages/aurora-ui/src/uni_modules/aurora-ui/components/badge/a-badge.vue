@@ -107,16 +107,14 @@
   });
 
   const mergeClass = computed(() => {
-    const dot = props.isDot && ns.m('dot');
-    const shape = props.shape === 'horn' && ns.m('horn');
     const isLinear = isLinearGradient(props.color);
 
     return [
       ns.b(),
-      dot,
-      shape,
       ns.m(props.type),
       ns.m(props.size),
+      ns.m(props.shape),
+      ns.is('dot', props.isDot),
       ns.is('linear', isLinear),
       ns.is('absolute', props.absolute),
       props.customClass,
