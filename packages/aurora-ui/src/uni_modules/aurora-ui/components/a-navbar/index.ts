@@ -9,3 +9,5 @@ export { ANavbar };
 export default ANavbar;
 
 export * from './navbar';
+
+export * from './styles';

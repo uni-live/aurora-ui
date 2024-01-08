@@ -4,17 +4,31 @@
   display: inline-block;
   justify-content: center;
   align-items: center;
-  color: getCssVar('tag', 'text-color');
   text-align: center;
   box-sizing: border-box;
   vertical-align: middle;
-  background: getCssVar('tag', 'color');
-  border: getCssVar('tag', 'border');
-  border-radius: getCssVar('tag', 'border-radius');
+  background: getCssVar('badge', 'color');
+  border-radius: getCssVar('badge', 'border-radius');
+  color: getCssVar('badge', 'text-color');
+  padding: getCssVar('badge', 'padding');
+  font-size: getCssVar('badge', 'font-size');
   position: relative;
   flex-shrink: 0;
   white-space: nowrap;
   flex-direction: row;
-  position: relative;
   overflow: hidden;
+
+  @include m(dot) {
+    padding: 20px;
+  }
+
+  @include m(horn) {
+    border-bottom-left-radius: 0;
+  }
+
+  @include when(absolute) {
+    position: absolute;
+    top: getCssVar('badge', 'top');
+    right: getCssVar('badge', 'right');
+  }
 }

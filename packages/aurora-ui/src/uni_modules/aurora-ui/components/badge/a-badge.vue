@@ -40,7 +40,7 @@
   import { badgeLight } from './styles';
   import { badgeProps } from './badge';
   import { computed } from 'vue';
-  import { addStyle, createKey } from '../../shared';
+  import { addStyle, addUnit, createKey } from '../../shared';
   import { isLinearGradient } from '../../shared/utils/is';
   import { changeColor } from 'seemly';
 
@@ -54,7 +54,7 @@
     const theme = themeRef.value;
     const { self } = theme;
 
-    const { type, color, size, shape } = props;
+    const { type, color, size } = props;
 
     const isLinear = isLinearGradient(color);
 
@@ -81,7 +81,6 @@
     // size
     const { [createKey('fontSize', size)]: fontSize, [createKey('padding', size)]: padding } =
       self as any;
-
     const sizeCssVar = ns.cssVarBlock({
       padding: padding,
       'font-size': fontSize,
@@ -90,14 +89,25 @@
     // border-radius
     const borderCssVar = ns.cssVarBlock({
       'border-radius': self.borderRadius,
-      'border-bottom-left-radius': shape === 'circle' ? self.borderRadius : '0px',
     });
 
-    return [colorProps, sizeCssVar, borderCssVar, addStyle(props.customStyle)];
+    // absolute
+    let absoluteCssVar;
+    if (props.absolute && props.offset.length) {
+      // top和right分为为offset的第一个和第二个值，如果没有第二个值，则right等于top
+      const top = props.offset[0];
+      const right = props.offset[1] || top;
+      absoluteCssVar = ns.cssVarBlock({
+        top: addUnit(top),
+        right: addUnit(right),
+      });
+    }
+
+    return [colorProps, sizeCssVar, borderCssVar, absoluteCssVar, addStyle(props.customStyle)];
   });
 
   const mergeClass = computed(() => {
-    const dot = props.isDot ? ns.m('dot') : ns.m('not-dot');
+    const dot = props.isDot && ns.m('dot');
     const shape = props.shape === 'horn' && ns.m('horn');
     const isLinear = isLinearGradient(props.color);
 
@@ -108,6 +118,7 @@
       ns.m(props.type),
       ns.m(props.size),
       ns.is('linear', isLinear),
+      ns.is('absolute', props.absolute),
       props.customClass,
     ];
   });

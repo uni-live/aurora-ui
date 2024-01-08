@@ -96,7 +96,7 @@ export const badgeProps = buildProps({
    * @default []
    */
   offset: {
-    type: Array,
+    type: definePropType<Array<string | number>>(Array),
     default: () => [],
   },
   /**
