@@ -87,7 +87,7 @@ export const badgeProps = buildProps({
    * @default 'overflow'
    */
   numberType: {
-    type: String,
+    type: definePropType<'overflow' | 'ellipsis' | 'limit'>(String),
     default: 'overflow',
   },
   /**

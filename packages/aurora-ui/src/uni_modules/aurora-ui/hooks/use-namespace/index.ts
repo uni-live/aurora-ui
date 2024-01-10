@@ -89,6 +89,9 @@ export const useNamespace = (block: string, namespaceOverrides?: Ref<string | un
   const cssVarName = (name: string) => `--${namespace.value}-${name}`;
   const cssVarBlockName = (name: string) => `--${namespace.value}-${block}-${name}`;
 
+  const getCssVar = (name: string) => `var(${cssVarName(name)})`;
+  const getCssVarBlock = (name: string) => `var(${cssVarBlockName(name)})`;
+
   return {
     namespace,
     b,
@@ -104,6 +107,8 @@ export const useNamespace = (block: string, namespaceOverrides?: Ref<string | un
     cssVarName,
     cssVarBlock,
     cssVarBlockName,
+    getCssVar,
+    getCssVarBlock,
   };
 };
 

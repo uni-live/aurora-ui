@@ -9,14 +9,18 @@
     z-index: 11;
   }
 
+  @include e(placeholder) {
+    height: getCssVar('navbar', 'placeholder-height');
+  }
+
   @include e(content) {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 44px;
-    background-color: getCssVar('color-primary');
     position: relative;
     justify-content: center;
+    height: getCssVar('navbar', 'content-height');
+    background-color: getCssVar('navbar', 'bg-color');
 
     &__left,
     &__right {

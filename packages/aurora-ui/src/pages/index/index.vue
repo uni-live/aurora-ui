@@ -25,6 +25,7 @@
     <view @click="handleClick('loading')">加载动画</view>
     <view @click="handleClick('cell')">cell</view>
     <view @click="handleClick('tag')">tag</view>
+    <view @click="handleClick('badge')">badge</view>
   </view>
 </template>
 

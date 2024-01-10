@@ -12,6 +12,7 @@ import cellDark from '../components/a-cell/styles/dark';
 import cellGroupDark from '../components/a-cell-group/styles/dark';
 import lineDark from '../components/a-line/styles/dark';
 import tagDark from '../components/a-tag/styles/dark';
+import badgeDark from '../components/a-badge/styles/dark';
 
 export const darkTheme: BuiltInGlobalTheme = {
   name: 'dark',
@@ -27,4 +28,5 @@ export const darkTheme: BuiltInGlobalTheme = {
   CellGroup: cellGroupDark,
   Line: lineDark,
   Tag: tagDark,
+  Badge: badgeDark,
 };

@@ -3,55 +3,42 @@ import { commonLight } from '../../../design/common';
 import type { ThemeCommonVars } from '../../../design/common';
 
 export const self = (vars: ThemeCommonVars) => {
-  const {
-    fontSizeMini,
-    fontSizeSmall,
-    fontSizeMedium,
-    fontSizeLarge,
-    primaryColor,
-    baseColor,
-    infoColor,
-    successColor,
-    warningColor,
-    errorColor,
-    buttonColor2,
-  } = vars;
+  const { primaryColor, baseColor, infoColor, successColor, warningColor, errorColor } = vars;
   return {
-    paddingMini: '4rpx 12rpx',
-    paddingSmall: '6rpx 20rpx',
-    paddingMedium: '8rpx 28rpx',
-    paddingLarge: '10rpx 36rpx',
+    paddingMini: '0rpx 8rpx',
+    paddingSmall: '0rpx 8rpx',
+    paddingMedium: '0rpx 10rpx',
+    paddingLarge: '2rpx 14rpx',
+    // dot
+    paddingDotMini: '7rpx',
+    paddingDotSmall: '8rpx',
+    paddingDotMedium: '10rpx',
+    paddingDotLarge: '12rpx',
     // borderRadius
     borderRadius: '100px',
     // fontSize
-    fontSizeMini,
-    fontSizeSmall,
-    fontSizeMedium,
-    fontSizeLarge,
+    fontSizeMini: '11px',
+    fontSizeSmall: '12px',
+    fontSizeMedium: '14px',
+    fontSizeLarge: '16px',
     // secondary
     colorOpacitySecondary: '0.16',
     colorOpacitySecondaryPressed: '0.28',
-    colorSecondary: buttonColor2,
     // primary
     colorPrimary: primaryColor,
     textColorPrimary: baseColor,
-    textColorTextPrimary: primaryColor,
     // info
     colorInfo: infoColor,
     textColorInfo: baseColor,
-    textColorTextInfo: infoColor,
     // success
     colorSuccess: successColor,
     textColorSuccess: baseColor,
-    textColorTextSuccess: successColor,
     // warning
     colorWarning: warningColor,
     textColorWarning: baseColor,
-    textColorTextWarning: warningColor,
     // error
     colorError: errorColor,
     textColorError: baseColor,
-    textColorTextError: errorColor,
   };
 };
 

@@ -1,28 +1,14 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps } from '../../shared';
 import Navbar from './a-navbar.vue';
+import commonProps from '../../common/props';
+import { NavbarTheme } from './styles';
 
 export const navbarProps = buildProps({
   /**
-   * @description 自定义class
-   * @property {String}
-   * @default ''
+   * @description 公共props
    */
-  customClass: {
-    type: String,
-    default: '',
-  },
-  /**
-   * @description 自定义style
-   * @property {Object,String}
-   * @default {}
-   */
-  customStyle: {
-    type: [Object, String],
-    default() {
-      return {};
-    },
-  },
+  ...commonProps<NavbarTheme>(),
   /**
    * @description 是否开启顶部安全区适配
    * @property {Boolean}
@@ -107,38 +93,30 @@ export const navbarProps = buildProps({
   /**
    * @description 背景颜色
    * @property {String}
-   * @default '#ffffff'
    */
   bgColor: {
     type: String,
-    default: '#ffffff',
   },
   /**
    * @description 标题的宽度
    * @property {String,Number}
-   * @default '400rpx'
    */
   titleWidth: {
     type: [String, Number],
-    default: '400rpx',
   },
   /**
    * @description 导航栏高度
    * @property {String,Number}
-   * @default '44px'
    */
   height: {
     type: [String, Number],
-    default: '44px',
   },
   /**
    * @description 左侧返回图标的大小
    * @property {String,Number}
-   * @default 20
    */
   leftIconSize: {
     type: [String, Number],
-    default: 20,
   },
   /**
    * @description 左侧返回图标的颜色

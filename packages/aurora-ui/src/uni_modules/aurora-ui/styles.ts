@@ -11,3 +11,4 @@ export { cellDark } from './components/a-cell/styles';
 export { cellGroupDark } from './components/a-cell-group/styles';
 export { lineDark } from './components/a-line/styles';
 export { tagDark } from './components/a-tag/styles';
+export { badgeDark } from './components/a-badge/styles';

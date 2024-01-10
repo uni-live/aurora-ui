@@ -51,13 +51,6 @@
 <script lang="ts" setup></script>
 
 <style lang="scss">
-  page {
-    background-color: #f3f4f6;
-  }
-  .cell-page {
-    background-color: #ffffff;
-  }
-
   .cell-box {
     &__title {
       font-size: 14px;

@@ -42,19 +42,16 @@
   import { computed } from 'vue';
   import { addStyle, addUnit, createKey } from '../../shared';
   import { isLinearGradient } from '../../shared/utils/is';
-  import { changeColor } from 'seemly';
 
   const props = defineProps(badgeProps);
-
   const ns = useNamespace('badge');
-
   const themeRef = useTheme('Badge', badgeLight, props);
 
   const mergeStyle = computed(() => {
     const theme = themeRef.value;
     const { self } = theme;
 
-    const { type, color, size } = props;
+    const { type, color, size, bgColor } = props;
 
     const isLinear = isLinearGradient(color);
 
@@ -64,24 +61,27 @@
     });
 
     if (!isLinear) {
-      const mergedTextColor = color || self[createKey('color', type)];
+      const mergedColor = bgColor || self[createKey('color', type)];
       colorProps = ns.cssVarBlock({
-        color: changeColor(mergedTextColor, {
-          alpha: Number(self.colorOpacitySecondary),
-        }),
-        'text-color': mergedTextColor,
+        color: mergedColor,
+        'text-color': self[createKey('textColor', type)],
       });
     } else {
       colorProps = ns.cssVarBlock({
-        color: color || self[createKey('color', type)],
-        'text-color': color ? self.textColorPrimary : self[createKey('textColor', type)],
+        color: bgColor || self[createKey('color', type)],
+        'text-color': self[createKey('textColor', type)],
       });
     }
 
     // size
-    const { [createKey('fontSize', size)]: fontSize, [createKey('padding', size)]: padding } =
-      self as any;
+    const {
+      [createKey('fontSize', size)]: fontSize,
+      [createKey('padding', size)]: padding,
+      [createKey('paddingDot', size)]: dotSize,
+    } = self as any;
+
     const sizeCssVar = ns.cssVarBlock({
+      'dot-size': dotSize,
       padding: padding,
       'font-size': fontSize,
     });
@@ -90,6 +90,8 @@
     const borderCssVar = ns.cssVarBlock({
       'border-radius': self.borderRadius,
     });
+
+    // dot
 
     // absolute
     let absoluteCssVar;

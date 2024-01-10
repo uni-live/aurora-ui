@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import ABadge from '@/uni_modules/aurora-ui/components/a-badge/a-badge.vue';
+</script>
 <template>
   <view class="u-page">
     <view class="u-demo-block">
@@ -31,7 +33,7 @@
       <text class="u-demo-block__title">显示圆点</text>
       <view class="u-demo-block__content">
         <view class="u-page__tag-item">
-          <a-badge :value="1011" numberType="overflow" isDot> </a-badge>
+          <a-badge :value="1011" isDot> </a-badge>
         </view>
       </view>
     </view>
@@ -50,22 +52,42 @@
         <view class="u-page__tag-item">
           <a-badge :value="9" type="primary"> </a-badge>
         </view>
+        <view class="u-page__tag-item">
+          <a-badge
+            :value="9"
+            bgColor="linear-gradient(to right, rgb(66, 83, 216), rgb(213, 51, 186))"
+          >
+          </a-badge>
+        </view>
       </view>
     </view>
     <view class="u-demo-block">
-      <text class="u-demo-block__title">反转色</text>
+      <text class="u-demo-block__title">尺寸</text>
       <view class="u-demo-block__content">
         <view class="u-page__tag-item">
-          <a-badge :value="9" type="error" inverted> </a-badge>
+          <a-badge :value="9" size="mini" type="error"> </a-badge>
         </view>
         <view class="u-page__tag-item">
-          <a-badge :value="1532" inverted type="warning"> </a-badge>
+          <a-badge :value="1532" size="small" type="warning"> </a-badge>
         </view>
         <view class="u-page__tag-item">
-          <a-badge :value="12" inverted type="success"> </a-badge>
+          <a-badge :value="12" size="medium" type="success"> </a-badge>
         </view>
         <view class="u-page__tag-item">
-          <a-badge :value="999" inverted type="primary"> </a-badge>
+          <a-badge :value="999" size="large" type="primary"> </a-badge>
+        </view>
+
+        <view class="u-page__tag-item">
+          <a-badge :value="9" size="mini" isDot type="error"> </a-badge>
+        </view>
+        <view class="u-page__tag-item">
+          <a-badge :value="1532" size="small" isDot type="warning"> </a-badge>
+        </view>
+        <view class="u-page__tag-item">
+          <a-badge :value="12" size="medium" isDot type="success"> </a-badge>
+        </view>
+        <view class="u-page__tag-item">
+          <a-badge :value="999" size="large" isDot type="primary"> </a-badge>
         </view>
       </view>
     </view>
