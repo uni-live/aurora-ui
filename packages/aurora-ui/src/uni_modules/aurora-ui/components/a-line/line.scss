@@ -11,16 +11,16 @@
   vertical-align: middle;
   box-sizing: border-box;
   border-color: getCssVar('line', 'border-color');
-  border-width: getCssVar('line', 'border-width');
-  border-bottom-width: getCssVar('line', 'border-width');
   border-style: getCssVar('line', 'border-style');
   transform: getCssVar('line', 'transform');
 
   @include m(row) {
     width: getCssVar('line', 'width');
+    border-bottom-width: getCssVar('line', 'border-width');
   }
 
   @include m(col) {
     height: getCssVar('line', 'height');
+    border-left-width: getCssVar('line', 'border-width');
   }
 }

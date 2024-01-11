@@ -46,19 +46,18 @@
 
   const mergeStyle = computed(() => {
     const { self } = themeRef.value;
-
     const style = ns.cssVarBlock({
       'border-color': props.color || self.borderColor,
       'border-width': self.borderWidth,
       'border-style': props.dashed ? 'dashed' : 'solid',
-      width: addUnit(props.length) || self.length,
+      [props.direction === 'row' ? 'width' : 'height']: addUnit(props.length || self.length),
       transform: props.direction == 'row' ? 'scaleY(0.5)' : 'scaleX(0.5)',
     });
 
     return [style, props.customStyle];
   });
 
-  const mergeClass = computed(() => [ns.b(), ns.e(props.direction), props.customClass]);
+  const mergeClass = computed(() => [ns.b(), ns.m(props.direction), props.customClass]);
 </script>
 <template>
   <view :class="mergeClass" :style="mergeStyle"> </view>

@@ -21,7 +21,10 @@
    * @property {Array}	          offset		              设置badge的位置偏移，格式为 [x, y]，也即设置的为top和right的值，absolute为true时有效 (默认 [])
    * @property {Boolean}	        absolute		            是否绝对定位 （默认 false）
    *
-   * @example <a-badge color="red"></a-badge>
+   * styles属性
+   * @property {String | Number}	height
+   *
+   * @example <a-navbar></a-navbar>
    */
   export default {
     name: 'a-navbar',
@@ -36,7 +39,7 @@
 <script setup lang="ts">
   import { navbarProps, navbarEmits } from './navbar';
   import { addUnit, getPx, sys, addStyle } from '../../shared';
-  import { computed } from 'vue';
+  import { computed, useSlots } from 'vue';
   import { useNamespace } from '../../hooks/use-namespace';
   import { useTheme } from '../../hooks/use-theme';
   import { navbarLight } from './styles';
@@ -46,11 +49,7 @@
   const emit = defineEmits(navbarEmits);
   const ns = useNamespace('navbar');
   const themeRef = useTheme('Badge', navbarLight, props);
-
-  const bgColor = computed(() => {
-    const { self } = themeRef.value;
-    return bgColor || self.bgColor;
-  });
+  const slots = useSlots();
 
   const mergeClass = computed(() => {
     const { customClass } = props;
@@ -58,18 +57,27 @@
   });
   const mergeStyle = computed(() => {
     const { self } = themeRef.value;
-    const { height } = self;
+
+    console.log();
 
     const cssVars = ns.cssVarBlock({
       'placeholder-height': addUnit(
-        (getPx(props.height) as number) + (sys().statusBarHeight as number),
+        (getPx(props.height || self.height) as number) + (sys().statusBarHeight as number),
         'px',
       ),
-      'content-height': addUnit(props.height) || height,
-      'bg-color': bgColor,
+      'content-height': addUnit(props.height || self.height),
+      'bg-color': props.bgColor || self.bgColor,
+      'left-pressed-color': self.leftPressedColor,
+      'title-text-color': self.titleTextColor,
+      'title-width': addUnit(props.titleWidth || self.titleWidth),
+      'left-icon-color': self.leftIconColor,
     });
 
     return [cssVars, addStyle(props.customStyle)];
+  });
+
+  const hasRight = computed(() => {
+    return slots?.right || props.rightIcon || props.rightText;
   });
 
   function leftClick() {
@@ -86,7 +94,7 @@
   <view :class="mergeClass" :style="mergeStyle">
     <view :class="[ns.e('placeholder')]" v-if="fixed && placeholder"></view>
     <view :class="[fixed && ns.m('fixed')]">
-      <a-status-bar v-if="safeAreaInsetTop" :bgColor="bgColor"></a-status-bar>
+      <a-status-bar v-if="safeAreaInsetTop" :bgColor="ns.getCssVarBlock('bg-color')"></a-status-bar>
       <view :class="[ns.e('content'), border && ns.m('border')]">
         <view
           :class="[ns.e('content__left')]"
@@ -99,35 +107,15 @@
               v-if="leftIcon"
               :name="leftIcon"
               :size="leftIconSize"
-              :color="leftIconColor"
+              :color="ns.getCssVarBlock('left-icon-color')"
             ></a-icon>
-            <text
-              v-if="leftText"
-              :style="{
-                color: leftIconColor,
-              }"
-              :class="ns.e('content__left__text')"
-              >{{ leftText }}</text
-            >
+            <text v-if="leftText" :class="ns.e('content__left__text')">{{ leftText }}</text>
           </slot>
         </view>
         <slot name="center">
-          <text
-            :class="[ns.e('content__title')]"
-            :style="[
-              {
-                width: addUnit(titleWidth),
-              },
-              addStyle(titleStyle),
-            ]"
-            >{{ title }}</text
-          >
+          <text :class="[ns.e('content__title')]">{{ title }}</text>
         </slot>
-        <view
-          :class="[ns.e('content__right')]"
-          v-if="$slots.right || rightIcon || rightText"
-          @tap="rightClick"
-        >
+        <view :class="[ns.e('content__right')]" v-if="hasRight" @tap="rightClick">
           <slot name="right">
             <a-icon v-if="rightIcon" :name="rightIcon" size="20"></a-icon>
             <text v-if="rightText" :class="ns.e('content__right__text')">{{ rightText }}</text>

@@ -53,6 +53,12 @@
       "style": {
         "navigationBarTitleText": "badge"
       }
+    },
+    {
+      "path": "pages/navbar/navbar",
+      "style": {
+        "navigationBarTitleText": "navbar"
+      }
     }
   ],
   "globalStyle": {

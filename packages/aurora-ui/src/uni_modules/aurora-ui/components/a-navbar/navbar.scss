@@ -37,19 +37,21 @@
       left: 0;
 
       &--hover {
-        opacity: 0.7;
+        opacity: getCssVar('navbar', 'left-pressed-color');
       }
 
       &__text {
         font-size: 15px;
         margin-left: 3px;
+        color: getCssVar('navbar', 'left-text-color');
       }
     }
 
     &__title {
       text-align: center;
       font-size: 16px;
-      color: getCssVar('text-color', 'primary');
+      width: getCssVar('navbar', 'title-width');
+      color: getCssVar('navbar', 'title-text-color');
     }
 
     &__right {

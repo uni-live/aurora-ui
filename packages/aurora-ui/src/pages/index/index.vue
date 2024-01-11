@@ -26,6 +26,7 @@
     <view @click="handleClick('cell')">cell</view>
     <view @click="handleClick('tag')">tag</view>
     <view @click="handleClick('badge')">badge</view>
+    <view @click="handleClick('navbar')">navbar</view>
   </view>
 </template>
 
