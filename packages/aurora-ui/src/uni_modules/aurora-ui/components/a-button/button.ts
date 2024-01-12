@@ -1,54 +1,15 @@
 import type { ExtractPropTypes } from 'vue';
 import { buildProps, definePropType } from '../../shared';
 import Button from './a-button.vue';
-import type { ExtractThemeOverrides } from '../../hooks/use-theme';
-import { ButtonTheme } from './styles';
+import commonProps from '../../common/props';
+import { ButtonTheme } from './styles/light';
 
 export const buttonProps = buildProps({
   /**
-   * @description 自定义class
-   * @property {String}
-   * @default ''
+    /**
+   * @description 公共props
    */
-  customClass: {
-    type: String,
-    default: '',
-  },
-  /**
-   * @description 自定义样式
-   * @property {Object,String}
-   * @default {}
-   */
-  customStyle: {
-    type: [Object, String],
-    default() {
-      return {};
-    },
-  },
-  /**
-   * @description 自定义主题
-   * @property {Object}
-   * @default
-   */
-  theme: {
-    type: definePropType<ButtonTheme>(Object),
-  },
-  /**
-   * @description 主题覆盖
-   * @property {Object}
-   * @default
-   */
-  themeOverrides: {
-    type: definePropType<ExtractThemeOverrides<ButtonTheme>>(Object),
-  },
-  /**
-   * @description 主题覆盖
-   * @property {Object}
-   * @default
-   */
-  builtinThemeOverrides: {
-    type: definePropType<ExtractThemeOverrides<ButtonTheme>>(Object),
-  },
+  ...commonProps<ButtonTheme>(),
   /**
    * @description 内置loading组件自定义class
    * @property {String}
