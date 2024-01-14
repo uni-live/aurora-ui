@@ -3,7 +3,8 @@ import { buildProps, definePropType } from '../../shared';
 import Form from './a-form.vue';
 import commonProps from '../../common/props';
 import { FormTheme } from './styles/light';
-import { createInjectionKey } from '../../shared/create-injection-key';
+import { FormAction } from './types';
+import { Fn } from 'types';
 
 export const formProps = buildProps({
   /**
@@ -87,9 +88,25 @@ export const formProps = buildProps({
   },
 });
 
+export interface ExtendFormProps extends FormProps {
+  transformDateFunc: (
+    key: string,
+    value: any,
+    formModel: Record<string, any>,
+    props: ExtendFormProps,
+  ) => any;
+  resetFunc: Fn;
+  submitFunc: (formModel: Record<string, any>) => Promise<any>;
+}
+
 export type FormProps = ExtractPropTypes<typeof formProps>;
 
-export const formEmits = {};
+export const formEmits = {
+  register: (_: FormAction) => true,
+  'update:model': (_: Record<string, any>) => true,
+  submit: (_: Record<string, any>) => true,
+  reset: () => true,
+};
 export type FormEmits = typeof formEmits;
 
 export type FormInstance = InstanceType<typeof Form>;

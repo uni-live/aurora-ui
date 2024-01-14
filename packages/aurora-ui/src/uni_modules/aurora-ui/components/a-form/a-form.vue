@@ -26,13 +26,16 @@
   };
 </script>
 <script setup lang="ts">
-  import { formEmits, formProps } from './form';
+  import { ExtendFormProps, FormProps, formEmits, formProps } from './form';
   import { useNamespace } from '../../hooks/use-namespace';
   import { useTheme } from '../../hooks/use-theme';
   import { formLight } from './styles';
-  import { provide, ref, watchEffect } from 'vue';
+  import { provide, ref, watchEffect, onMounted, unref, computed } from 'vue';
   import { formProviderInjectionKey } from './context';
   import { cloneDeep } from 'lodash-es';
+  import Schema from 'async-validator';
+  import { FormAction } from './types';
+  import { deepMerge } from '../../shared/deep-merge';
 
   const props = defineProps(formProps);
   const emit = defineEmits(formEmits);
@@ -40,11 +43,15 @@
   const ns = useNamespace('form');
   const themeRef = useTheme('Form', formLight, props);
 
+  const formModel = ref<Record<string, any>>({});
   const formRules = ref({});
-  const validator = ref({});
+  const validatorRef = ref({});
   const originalModel = ref({});
+  const propsRef = ref<ExtendFormProps>();
 
-  Schema.warning = function () {};
+  const getProps = computed(() => {
+    return { ...props, ...(unref(propsRef) || {}) } as ExtendFormProps;
+  });
 
   watchEffect(() => {
     setRules();
@@ -56,15 +63,67 @@
     }
   });
 
+  watchEffect(() => {
+    emit('update:model', formModel);
+  });
+
   const setRules = () => {};
 
   const clearValidate = () => {};
 
   const validateField = () => {};
 
-  const validate = () => {};
+  const validate = async () => {
+    return Promise.reject({});
+  };
 
-  provide(formProviderInjectionKey, {});
+  const reset = () => {};
+
+  const getFieldsValue = () => {
+    return {};
+  };
+
+  function setFormModel(key: string, value: any) {
+    formModel[key] = value;
+  }
+
+  const setFieldsValue = (values: any) => {
+    console.log(values);
+  };
+
+  const submit = async () => {
+    try {
+      const values = await validate();
+
+      emit('submit', values);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  async function setProps(formProps: Partial<ExtendFormProps>) {
+    propsRef.value = deepMerge(unref(propsRef) || {}, formProps) as ExtendFormProps;
+  }
+
+  const formAction: FormAction = {
+    setProps,
+    clearValidate,
+    validateField,
+    validate,
+    reset,
+    setRules,
+    getFieldsValue,
+    setFieldsValue,
+    submit,
+  };
+
+  onMounted(() => {
+    emit('register', formAction);
+  });
+
+  provide(formProviderInjectionKey, {
+    setFormModel,
+  });
 </script>
 <template>
   <view>
