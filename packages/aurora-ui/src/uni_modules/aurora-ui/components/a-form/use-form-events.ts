@@ -30,41 +30,11 @@ export function useFormEvents({
    * @description: Set form value
    */
   async function setFieldsValue(values: Record<string, any>): Promise<void> {
-    const fields = unref(getSchema)
-      .map((item) => item.field)
-      .filter(Boolean);
-
     const validKeys: string[] = [];
     Object.keys(values).forEach((key) => {
-      const schema = unref(getSchema).find((item) => item.field === key);
       let value = values[key];
-
-      const hasKey = Reflect.has(values, key);
-
-      value = handleInputNumberValue(schema?.component, value);
-      // 0| '' is allow
-      if (hasKey && fields.includes(key)) {
-        // time type
-        if (itemIsDateType(key)) {
-          if (Array.isArray(value)) {
-            const arr: any[] = [];
-            for (const ele of value) {
-              arr.push(ele ? dateUtil(ele) : null);
-            }
-            formModel[key] = arr;
-          } else {
-            const { componentProps } = schema || {};
-            let _props = componentProps as any;
-            if (typeof componentProps === 'function') {
-              _props = _props({ formModel });
-            }
-            formModel[key] = value ? (_props?.valueFormat ? value : dateUtil(value)) : null;
-          }
-        } else {
-          formModel[key] = value;
-        }
-        validKeys.push(key);
-      }
+      formModel[key] = value;
+      validKeys.push(key);
     });
     validateFields(validKeys).catch((_) => {});
   }
