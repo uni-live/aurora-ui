@@ -79,6 +79,19 @@ export function useFormEvents({
     }
   }
 
+
+  async function setRules(rules) {
+// 判断是否有规则
+if (Object.keys(rules).length === 0) return;
+if (process.env.NODE_ENV === 'development' && Object.keys(this.model).length === 0) {
+  uni.$u.error('设置rules，model必须设置！如果已经设置，请刷新页面。');
+  return;
+};
+this.formRules = rules;
+// 重新将规则赋予Validator
+this.validator = new Schema(rules);
+  }
+
   return {
     handleSubmit,
     clearValidate,

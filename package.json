@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@ctrl/tinycolor": "^4.0.2",
+    "async-validator": "^4.2.5",
     "dayjs": "^1.11.7",
     "lodash-es": "^4.17.21",
     "path-to-regexp": "^6.2.1",

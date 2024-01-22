@@ -33,15 +33,20 @@
   import { provide, ref, watchEffect, onMounted, unref, computed } from 'vue';
   import { formProviderInjectionKey } from './context';
   import { cloneDeep } from 'lodash-es';
+  // @ts-ignore
   import Schema from 'async-validator';
   import { FormAction } from './types';
   import { deepMerge } from '../../shared/deep-merge';
+import { useInstance } from '../../hooks/use-instance';
+import { createFormProviderContext } from './provider';
 
   const props = defineProps(formProps);
   const emit = defineEmits(formEmits);
+  
 
   const ns = useNamespace('form');
   const themeRef = useTheme('Form', formLight, props);
+  const instance = useInstance();
 
   const formModel = ref<Record<string, any>>({});
   const formRules = ref({});
@@ -51,6 +56,11 @@
 
   const getProps = computed(() => {
     return { ...props, ...(unref(propsRef) || {}) } as ExtendFormProps;
+  });
+
+  createFormProviderContext({
+    ...instance,
+    instances: instance.instances.value,
   });
 
   watchEffect(() => {
