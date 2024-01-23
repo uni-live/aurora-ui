@@ -9,7 +9,7 @@ export interface InstanceReturns {
 }
 
 export function useInstance(): InstanceReturns {
-  const instances = ref<ComponentInternalInstance[]>([]);
+  const instances = ref<any>([]);
 
   const has = (uid: string | number) => {
     return instances.value.findIndex((item) => item.uid == uid) > -1;

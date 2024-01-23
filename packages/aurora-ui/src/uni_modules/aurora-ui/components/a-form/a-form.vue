@@ -43,7 +43,6 @@ import { createFormProviderContext } from './provider';
   const props = defineProps(formProps);
   const emit = defineEmits(formEmits);
   
-
   const ns = useNamespace('form');
   const themeRef = useTheme('Form', formLight, props);
   const instance = useInstance();
@@ -60,7 +59,7 @@ import { createFormProviderContext } from './provider';
 
   createFormProviderContext({
     ...instance,
-    instances: instance.instances.value,
+    instances: instance.instances.value
   });
 
   watchEffect(() => {
