@@ -1,10 +1,10 @@
 import { FormProps } from './form';
 
-export type EmitType = (event: string, ...args: any[]) => void;
+export type EmitType = (event: any, ...args: any[]) => void;
 
 export interface FormAction {
   clearValidate: () => void;
-  validateField: (key: string) => any;
+  validateFields: (keys: string[]) => any;
   validate: () => Promise<any>;
   reset: () => void;
   setRules: (rules: any) => void;

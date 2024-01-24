@@ -1,27 +1,31 @@
 import type { ComputedRef } from 'vue';
 import { unref, toRaw } from 'vue';
-import { isFunction } from 'lodash-es';
+import { isFunction, set } from 'lodash-es';
 import { EmitType } from './types';
 import { ExtendFormProps } from './form';
 import { Fn } from '../../types';
+import { AsyncValidatorAction } from './use-async-validator';
 
 interface UseFormActionContext {
   emit: EmitType;
-  getProps: ComputedRef<ExtendFormProps>;
+  props: ComputedRef<ExtendFormProps>;
   formModel: Record<string, any>;
+  formValidator: AsyncValidatorAction;
   handleFormValues: Fn;
 }
+
 export function useFormEvents({
   emit,
-  getProps,
+  props,
   formModel,
+  formValidator,
   handleFormValues,
 }: UseFormActionContext) {
-  async function resetFields(): Promise<void> {
-    const { resetFunc } = unref(getProps);
+  async function reset(): Promise<void> {
+    const { resetFunc } = unref(props);
     resetFunc && isFunction(resetFunc) && (await resetFunc());
 
-    clearValidate();
+    formValidator.clearValidate();
     emit('reset', toRaw(formModel));
     handleSubmit();
   }
@@ -33,45 +37,25 @@ export function useFormEvents({
     const validKeys: string[] = [];
     Object.keys(values).forEach((key) => {
       let value = values[key];
-      formModel[key] = value;
+      set(formModel, key, value);
       validKeys.push(key);
     });
-    validateFields(validKeys).catch((_) => {});
+    // 验证字段
+    formValidator.validateFields(validKeys);
   }
-
-  /**
-   * @description 验证某个表单字段
-   * @param keys
-   * @returns
-   */
-  async function validateFields(keys?: string[]) {
-    return {};
-  }
-
-  /**
-   * @description: 验证全部表单字段
-   */
-  async function validate() {
-    return {};
-  }
-
-  /**
-   * @description 清除验证
-   */
-  async function clearValidate() {}
 
   /**
    * @description: Form submission
    */
   async function handleSubmit(e?: Event): Promise<void> {
     e && e.preventDefault();
-    const { submitFunc } = unref(getProps);
+    const { submitFunc } = unref(props);
     if (submitFunc && isFunction(submitFunc)) {
       await submitFunc(formModel);
       return;
     }
     try {
-      const values = await validate();
+      const values = await formValidator.validate();
       const res = handleFormValues(values);
       emit('submit', res);
     } catch (error) {
@@ -79,14 +63,18 @@ export function useFormEvents({
     }
   }
 
-
+  /**
+   * 获取表单数据
+   * @returns
+   */
+  function getFieldsValue() {
+    return formModel.value;
+  }
 
   return {
     handleSubmit,
-    clearValidate,
-    validate,
-    validateFields,
-    resetFields,
+    reset,
     setFieldsValue,
+    getFieldsValue,
   };
 }

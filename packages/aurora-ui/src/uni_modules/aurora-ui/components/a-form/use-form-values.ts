@@ -4,10 +4,10 @@ import { isEmpty, isObject, isString, set } from 'lodash-es';
 import { ExtendFormProps } from './form';
 
 interface FormValuesContext {
-  getProps: ComputedRef<ExtendFormProps>;
+  props: ComputedRef<ExtendFormProps>;
   formModel: Ref<Record<string, any>>;
 }
-export function useFormValues({ formModel, getProps }: FormValuesContext) {
+export function useFormValues({ formModel, props }: FormValuesContext) {
   function handleFormValues(values: Record<string, any>) {
     if (!isObject(values)) {
       return {};
@@ -19,9 +19,9 @@ export function useFormValues({ formModel, getProps }: FormValuesContext) {
 
       if (!key) continue;
 
-      const transformDateFunc = unref(getProps).transformDateFunc;
+      const transformDateFunc = unref(props).transformDateFunc;
       if (!isEmpty(value) && transformDateFunc) {
-        value = transformDateFunc?.(key, value, formModel, getProps.value);
+        value = transformDateFunc?.(key, value, formModel, props.value);
       }
       if (isString(value)) {
         value = value.trim();

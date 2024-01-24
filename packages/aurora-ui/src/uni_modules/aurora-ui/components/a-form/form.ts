@@ -22,6 +22,24 @@ export const formProps = buildProps({
     default: () => ({}),
   },
   /**
+   * @description 表单默认值，只有初始化以及重置时生效
+   * @property {Object}
+   * @default {}
+   */
+  initialValues: {
+    type: Object,
+    default: () => ({}),
+  },
+  /**
+   * @description 设置表单组件禁用
+   * @property {Boolean}
+   * @default {}
+   */
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  /**
    * @description 验证规则
    * @property {Object, Function, Array}
    * @default {}

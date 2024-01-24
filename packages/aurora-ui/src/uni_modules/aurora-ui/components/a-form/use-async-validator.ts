@@ -1,47 +1,43 @@
-import { ref, unref, watchEffect } from "vue";
-import { ExtendFormProps } from "./form";
-import Schema, { ValidateError } from 'async-validator';
-import { useFormProviderContext } from './provider'
-import { get, isArray, isEmpty } from "lodash-es";
+import { Ref, ref, unref, watchEffect } from 'vue';
+import { ExtendFormProps } from './form';
+import Schema, { Rules, ValidateError } from 'async-validator';
+import { useFormProviderContext } from './provider';
+import { get, isArray, isEmpty } from 'lodash-es';
 
-export function useAsyncValidator(props: ExtendFormProps, formModel: Record<string, any>) {
+export interface AsyncValidatorAction {
+  formRules: Ref;
+  validateFields: (keys: string[], callback?: (errors: ValidateError[]) => void) => void;
+  setRules: (rules: Rules) => void;
+  validate: () => Promise<void>;
+  clearValidate: () => void;
+}
+
+export function useAsyncValidator(props: Ref<ExtendFormProps>, formModel: Record<string, any>) {
   const formRules = ref();
 
-  const { instances } = useFormProviderContext()
+  const { instances } = useFormProviderContext();
 
   watchEffect(() => {
-      setRules(props.rules);
-  })
+    setRules(props.value.rules);
+  });
 
   function setRules(rules) {
     if (Object.keys(rules).length === 0) return;
-				if (Object.keys(formModel).length === 0) {
-					console.error('设置rules，model必须设置！如果已经设置，请刷新页面。');
-					return;
-				};
-				formRules.value = rules;
+
+    formRules.value = rules;
   }
 
-
-  async function validateField(prop, val, rule, callback) {
-      const validator = new Schema({
-        [prop]: rule,
-      });
-
-      await validator.validate({
-        [prop]: val,
-      },
-      callback
-    );
-  }
-
- /**
+  /**
    * @description 验证某个表单字段
    * @param keys
    * @returns
    */
- async function validateFields(keys: string[],callback, event = null) {
-  // $nextTick是必须的，否则model的变更，可能会延后于此方法的执行
+  async function validateFields(
+    keys: string[],
+    callback?: (errors: ValidateError[]) => void,
+    event = null,
+  ) {
+    // $nextTick是必须的，否则model的变更，可能会延后于此方法的执行
     // 校验错误信息，返回给回调方法，用于存放所有form-item的错误信息
     const errorsRes: ValidateError[] = [];
     // 如果为字符串，转为数组
@@ -51,14 +47,10 @@ export function useAsyncValidator(props: ExtendFormProps, formModel: Record<stri
       const prop = child.props.prop as string;
       if (keys.includes(prop)) {
         // 获取对应的属性，通过类似'a.b.c'的形式
-        const propertyVal = get(
-          formModel,
-          prop
-        );
+        const propertyVal = get(formModel, prop);
         // 属性链数组
-        const propertyChain = prop.split(".");
-        const propertyName =
-          propertyChain[propertyChain.length - 1];
+        const propertyChain = prop.split('.');
+        const propertyName = propertyChain[propertyChain.length - 1];
 
         const rule = unref(formRules)[prop];
         // 如果不存在对应的规则，直接返回，否则校验器会报错
@@ -77,7 +69,8 @@ export function useAsyncValidator(props: ExtendFormProps, formModel: Record<stri
           const validator = new Schema({
             [propertyName]: ruleItem,
           });
-          validator.validate({
+          validator.validate(
+            {
               [propertyName]: propertyVal,
             },
             (errors, fields) => {
@@ -85,55 +78,53 @@ export function useAsyncValidator(props: ExtendFormProps, formModel: Record<stri
                 errorsRes.push(...errors!);
                 childErrors.push(...errors);
               }
-              child.exposed?.setMessage(childErrors[0]?.message ?? null)
-            }
+              child.exposed?.setMessage(childErrors[0]?.message ?? null);
+            },
           );
         }
       }
     });
     // 执行回调函数
-    typeof callback === "function" && callback(errorsRes);
-}
+    typeof callback === 'function' && callback(errorsRes);
+  }
 
-/**
- * @description: 验证全部表单字段
- */
-async function validate() {
-  if(isEmpty(formRules)) return
+  /**
+   * @description: 验证全部表单字段
+   */
+  async function validate() {
+    if (isEmpty(formRules)) return;
 
-  return new Promise((resolve, reject) => {
-    // $nextTick是必须的，否则model的变更，可能会延后于validate方法
+    return new Promise<any>((resolve, reject) => {
+      // $nextTick是必须的，否则model的变更，可能会延后于validate方法
       // 获取所有form-item的prop，交给validateField方法进行校验
-      const formItemProps = instances.map(
-        (item) => item.props.prop as string
-      );
+      const formItemProps = instances.map((item) => item.props.prop as string);
       validateFields(formItemProps, (errors) => {
-        if(errors.length) {
+        if (errors.length) {
           //TODO 如果错误提示方式为toast，则进行提示
           // props.errorType === 'toast' && uni.$u.toast(errors[0].message)
-          reject(errors)
+          reject(errors);
         } else {
-          resolve(true)
+          resolve(true);
         }
       });
     });
-}
+  }
 
-   /**
+  /**
    * @description 清除验证
    */
-   async function clearValidate() {
+  async function clearValidate() {
     instances.map((child) => {
       // 如果u-form-item的prop在props数组中，则清除对应的校验结果信息
-        child.exposed?.setMessage(null);
+      child.exposed?.setMessage(null);
     });
-   }
+  }
 
   return {
     formRules,
     validateFields,
     setRules,
     validate,
-    clearValidate
+    clearValidate,
   };
 }
