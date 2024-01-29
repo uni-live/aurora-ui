@@ -3,6 +3,10 @@
    * Form 表单
    * @description 此组件一般用于表单场景，可以配置Input输入框，Select弹出框，进行表单验证等。
    * @tutorial https://www.xxx.com/components/form.html
+   * @property {String}	                    customClass	    定义需要用到的外部calss样式
+   * @property {Object | String}	          customStyle	    定义需要用到的外部style样式
+   * @property {Object}	                    theme	          自定义主题
+   * @property {Object}	                    themeOverrides	主题变量
    * @property {Object}						          model			      当前form的需要验证字段的集合
    * @property {Object}						          initialValues	  表单默认值，只有初始化以及重置时生效
    * @property {Object | Function | Array}	rules			      验证规则
@@ -30,8 +34,6 @@
 <script setup lang="ts">
   import { ExtendFormProps, formEmits, formProps } from './form';
   import { useNamespace } from '../../hooks/use-namespace';
-  import { useTheme } from '../../hooks/use-theme';
-  import { formLight } from './styles';
   import { ref, watchEffect, onMounted, unref, computed, defineExpose } from 'vue';
   import { FormAction } from './types';
   import { deepMerge } from '../../shared/deep-merge';
@@ -46,7 +48,6 @@
   const emit = defineEmits(formEmits);
 
   const ns = useNamespace('form');
-  const themeRef = useTheme('Form', formLight, props);
   const instance = useInstance();
 
   const formModel = ref<Record<string, any>>({});
@@ -57,7 +58,6 @@
   });
 
   const mergeStyle = computed(() => {
-    const { self } = themeRef.value;
     const style = ns.cssVarBlock({});
 
     return [style, addStyle(props.customStyle)];
